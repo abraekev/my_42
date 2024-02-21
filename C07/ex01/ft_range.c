@@ -21,9 +21,9 @@ int	*ft_range(int min, int max)
 	if (min >= max)
 		return (NULL);
 	delta = max - min;
-	out = malloc((sizeof(int) * (delta +1)));
+	out = malloc((sizeof(int) * delta));
 	i = 0;
-	while (i <= delta)
+	while (i < delta)
 	{
 		out[i] = min;
 		i++;
@@ -38,7 +38,7 @@ int	*ft_range(int min, int max)
 int	main(void)
 {
 	
-	int *a = ft_range(-5, 2);
+	int *a = ft_range(2, 5);
 
 	int i = -1;
 	while (++i < 8)
