@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:08:27 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/22 12:03:02 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:11:54 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 */
 
 #include <stdlib.h>
-//#include "ft.h"
-#include <stdio.h>
 
 int	ft_is_charset(char c, char *charset)
 {
@@ -47,7 +45,7 @@ int	ft_get_length_out(char *str, char *charset)
 
 	length = 0;
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!ft_is_charset(str[i], charset))
 			length++;
@@ -59,47 +57,89 @@ int	ft_get_length_out(char *str, char *charset)
 	return (length);
 }
 
-char	**ft_split_strs(char **out, int length, char *charset, int i)
+int	ft_split_create_str(char **out, char *str, int strlength, int i)
 {
+	int	j;
+	int	strt_str;
+
+	strt_str = i - strlength;
+	j = 0;
+	while (out[j])
+		j++;
+	out [j] = malloc(strlength + 1);
+	if (!out[j])
+	{
+		free(out[j]);
+		while (--j >= 0)
+			free(out[j]);
+		free(out);
+		return (0);
+	}
+	i = -1;
+	while (++i < strlength)
+	{
+		(out[j])[i] = str[strt_str + i];
+	}
+	(out[j])[i] = 0;
+	return (1);
+}
+
+int	ft_split_read_strs(char **out, char *str, int length, char *charset)
+{
+	int	strlength;
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		strlength = 0;
+		while (str[i] && !ft_is_charset(str[i], charset))
+		{
+			strlength ++;
+			i++;
+		}
+		if (strlength)
+			if (!(ft_split_create_str(out, str, strlength, i)))
+				return (0);
+		while (str[i] && ft_is_charset(str[i], charset))
+			i++;
+	}
+	return (1);
 }
 
 char	**ft_split(char *str, char *charset)
 {
-	char		**out
+	char		**out;
 	int			length;
 	int			i;
 
 	length = ft_get_length_out(str, charset) + 1;
-	printf("=%s=%d=\n", str, length);
-	out = malloc(sizeof(char*) * length);
+	out = malloc(sizeof(char *) * length);
 	if (!out)
 		return (NULL);
-	ft_split_strs(out, length, charset, -1);
-	out[length - 1] = 0;
-		
-
-
-	return (NULL);
+	i = -1;
+	while (++i < length)
+		out[i] = 0;
+	if (!(ft_split_read_strs(out, str, length, charset)))
+		return (NULL);
+	return (out);
 }
 
-/* ************************************************************************** */
+/* **************************************************************************
+
+#include <stdio.h>
 
 int	main(void)
 {
-	char	*str1 = "aa!!";
-	char	*str2 = "!!aa";
-	char	*str3 = "!!";
-	char	*str4 = "aa";
-	char	*str5 = "!!aa!!bb!!cc!!";
-	char	*str6 = "!a!";
-
-	char	*strs[6] = {str1,str2,str3,str4,str5,str6};
+	char	*str5 = "?! Hello World!, I am Arnout,Student !! ";
 	char	*charset = "!, ?.";
 	
-	int	i=-1;
-	while (++i < 6)
+	char **out = ft_split(str5, charset);
+	int i = -1;
+	while (out[++i] )
 	{
-		ft_split(strs[i],charset);
+		printf("==%s==", out[i]);
 	}
 	return (0);
 }
+*/
