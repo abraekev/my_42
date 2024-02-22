@@ -6,15 +6,14 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/02/21 22:20:03 by abraekev         ###   ########.fr        #
+#    Updated: 2024/02/22 09:05:51 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 # VARIABLES
 # **************************************************************************** #
 
-GCC =		gcc
+GCC =		cc
 
 CFLAGS +=	-Wall -Wextra -Werror
 
@@ -47,7 +46,7 @@ $(NAME):	$(OBJS)
 .c.o:
 			$(GCC) $(CFLAGS) -c -I $(INCL) $< -o $(<:.c=.o)
 #	%.o: %.c
-#	"to make a file n.o, look for a file n.c and apply this rule".
+#	"to make a file name.o, look for a file name.c and apply this rule".
 
 clean:
 			rm -f $(OBJS)
@@ -57,3 +56,4 @@ fclean:		clean
 
 re:			fclean all
 
+# **************************************************************************** #
