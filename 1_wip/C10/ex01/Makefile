@@ -17,7 +17,7 @@ GCC =		cc
 
 CFLAGS +=	-Wall -Wextra -Werror
 
-SRC =		main.c
+SRC =		main.c ft_1.c ft_2.c ft_3.c ft_4.c
 PRE =		./srcs/
 SRCS =		$(addprefix $(PRE), $(SRC))
 

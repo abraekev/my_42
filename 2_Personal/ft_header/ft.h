@@ -20,6 +20,8 @@
 # include <errno.h>
 # include <string.h>
 # include <libgen.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 		// puts
 void	ft_putchar(char c);
@@ -34,7 +36,11 @@ char    **ft_split(char *str, char *charset);
 		// str 
 char	*ft_strcat(char *dest, char *src);
 char	*ft_strcpy(char *dest, char *src);
-int		ft_strlength(char *src);
+int		ft_strlen(char *src);
 char	*ft_strdup(char *src);
+int		ft_strjoin_len(int size, char **strs, char *sep);
+char	*ft_strjoin(int size, char **strs, char *sep);
+int		ft_strncmp(char *s1, char *s2, unsigned int n);
+char	*ft_strstr(char *str, char *to_find);
 
 #endif /*FT_H*/

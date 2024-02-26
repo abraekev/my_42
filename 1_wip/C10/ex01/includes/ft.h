@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/26 16:18:34 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:32:57 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,27 @@
 # include <errno.h>
 # include <string.h>
 # include <libgen.h>
+# include <stdlib.h>
+# include <stdio.h>
+
+		// puts
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
+void	ft_putnbr(int nb);
+		// split
+int		ft_is_charset(char c, char *charset);
+int		ft_get_length_out(char *str, char *charset);
+int		ft_split_create_str(char **out, char *str, int strlength, int i);
+int		ft_split_read_strs(char **out, char *str, char *charset);
+char    **ft_split(char *str, char *charset);
+		// str 
+char	*ft_strcat(char *dest, char *src);
+char	*ft_strcpy(char *dest, char *src);
+int		ft_strlen(char *src);
+char	*ft_strdup(char *src);
+int		ft_strjoin_len(int size, char **strs, char *sep);
+char	*ft_strjoin(int size, char **strs, char *sep);
+int		ft_strncmp(char *s1, char *s2, unsigned int n);
+char	*ft_strstr(char *str, char *to_find);
 
 #endif /*FT_H*/

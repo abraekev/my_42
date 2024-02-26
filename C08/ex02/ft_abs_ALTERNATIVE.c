@@ -39,10 +39,10 @@ int	main(void)
 	int nb = -5;
 
 	ABS2(nb);
-	printf("==%d==", nb);
+	printf("==%d==\n", nb);
 	if (ABS1(nb) < 6)	
-		printf("==%d==", nb);
-	
+		printf("==%d==\n", nb);
+	printf("\n");	
 	
 	return 0;
 }

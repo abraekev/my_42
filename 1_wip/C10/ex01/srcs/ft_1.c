@@ -1,27 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 13:01:06 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/25 21:36:20 by abraekev         ###   ########.fr       */
+/*   Created: 2024/02/07 16:58:41 by abraekev          #+#    #+#             */
+/*   Updated: 2024/02/26 17:22:21 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
-{
-	int	i;
+#include "ft.h"
 
-	i = 0;
-	if (*s1 == '\0' && *s2 == '\0')
-		return (0);
-	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *str)
+{
+	while (*str != '\0')
 	{
-		if (s1[i] - s2[i] != 0)
-			return (s1[i] - s2[i]);
-		i++;
+		write(1, str, 1);
+		str++;
 	}
-	return (0);
+}
+
+void	ft_putnbr(int nb)
+{
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		if (nb == -2147483648)
+		{
+			nb = -147483648;
+			ft_putchar('2');
+		}
+		nb = -nb;
+	}
+	if (nb >= 10)
+		ft_putnbr(nb / 10);
+	ft_putchar('0' + (nb % 10));
 }

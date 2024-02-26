@@ -10,18 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	error(void)
+#include "ft.h"
+
+void	error(int i)
 {
-	ft_putstr(strerror(errno));
+	if (i < 0)
+		i = errno;	
+	ft_putstr(strerror(i));
+	ft_putstr("\n");
 }
+
+/*
+void ft_putstr_fd(char *s, int fd)
+{
+    while (*s)
+        write(fd, s++, 1);
+}
+
+void print_error(char *filename)
+{
+    ft_putstr_fd("ft_cat: ", STDERR_FILENO);
+    ft_putstr_fd(filename, STDERR_FILENO);
+    ft_putstr_fd(": ", STDERR_FILENO);
+    ft_putstr_fd(strerror(errno), STDERR_FILENO);
+    ft_putstr_fd("\n", STDERR_FILENO);
+}
+*/
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
+	char	*test;
+
+	if (argc < 2)
 	{
-		error();
-		return (0);
+			error(22);		
+			return (0);
 	}
-	
+	test = argv[1];
+	printf("==%s==\n", test);
 	return (0);
 }
