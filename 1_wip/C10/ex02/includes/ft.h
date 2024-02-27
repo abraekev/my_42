@@ -26,6 +26,8 @@
 //	MACROS
 /******************************************************************************/
 
+# define BUF_SIZE 30000
+
 //	DEFINITIONS
 /******************************************************************************/
 
@@ -61,5 +63,12 @@ char	*ft_strstr(char *str, char *to_find);
 
 //	EXERCISE
 /******************************************************************************/
+int		ft_tail(char *filepath, int bytes_asked);
+void	arg_error(char **argv, int i);
+void	no_arg(char **argv);
+int		has_c_option(char **argv);
+void	only_c(char **argv);
+void	invalid_byte(char **argv);
+int		arg_valid_bytes(char *str);
 
 #endif /*FT_H*/

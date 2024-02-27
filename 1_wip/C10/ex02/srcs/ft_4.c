@@ -1,61 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_4.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:40:53 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/27 13:42:28 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/02/20 09:34:36 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (*(src + i) != '\0')
-	{
-		*(dest + i) = *(src + i);
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strcat(char *dest, char *src)
-{
-	char	*output;
-
-	output = dest;
-	while (*dest != '\0')
-	{
-		dest ++;
-	}
-	while (*src != '\0')
-	{
-		*dest = *src;
-		dest++;
-		src++;
-	}
-	*dest = '\0';
-	return (output);
-}
-
-int	ft_str_len(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
-}
+#include "ft.h"
 
 int	ft_strjoin_len(int size, char **strs, char *sep)
 {
@@ -66,9 +21,9 @@ int	ft_strjoin_len(int size, char **strs, char *sep)
 	size_out = 0;
 	while (++i < size)
 	{
-		size_out += ft_str_len(strs[i]);
+		size_out += ft_strlen(strs[i]);
 		if (i < (size - 1))
-			size_out += ft_str_len(sep);
+			size_out += ft_strlen(sep);
 	}
 	return (size_out);
 }
@@ -97,23 +52,47 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	}
 	return (out);
 }
-/*
-#include <stdio.h>
 
-int	main(void)
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	char **strs = malloc(sizeof(char*) * 3);
-	strs[0] = malloc(4);
-	strs[1] = malloc(4);
-	strs[2] = malloc(6);
+	unsigned int	i;
 
-	ft_strcpy(strs[0], "123");
-	ft_strcpy(strs[1], "");
-	ft_strcpy(strs[2], "789");
-
-
-	char *str = ft_strjoin(3, strs, "**");
-	printf("\n===%s===\n", str);
+	i = 0;
+	if (*s1 == '\0' && *s2 == '\0')
+		return (0);
+	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+	{
+		if (s1[i] - s2[i] != 0)
+			return (s1[i] - s2[i]);
+		i++;
+	}
 	return (0);
 }
-*/
+
+char	*ft_strstr(char *str, char *to_find)
+{
+	char	*begin_to_find;
+	int		teller;
+
+	teller = 0;
+	begin_to_find = to_find;
+	while (*to_find != '\0' && *str != '\0')
+	{
+		if (*str == *to_find)
+		{
+			str++;
+			to_find++;
+			teller++;
+		}
+		else
+		{
+			str++;
+			to_find = begin_to_find;
+			teller = 0;
+		}
+	}
+	if (*to_find == '\0')
+		return (str - teller);
+	else
+		return (0);
+}

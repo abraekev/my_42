@@ -26,6 +26,27 @@ void	ft_putstr(char *str)
 	}
 }
 
+void	ft_putstr_size(char *s, int size)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && i < size)
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
+void	ft_putstr_fd(char *str, int fd)
+{
+	while (*str)
+	{
+		write(fd, str, 1);
+		str++;
+	}
+}
+
 void	ft_putnbr(int nb)
 {
 	if (nb < 0)
