@@ -17,18 +17,20 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putspecial(int c, int firstdigit)
+void	ft_putspecial(int c, int first_iter)
 {
 	char	*base;
-	int		rest;
-
+	
 	base = "0123456789abcdef";
-	if (c / 16 >= 16)
-		ft_putspecial(c / 16, 0);
-	rest = c % 16;
-	if (firstdigit)
+	if (c < 16 && first_iter == 1)
 		ft_putchar('0');
-	ft_putchar(base[rest]);
+	if (c >= 16)
+	{
+		ft_putspecial(nb / 16, 0);
+		ft_putspecial(nb % 16, 0);
+	}
+	else
+		ft_putchar(base[c]);
 }
 
 void	ft_putstr_non_printable(char *str)
