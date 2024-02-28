@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 08:46:28 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/12 11:40:22 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:43:19 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_strcapitalize(char *str)
 		else if (ft_char_is_alpha_digit(*loop) == 2)
 			*loop = *loop + 32;
 		loop++;
-	}	
+	}
 	return (str);
 }
 /*

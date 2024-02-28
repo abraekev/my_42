@@ -1,0 +1,5 @@
+Line 1 with a tab	here.
+Line 2 with a newline below.
+
+Line 3 ends with special chars: !@#$%^&*()
+
