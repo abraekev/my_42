@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:48:35 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/19 08:49:01 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:57:15 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_atoi(char *str)
 	}
 	return (min * nb);
 }
-/*
 #include <unistd.h>
 #include <strings.h>
 #include <stdio.h>
@@ -57,4 +56,3 @@ int	main(void)
 	}
 	return (0);
 }
-*/
