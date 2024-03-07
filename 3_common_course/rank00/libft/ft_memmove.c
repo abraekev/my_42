@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,28 @@
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*from;
-	unsigned char	*to;
-	size_t			i;
+	unsigned char		*d;
+	const unsigned char	*s;
+	size_t				i;
 
-	from = (unsigned char *)src;
-	to = (unsigned char *)dest;
-	i = -1;
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
 	if (!dest && !src)
 		return (NULL);
-	while (++i < n)
-		to[i] = from[i];
+	i = -1;
+	if (dest < src)
+	{
+		i = n;
+		while (i > 0)
+		{
+			d[i - 1] = s[i -1];
+			i--;
+		}
+	}
+	else
+		while (++i < n)
+			d[i] = s[i];
 	return (dest);
 }
