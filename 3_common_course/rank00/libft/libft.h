@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -29,37 +29,27 @@
 //	DEFINITIONS
 /******************************************************************************/
 
-// error
-
-void	ft_errno(int i);
-void	ft_error(char	*s);
-void	ft_big_error(char *s);
-
-//	puts
-void	ft_putstr_size(char *s, int size);
-void	ft_putstr_fd(char *str, int fd);
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-void	ft_putnbr(int nb);
-
-//	split
-int		ft_is_charset(char c, char *charset);
-int		ft_get_length_out(char *str, char *charset);
-int		ft_split_create_str(char **out, char *str, int strlength, int i);
-int		ft_split_read_strs(char **out, char *str, char *charset);
-char	**ft_split(char *str, char *charset);
-
-//	str 
-char	*ft_strcat(char *dest, char *src);
-char	*ft_strcpy(char *dest, char *src);
-int		ft_strlen(char *src);
-char	*ft_strdup(char *src);
-int		ft_strjoin_len(int size, char **strs, char *sep);
-char	*ft_strjoin(int size, char **strs, char *sep);
+int		ft_atoi(const char *str);
+int		ft_isalnum(int c);
+int		ft_isalpha(int c);
+int		ft_isascii(int c);
+int		ft_isdigit(int c);
+int		ft_isprint(int c);
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+int		ft_strlen(const char *str);
 int		ft_strncmp(char *s1, char *s2, unsigned int n);
-char	*ft_strstr(char *str, char *to_find);
+char	*ft_strnstr(const char *str, char *to_find, size_t len);
+char	*ft_strrchr(const char *s, int c);
+int		ft_tolower(int c);
+int		ft_toupper(int c);
+void	*ft_memset(void *s, int c, size_t n);
+void	ft_bzero(void *s, size_t n);
+
+//	libft_1
 
 //	EXERCISE
 /******************************************************************************/
 
-#endif /*FT_H*/
+#endif /*LIBFT_H*/

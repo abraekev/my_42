@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,56 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
-void	ft_putchar(char c)
+int	ft_tolower(int c)
 {
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	while (*str != '\0')
-	{
-		write(1, str, 1);
-		str++;
-	}
-}
-
-void	ft_putstr_size(char *s, int size)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && i < size)
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
-
-void	ft_putstr_fd(char *str, int fd)
-{
-	while (*str)
-	{
-		write(fd, str, 1);
-		str++;
-	}
-}
-
-void	ft_putnbr(int nb)
-{
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		if (nb == -2147483648)
-		{
-			nb = -147483648;
-			ft_putchar('2');
-		}
-		nb = -nb;
-	}
-	if (nb >= 10)
-		ft_putnbr(nb / 10);
-	ft_putchar('0' + (nb % 10));
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }
