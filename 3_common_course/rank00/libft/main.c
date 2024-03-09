@@ -12,7 +12,11 @@
 
 #include "libft.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	if (argc > 1)
+	{
+		//printf("=%s=\n", ft_substr(argv[1], 13, 20));
+	}
 	return (0);
 }
