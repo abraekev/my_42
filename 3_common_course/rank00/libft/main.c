@@ -14,9 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc > 1)
+	if (argc > 1 && argv[1])
 	{
-		//printf("=%s=\n", ft_substr(argv[1], 13, 20));
+		printf("start\n");
+		char	**array = ft_split(argv[1], 'x');
+		for (int i = 0; i < 6; i++)
+			printf("=%s=\n", array[i]);
 	}
 	return (0);
 }

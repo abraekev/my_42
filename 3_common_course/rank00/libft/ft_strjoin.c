@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,46 +12,26 @@
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	char	*out;
+	size_t	s1_len;
+	size_t	s2_len;
 	size_t	i;
-	size_t	j;
 
-	if (!to_find[0])
-		return ((char *)str);
-	i = 0;
-	while (str[i] && i < len)
-	{
-		j = 0;
-		while (to_find[j] && to_find[j] == str[i + j] && i + j < len)
-			j++;
-		if (to_find[j] == 0)
-			return ((char *)str + i);
-		i++;
-	}
-	return (NULL);
+	if (!s1 || !s2)
+		return (NULL);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	out = malloc(s1_len + s2_len + 1);
+	if (!out)
+		return (NULL);
+	i = -1;
+	while (++i < s1_len)
+		out[i] = s1[i];
+	i = -1;
+	while (++i < s2_len)
+		out[s1_len + i] = s2[i];
+	out[s1_len + i] = 0;
+	return (out);
 }
-
-/*
-#include <string.h>
-#include <stdio.h>
-
-int	main(void)
-{
-	char	*berg = "Hello Woxx World!";
-	char	*berg2 = "123456";
-	char	*naald = "56";
-
-	printf("berg: %s\n", berg);
-	char *x = ft_strnstr(berg, naald, 3);
-	
-	printf("berg: %s\tnaald: %s\tresult: %s\n",berg, naald, x);
-	printf("berg: %s\n", berg);
-
-	x = ft_strnstr(berg2, naald, 20);
-    printf("berg: %s\tnaald: %s\tresult: %s\n",berg2, naald, x);
-       
-
-	return (0);
-}
-*/
