@@ -57,7 +57,7 @@ char **out, const char *str, size_t s_len, size_t i)
 	out[j] = malloc(s_len + 1);
 	if (!out[j])
 	{
-		while (j >= 0 && j < SIZE_MAX)
+		while (j != SIZE_MAX)
 			free(out[j]);
 		free(out);
 		return (0);
