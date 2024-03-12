@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 16:49:13 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/13 10:28:58 by abraekev         ###   ########.fr       */
+/*   Created: 2024/02/07 16:58:41 by abraekev          #+#    #+#             */
+/*   Updated: 2024/02/26 17:22:21 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main(int argc, char **argv)
+/*
+typedef struct s_list
 {
-	if (argc >= 1 && argv[0])
-	{
-		ft_putendl_fd("Start", 1);
-		ft_putnbr_fd(0, 1);
-	}
-	return (0);
+	void			*content;
+	struct s_list	*next;
+}
+*/
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (!lst || !new)
+		return ;
+	new -> next = *lst;
+	*lst = new;
 }
