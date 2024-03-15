@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int	get_index_nl(t_data *d)
+static int	get_index_nl(t_data *d)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	get_index_nl(t_data *d)
 	return (0);
 }
 
-char	*gnl_prewhile(t_data *d)
+static char	*gnl_prewhile(t_data *d)
 {
 	char	*out;
 	size_t	len;
@@ -56,7 +56,7 @@ char	*gnl_prewhile(t_data *d)
 	return (NULL);
 }
 
-char	*gnl_postwhile_retro(t_data *d, char *out, size_t len)
+static char	*gnl_postwhile_retro(t_data *d, char *out, size_t len)
 {
 	char	*tmp;
 	size_t	t_len;
@@ -75,7 +75,7 @@ char	*gnl_postwhile_retro(t_data *d, char *out, size_t len)
 	return (out);
 }
 
-char	*gnl_postwhile(t_data *d, char *out)
+static char	*gnl_postwhile(t_data *d, char *out)
 {
 	size_t	len;
 

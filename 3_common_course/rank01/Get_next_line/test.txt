@@ -11,3 +11,4 @@ A line with a tab
 A line that ends exactly at 64 characters long................
 A line that is exactly 65 characters long, extending just beyond.
 This is your last line without a trailing newline.
+no nl

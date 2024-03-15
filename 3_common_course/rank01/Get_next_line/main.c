@@ -20,12 +20,11 @@ int	ft_fd(char *filepath)
 int	main(int argc, char **argv)
 {
 	char	*s;
-	size_t	len;
 	int		fd;
 
+	s = NULL;
 	if (argc == 2)
 	{
-		s = NULL;
 		fd = ft_fd(argv[1]);
 		s = get_next_line(fd);
 		while (s)
@@ -36,7 +35,15 @@ int	main(int argc, char **argv)
 		}
 	}
 	else if (argc == 1)
-		get_next_line(0);
+	{
+		s = get_next_line(0);
+		while (s)
+		{
+			printf("%s", s);
+			free(s);
+			s = get_next_line(0);
+		}
+	}
 	else
 		printf("Error\n");
 	return (0);

@@ -31,7 +31,12 @@
 //	MACROS
 /******************************************************************************/
 
-# define BUFFER_SIZE 64
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 64
+# endif /*BUFFER_SIZE*/
+
+//	STRUCTS & ENUMS
+/******************************************************************************/
 
 typedef struct s_data
 {
@@ -45,14 +50,10 @@ typedef struct s_data
 //	DEFINITIONS
 /******************************************************************************/
 
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcat(char *dest, const char *src, size_t d_size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-size_t	ft_strlcat(char *dest, const char *src, size_t d_size);
-char	*ft_strjoin(char const *s1, char const *s2);
-
-size_t	ft_strlen(const char *s);
 char	*get_next_line(int fd);
-int		newline_found(t_data *data);
-int		add_buff_to_out(char *out, t_data *data);
 
 #endif /*GET_NEXT_LINE_H*/
