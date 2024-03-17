@@ -21,6 +21,8 @@ int	main(int argc, char **argv)
 {
 	char	*s;
 	int		fd;
+	int		fd1;
+	int		fd2;
 
 	s = NULL;
 	if (argc == 2)
@@ -34,14 +36,31 @@ int	main(int argc, char **argv)
 			s = get_next_line(fd);
 		}
 	}
-	else if (argc == 1)
+	else if (argc == 3)
 	{
-		s = get_next_line(0);
+		fd1 = ft_fd(argv[1]);
+		fd2 = ft_fd(argv[2]);
+		fd = fd1;
+		s = get_next_line(fd);
 		while (s)
 		{
 			printf("%s", s);
 			free(s);
-			s = get_next_line(0);
+			if (fd == fd1)
+				fd = fd2;
+			else
+				fd = fd1;
+			s = get_next_line(fd);
+		}
+	}
+	else if (argc == 1)
+	{
+		s = get_next_line(2);
+		while (s)
+		{
+			printf("%s", s);
+			free(s);
+			s = get_next_line(2);
 		}
 	}
 	else

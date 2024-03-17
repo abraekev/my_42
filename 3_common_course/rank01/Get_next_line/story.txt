@@ -1,3 +1,4 @@
-Hello, World!
-This is a short line.
-This line is much longer than the previous ones and is designed to test how your function handles longer inputs that might span across multiple BUFFER_SIZE chunks.
+Beneath a blanket of stars, an old lighthouse stood guard on a craggy shore, its light a solitary beacon in the night.
+A stormy evening brought a mysterious ship, unseen for centuries, gliding silently towards the coast.
+The lighthouse keeper, an old man with countless tales, watched in awe as ghostly figures repaired the timeworn vessel.
+As dawn broke, the ship set sail, vanishing into the morning mist, leaving behind an ancient map marked with the path to lost treasures.

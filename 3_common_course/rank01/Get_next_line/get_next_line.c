@@ -76,6 +76,8 @@ char	*get_next_line(int fd)
 	size_t		len;
 	char		*nl;
 
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
 	if (str && *str)
 	{
 		if (ft_strchr(str, '\n'))
