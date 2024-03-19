@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 	void *ptr = &nbr;
 	unsigned int n = 677629;
 	
-	ft_printf("%u\n", n);
+	printf("%p\n", ptr);
+	ft_printf("%p\n", ptr);
 	return (0);
 }

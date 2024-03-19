@@ -41,7 +41,7 @@ int	ft_printf_char(char c)
 int	ft_printf_str(char *s)
 {
 	int	len;
-	
+
 	len = (int)ft_strlen(s);
 	ft_putstr_fd(s, 1);
 	return (len);
@@ -49,7 +49,7 @@ int	ft_printf_str(char *s)
 
 int	ft_printf_sint(int nbr)
 {
-	ft_putnbr_fd(nbr, 1);	
+	ft_putnbr_fd(nbr, 1);
 	return (ft_sintlen(nbr));
 }
 

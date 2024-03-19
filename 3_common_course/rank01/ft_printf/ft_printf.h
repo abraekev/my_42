@@ -31,7 +31,6 @@
 //	needed for variadic functions
 # include <stdarg.h>
 
-
 //	MACROS
 /******************************************************************************/
 
@@ -41,11 +40,11 @@
 //	DEFINITIONS
 /******************************************************************************/
 
-int	ft_printf_void_ptr(uintptr_t nbr);
+int	ft_printf_void_ptr(uintptr_t nbr, int is_addr);
 int	ft_printf_uint_base(unsigned int nbr, char c);
 int	ft_printf_char(char c);
 int	ft_printf_str(char *s);
 int	ft_printf_sint(int nbr);
-int 	ft_printf(const char *s, ...);
+int	ft_printf(const char *s, ...);
 
 #endif /*FT_PRINTF_H*/
