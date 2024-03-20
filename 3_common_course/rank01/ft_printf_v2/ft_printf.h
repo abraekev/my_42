@@ -40,9 +40,11 @@
 //	DEFINITIONS
 /******************************************************************************/
 
-int	null_freestrs(size_t n, ...);
+char	*get_insertstr(char *fspec, va_list args, char convspec);
+char	*get_percent(void);
+int		null_freestrs(size_t n, ...);
 char	*update_s(char *s, char *insert, size_t i, size_t fspec_len);
-char *get_percent(void);
-int	ft_printf(const char *s, ...);
+
+int		ft_printf(const char *s, ...);
 
 #endif /*FT_PRINTF_H*/

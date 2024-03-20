@@ -14,7 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	const char	*str = "aaa%%bbb";
+	const char	*str;
+
+	str = "abc%%zyx";
 	ft_printf(str);
 	return (0);
 }

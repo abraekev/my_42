@@ -15,7 +15,7 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-char *get_percent(void)
+char	*get_percent(void)
 {
 	char	*out;
 

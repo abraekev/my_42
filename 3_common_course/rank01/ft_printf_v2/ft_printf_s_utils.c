@@ -15,6 +15,12 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
+char	*get_insertstr(char *fspec, va_list args, char convspec)
+{
+	if (convspec == '%')
+		return (get_percent());
+}
+
 char	*update_s(char *s, char *insert, size_t i, size_t fspec_len)
 {
 	char	*tmp;
@@ -38,7 +44,7 @@ char	*update_s(char *s, char *insert, size_t i, size_t fspec_len)
 int	null_freestrs(size_t n, ...)
 {
 	size_t	i;
-	va_list args;
+	va_list	args;
 
 	va_start(args, n);
 	i = 0;

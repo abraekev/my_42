@@ -13,7 +13,8 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-// char *fspec = %[flags][min width][precision][conv specifier]
+//	format specifier:
+//	char *fspec = %[flags][min width][precision][conversion specifier]
 
 static char	*get_fspecstr(char *s, size_t i)
 {
@@ -30,16 +31,10 @@ static char	*get_fspecstr(char *s, size_t i)
 			lastchr = s + j;
 			return (ft_substr(s, i, (lastchr - (s + i) + 1)));
 		}
-		j++;	
+		j++;
 	}
 	return (NULL);
 }
-static char	*get_insertstr(char *fspec, va_list args, char convspec)
-{
-	if (convspec == '%')
-		return (get_percent());
-}
-
 
 static int	process_formatspec(char **s, int i, va_list args)
 {
@@ -48,13 +43,13 @@ static int	process_formatspec(char **s, int i, va_list args)
 	char	*insert;
 	char	convspec;
 	size_t	fspec_len;
- 
+
 	fspec = get_fspecstr(*s, i);
 	if (!fspec)
 		return (0);
 	fspec_len = ft_strlen(fspec);
 	convspec = fspec[fspec_len - 1];
-	insert = get_insertstr(fspec, args, convspec);	
+	insert = get_insertstr(fspec, args, convspec);
 	if (!insert)
 		return (null_freestrs(1, fspec));
 	tmp = update_s(*s, insert, i, fspec_len);
@@ -63,8 +58,7 @@ static int	process_formatspec(char **s, int i, va_list args)
 		return (null_freestrs(2, fspec, insert));
 	*s = tmp;
 	null_freestrs(2, fspec, insert);
-	printf("%s", *s);
-	return (1);
+	return (fspec_len);
 }
 
 static int	create_s(const char *src, char **s)
@@ -79,12 +73,28 @@ static int	create_s(const char *src, char **s)
 	return (1);
 }
 
+static int	get_len_and_print(char *s)
+{
+	int	out;
+
+	if (s)
+	{
+		out = (int)ft_strlen(s);
+		ft_putstr_fd(s, 1);
+		free(s);
+		return (out);
+	}
+	else
+		return (-1);
+}
+
 int	ft_printf(const char *src, ...)
 {
-	char	*s;
-	int		ret;
+	char		*s;
+	int			ret;
 	size_t		i;
-	va_list	args;
+	size_t		jump;
+	va_list		args;
 
 	va_start(args, src);
 	i = -1;
@@ -94,16 +104,15 @@ int	ft_printf(const char *src, ...)
 	{
 		if (s[i] == '%')
 		{
-			if (!process_formatspec(&s, i, args));
+			jump = process_formatspec(&s, i, args);
+			if (!jump)
 			{
 				if (s)
-					free(s);	
+					free(s);
 				return (-1);
 			}
+			i = i + jump - 2;
 		}
 	}
-	ret = (int)ft_strlen(s);
-	if (s)
-		free(s);
-	return (ret);
+	return (get_len_and_print(s));
 }
