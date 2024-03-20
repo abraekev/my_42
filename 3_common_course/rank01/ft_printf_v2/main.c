@@ -15,7 +15,12 @@
 int	main(int argc, char **argv)
 {
 	const char	*str;
+	t_flags		flags = {0};
+	char		*fspec = "+#-0 40603.9090909c";
 
+	printf("=%s=\n", fspec);
+	get_min_width(&flags, fspec);
+	printf("=%d=\n", flags.min_width);
 	str = "abc%%zyx";
 	ft_printf(str);
 	return (0);

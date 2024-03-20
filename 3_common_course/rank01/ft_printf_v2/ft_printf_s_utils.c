@@ -15,12 +15,6 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-char	*get_insertstr(char *fspec, va_list args, char convspec)
-{
-	if (convspec == '%')
-		return (get_percent());
-}
-
 char	*update_s(char *s, char *insert, size_t i, size_t fspec_len)
 {
 	char	*tmp;
