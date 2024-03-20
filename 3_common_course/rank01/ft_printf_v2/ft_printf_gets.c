@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_printf_gets.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 11:12:52 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/27 17:45:49 by abraekev         ###   ########.fr       */
+/*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
+/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "libft.h"
 
-/*
-	size = size of the DESTINATION buffer.
+// char *fspec = %[flags][min width][precision][conv specifier]
 
-	the maximum number of characters that can be safely copied from src 
-	to dst, including the null terminator.
-*/
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char *get_percent(void)
 {
-	size_t	i;
-	size_t	s_len;
+	char	*out;
 
-	i = 0;
-	if (!src)
-		return (0);
-	s_len = ft_strlen(src);
-	if (!size)
-		return (s_len);
-	while (src[i] && i < size - 1)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = 0;
-	return (s_len);
+	out = malloc(2);
+	if (!out)
+		return (NULL);
+	ft_strlcpy(out, "%", 2);
+	return (out);
 }
