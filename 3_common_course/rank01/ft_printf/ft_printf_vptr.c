@@ -30,18 +30,17 @@ static size_t	get_vptr_len(uintptr_t nbr, size_t b_len)
 	return (len);
 }
 
-static char 	*vptr_base(uintptr_t nbr, char *base, size_t b_len)
+static char	*vptr_base(uintptr_t nbr, char *base, size_t b_len)
 {
 	size_t	s_len;
 	size_t	i;
 	char	*s;
 
-
-	s_len = get_vptr_len(nbr,  b_len);
+	s_len = get_vptr_len(nbr, b_len);
 	s = malloc(s_len + 1);
 	if (!s)
 		return (NULL);
-	s[s_len] = 0;	
+	s[s_len] = 0;
 	while (s_len != 0)
 	{
 		s[s_len - 1] = *(base + (nbr % b_len));
@@ -51,10 +50,23 @@ static char 	*vptr_base(uintptr_t nbr, char *base, size_t b_len)
 	return (s);
 }
 
+static char	*empty_ptr(void)
+{
+	char	*s;
+
+	s = malloc(6);
+	if (!s)
+		return (NULL);
+	ft_strlcpy(s, "(nil)", 6);
+	return (s);
+}
+
 char	*get_vptr_base(uintptr_t nbr)
 {
 	char	*base;
 
 	base = "0123456789abcdef";
+	if (!nbr)
+		return (empty_ptr());
 	return (get_alt_print(vptr_base(nbr, base, ft_strlen(base))));
 }

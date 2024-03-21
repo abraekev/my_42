@@ -13,7 +13,21 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-// char *fspec = %[flags][min width][precision][conv specifier]
+/*
+char *fspec = %[flags][min width][precision][conv specifier]
+
+typedef struct s_flags
+{
+	char	cspec;
+	int		just_l;
+	int		pad_zero;
+	int		pref_space;
+	int		pref_plus;
+	int		alt_print;
+	int		min_width;
+	int		precision;
+}	t_flags;
+*/
 
 char	*get_char(char c)
 {
@@ -23,7 +37,7 @@ char	*get_char(char c)
 	if (!s)
 		return (NULL);
 	s[0] = c;
-	s[1] = 0;	
+	s[1] = 0;
 	return (s);
 }
 
@@ -37,11 +51,14 @@ char	*get_str(char *s)
 	if (!out)
 		return (NULL);
 	ft_strlcpy(out, s, o_len + 1);
-	return (out);	
+	return (out);
 }
 
 char	*apply_flags(char *s, t_flags f)
 {
+	//if(f.min_wdith)
+	//if(f.precision)
+	
 	return (s);
 }
 
@@ -50,7 +67,9 @@ char	*get_insertstr(char *fspec, va_list args, char cspec)
 	t_flags	flags;
 	char	*out;
 
-	flags = getflags(fspec);
+	flags = initiate_flags();
+	if (!get_and_validate_flags(fspec, &flags))
+		return (NULL);
 	out = NULL;
 	if (cspec == '%')
 		out = get_char('%');

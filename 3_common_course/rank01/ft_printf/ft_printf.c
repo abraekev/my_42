@@ -20,6 +20,7 @@ static char	*get_fspecstr(char *s, size_t i)
 {
 	char	*convspecs;
 	char	*lastchr;
+	char	*fspec;
 	size_t	j;
 
 	convspecs = "cspdiuxX%";

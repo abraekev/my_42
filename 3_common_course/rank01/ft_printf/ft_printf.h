@@ -61,11 +61,12 @@ char	*get_vptr_base(uintptr_t nbr);
 	// ft_printf_uint_base.c
 char	*get_uint_base(unsigned int nbr, char c);
 
-	// ft_printf_flags.c
+	// ft_printf_flags_init.c
+int		validate_flags(char *s, t_flags *flags);
 void	get_precision(t_flags *flags, char *fspec);
 void	get_min_width(t_flags *flags, char *fspec);
 t_flags	initiate_flags(void);
-t_flags	getflags(char *fspec);
+int		getflags(char *fspec, t_flags *flags);
 
 	// ft_printf_gets.c
 char	*apply_flags(char *s, t_flags f);

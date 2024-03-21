@@ -25,7 +25,7 @@ char	*get_alt_print(char *s)
 	s_len = ft_strlen(s);
 	out = malloc(s_len + 3);
 	ft_strlcpy(out, "0x", s_len + 3);
-	ft_strlcat(out, s ,s_len + 3);
+	ft_strlcat(out, s, s_len + 3);
 	free(s);
 	return (out);
 }

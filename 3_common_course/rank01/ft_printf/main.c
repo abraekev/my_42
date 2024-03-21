@@ -15,12 +15,21 @@
 int	main(int argc, char **argv)
 {
 	const char	*str;
-	t_flags		flags = {0};
-	char		*fspec = "+#-0 40603.9090909c";
+	t_flags		f 	= initiate_flags();
+	char		*fspec 	= "+#-0 40603.9090909c";
 
-	int 		a = 10;
-	void		*ptr = &a;
+	int 		a 	= 10;
+	void		*ptr 	= &a;
+	void		*var 	= 0;
 	
+	
+	
+	
+	//printf("%#d\n", 6);
+	printf("\n%d", ft_printf("%567+s", "123"));
+	//ft_printf("%10p\n", var);
+	
+	/*
 	//testing
 	ft_printf("ft_printfs: =%s=\n", "DEZESTRING");
 	ft_printf("ft_printfc: =%c=\n", '@');
@@ -31,5 +40,8 @@ int	main(int argc, char **argv)
 	ft_printf("ft_printfX: =%X=\n", (unsigned int)INT_MAX-2345);
 	ft_printf("ft_printfp: =%p=\n", ptr);
 	ft_printf("ft_printf: =%s= =%c= =%i= =%d= =%X=%%\n", "DEZESTRING", '@', 0, INT_MIN, 99, ptr);
+	*/
+	
+	printf("\n");
 	return (0);
 }

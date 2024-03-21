@@ -30,18 +30,17 @@ static size_t	get_uint_len(unsigned int nbr, size_t b_len)
 	return (len);
 }
 
-static char 	*uint_base(unsigned int nbr, char *base, size_t b_len)
+static char	*uint_base(unsigned int nbr, char *base, size_t b_len)
 {
 	size_t	s_len;
 	size_t	i;
 	char	*s;
 
-
-	s_len = get_uint_len(nbr,  b_len);
+	s_len = get_uint_len(nbr, b_len);
 	s = malloc(s_len + 1);
 	if (!s)
 		return (NULL);
-	s[s_len] = 0;	
+	s[s_len] = 0;
 	while (s_len != 0)
 	{
 		s[s_len - 1] = *(base + (nbr % b_len));
