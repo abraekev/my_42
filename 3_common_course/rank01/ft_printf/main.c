@@ -14,11 +14,22 @@
 
 int	main(int argc, char **argv)
 {
-	int nbr = 10;
-	void *ptr = &nbr;
-	unsigned int n = 677629;
+	const char	*str;
+	t_flags		flags = {0};
+	char		*fspec = "+#-0 40603.9090909c";
+
+	int 		a = 10;
+	void		*ptr = &a;
 	
-	printf("%p\n", ptr);
-	ft_printf("%p\n", ptr);
+	//testing
+	ft_printf("ft_printfs: =%s=\n", "DEZESTRING");
+	ft_printf("ft_printfc: =%c=\n", '@');
+	ft_printf("ft_printfi: =%i=\n", 0);
+	ft_printf("ft_printfd: =%d=\n", INT_MIN);
+	ft_printf("ft_printfu: =%u=\n", (unsigned int)INT_MAX);
+	ft_printf("ft_printfx: =%x=\n", (unsigned int)INT_MAX-2345);
+	ft_printf("ft_printfX: =%X=\n", (unsigned int)INT_MAX-2345);
+	ft_printf("ft_printfp: =%p=\n", ptr);
+	ft_printf("ft_printf: =%s= =%c= =%i= =%d= =%X=%%\n", "DEZESTRING", '@', 0, INT_MIN, 99, ptr);
 	return (0);
 }

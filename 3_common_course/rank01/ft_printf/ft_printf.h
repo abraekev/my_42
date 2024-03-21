@@ -37,14 +37,47 @@
 //	STRUCTS & ENUMS
 /******************************************************************************/
 
+typedef struct s_flags
+{
+	char	cspec;
+	int		just_l;
+	int		pad_zero;
+	int		pref_space;
+	int		pref_plus;
+	int		alt_print;
+	int		min_width;
+	int		precision;
+}	t_flags;
+
 //	DEFINITIONS
 /******************************************************************************/
 
-int	ft_printf_void_ptr(uintptr_t nbr, int is_addr);
-int	ft_printf_uint_base(unsigned int nbr, char c);
-int	ft_printf_char(char c);
-int	ft_printf_str(char *s);
-int	ft_printf_sint(int nbr);
-int	ft_printf(const char *s, ...);
+	// ft_print_flags_utils.c
+char	*get_alt_print(char *s);
+
+	// ft_print_vptr_base.c
+char	*get_vptr_base(uintptr_t nbr);
+
+	// ft_printf_uint_base.c
+char	*get_uint_base(unsigned int nbr, char c);
+
+	// ft_printf_flags.c
+void	get_precision(t_flags *flags, char *fspec);
+void	get_min_width(t_flags *flags, char *fspec);
+t_flags	initiate_flags(void);
+t_flags	getflags(char *fspec);
+
+	// ft_printf_gets.c
+char	*apply_flags(char *s, t_flags f);
+char	*get_char(char c);
+char	*get_str(char *s);
+char	*get_insertstr(char *fspec, va_list args, char convspec);	
+
+	// ft_printf_s_utils.c
+int		null_freestrs(size_t n, ...);
+char	*update_s(char *s, char *insert, size_t i, size_t fspec_len);
+
+	// ft_printf.c
+int		ft_printf(const char *s, ...);
 
 #endif /*FT_PRINTF_H*/

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_char_str_sint.c                          :+:      :+:    :+:   */
+/*   ft_printf_uint_base.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,52 +13,55 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-static int	ft_sintlen(int nbr)
+// char *fspec = %[flags][min width][precision][conv specifier]
+
+static size_t	get_uint_len(unsigned int nbr, size_t b_len)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
 	if (!nbr)
 		return (1);
-	if (nbr >= 0)
-		nbr = -nbr;
-	else
-		len++;
 	while (nbr != 0)
 	{
 		len ++;
-		nbr /= 10;
+		nbr /= b_len;
 	}
 	return (len);
 }
 
-int	ft_printf_char(char c)
+static char 	*uint_base(unsigned int nbr, char *base, size_t b_len)
 {
-	ft_putchar_fd(c, 1);
-	return (1);
+	size_t	s_len;
+	size_t	i;
+	char	*s;
+
+
+	s_len = get_uint_len(nbr,  b_len);
+	s = malloc(s_len + 1);
+	if (!s)
+		return (NULL);
+	s[s_len] = 0;	
+	while (s_len != 0)
+	{
+		s[s_len - 1] = *(base + (nbr % b_len));
+		nbr /= b_len;
+		s_len--;
+	}
+	return (s);
 }
 
-int	ft_printf_str(char *s)
+char	*get_uint_base(unsigned int nbr, char c)
 {
-	int	len;
+	char	*base;
 
-	len = (int)ft_strlen(s);
-	ft_putstr_fd(s, 1);
-	return (len);
+	if (c == 'u')
+		base = "0123456789";
+	else if (c == 'x')
+		base = "0123456789abcdef";
+	else if (c == 'X')
+		base = "0123456789ABCDEF";
+	else
+		return (NULL);
+	return (uint_base(nbr, base, ft_strlen(base)));
 }
-
-int	ft_printf_sint(int nbr)
-{
-	ft_putnbr_fd(nbr, 1);
-	return (ft_sintlen(nbr));
-}
-
-/****************************************************************************
-
-int	main()
-{
-	printf("%d\n", ft_sintlen(INT_MIN));
-
-	return 0;
-}
-*/

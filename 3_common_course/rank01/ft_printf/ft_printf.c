@@ -13,42 +13,106 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-static int	choose_print(char c, va_list args)
+//	format specifier:
+//	char *fspec = %[flags][min width][precision][conversion specifier]
+
+static char	*get_fspecstr(char *s, size_t i)
 {
-	if (c == 'c')
-		return (ft_printf_char((char)va_arg(args, int)));
-	if (c == 's')
-		return (ft_printf_str(va_arg(args, char *)));
-	if (c == 'd' || c == 'i')
-		return (ft_printf_sint(va_arg(args, signed int)));
-	if (c == 'p')
-		return (ft_printf_void_ptr(va_arg(args, uintptr_t), 1));
-	if (c == 'u' || c == 'x' || c == 'X')
-		return (ft_printf_uint_base(va_arg(args, unsigned int), c));
-	return (0);
+	char	*convspecs;
+	char	*lastchr;
+	size_t	j;
+
+	convspecs = "cspdiuxX%";
+	j = i + 1;
+	while (s[j])
+	{
+		if (ft_strchr(convspecs, s[j]))
+		{
+			lastchr = s + j;
+			return (ft_substr(s, i, (lastchr - (s + i) + 1)));
+		}
+		j++;
+	}
+	return (NULL);
 }
 
-int	ft_printf(const char *s, ...)
+static int	process_formatspec(char **s, int i, va_list args)
 {
-	size_t	count;
-	va_list	args;
+	char	*tmp;
+	char	*fspec;
+	char	*insert;
+	char	convspec;
+	size_t	fspec_len;
 
-	va_start(args, s);
-	count = 0;
-	while (*s)
+	fspec = get_fspecstr(*s, i);
+	if (!fspec)
+		return (0);
+	fspec_len = ft_strlen(fspec);
+	convspec = fspec[fspec_len - 1];
+	insert = get_insertstr(fspec, args, convspec);
+	if (!insert)
+		return (null_freestrs(1, fspec));
+	tmp = update_s(*s, insert, i, fspec_len);
+	free(*s);
+	if (!tmp)
+		return (null_freestrs(2, fspec, insert));
+	*s = tmp;
+	null_freestrs(2, fspec, insert);
+	return (fspec_len);
+}
+
+static int	create_s(const char *src, char **s)
+{
+	size_t	src_len;
+
+	src_len = ft_strlen(src);
+	*s = malloc(src_len + 1);
+	if (!*s)
+		return (0);
+	ft_strlcpy(*s, src, src_len + 1);
+	return (1);
+}
+
+static int	get_len_and_print(char *s)
+{
+	int	out;
+
+	if (s)
 	{
-		if (*s != '%')
-			ft_putchar_fd(*s, 1);
-		else
-		{
-			if (*(s + 1) == '%')
-				ft_putchar_fd('%', 1);
-			else
-				count += choose_print(*(s + 1), args) - 1;
-			s++;
-		}
-		count++;
-		s++;
+		out = (int)ft_strlen(s);
+		ft_putstr_fd(s, 1);
+		free(s);
+		return (out);
 	}
-	return (count);
+	else
+		return (-1);
+}
+
+int	ft_printf(const char *src, ...)
+{
+	char		*s;
+	int			ret;
+	size_t		i;
+	size_t		jump;
+	va_list		args;
+
+	va_start(args, src);
+	i = -1;
+	if (!create_s(src, &s))
+		return (-1);
+	while (s[++i])
+	{
+		if (s[i] == '%')
+		{
+			jump = process_formatspec(&s, i, args);
+			if (!jump)
+			{
+				if (s)
+					free(s);
+				return (-1);
+			}
+			i = i + jump - 2;
+		}
+	}
+	return (get_len_and_print(s));
 }

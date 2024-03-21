@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_vptr.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
+/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+#include "libft.h"
+
+// char *fspec = %[flags][min width][precision][conv specifier]
+
+static size_t	get_vptr_len(uintptr_t nbr, size_t b_len)
+{
+	size_t	len;
+
+	len = 0;
+	if (!nbr)
+		return (1);
+	while (nbr != 0)
+	{
+		len ++;
+		nbr /= b_len;
+	}
+	return (len);
+}
+
+static char 	*vptr_base(uintptr_t nbr, char *base, size_t b_len)
+{
+	size_t	s_len;
+	size_t	i;
+	char	*s;
+
+
+	s_len = get_vptr_len(nbr,  b_len);
+	s = malloc(s_len + 1);
+	if (!s)
+		return (NULL);
+	s[s_len] = 0;	
+	while (s_len != 0)
+	{
+		s[s_len - 1] = *(base + (nbr % b_len));
+		nbr /= b_len;
+		s_len--;
+	}
+	return (s);
+}
+
+char	*get_vptr_base(uintptr_t nbr)
+{
+	char	*base;
+
+	base = "0123456789abcdef";
+	return (get_alt_print(vptr_base(nbr, base, ft_strlen(base))));
+}

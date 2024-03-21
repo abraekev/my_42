@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_gets.c                                   :+:      :+:    :+:   */
+/*   ft_printf_flags_init.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,38 +15,17 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-char	*get_char(char *fspec, char c)
+char	*get_alt_print(char *s)
 {
-	return (NULL);
-}
-
-char	*get_percent(void)
-{
+	size_t	s_len;
 	char	*out;
 
-	out = malloc(2);
-	if (!out)
+	if (!s)
 		return (NULL);
-	ft_strlcpy(out, "%", 2);
+	s_len = ft_strlen(s);
+	out = malloc(s_len + 3);
+	ft_strlcpy(out, "0x", s_len + 3);
+	ft_strlcat(out, s ,s_len + 3);
+	free(s);
 	return (out);
-}
-
-char	*get_insertstr(char *fspec, va_list args, char convspec)
-{
-	t_flags	flags;
-
-	flags = getflags(fspec);
-	if (convspec == '%')
-		return (get_percent());
-	if (convspec == 'c')
-		return (get_char(fspec, va_arg(args, int)));
-	if (convspec == 's')
-		return (NULL);
-	if (convspec == 'd' || convspec == 'i')
-		return (NULL);
-	if (convspec == 'p')
-		return (NULL);
-	if (convspec == 'u' || convspec == 'x' || convspec == 'X')
-		return (NULL);
-	return (NULL);
 }

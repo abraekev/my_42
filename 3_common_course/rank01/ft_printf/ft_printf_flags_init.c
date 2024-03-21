@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_flags.c                                  :+:      :+:    :+:   */
+/*   ft_printf_flags_init.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -26,28 +26,46 @@ t_flags	initiate_flags(void)
 	flags.alt_print = 0;
 	flags.min_width = 0;
 	flags.precision = 0;
+	flags.cspec = 0;
 	return (flags);
 }
+
 void	get_precision(t_flags *flags, char *fspec)
-{}
+{
+	int		i;
+
+	i = 0;
+	while (fspec[i] && fspec[i] != '.')
+		i++;
+	while (fspec[i])
+	{
+		if (ft_isdigit(fspec[i]))
+		{
+			flags->precision = ((flags->precision) * 10
+					+ (fspec[i] - '0'));
+			if (!ft_isdigit(fspec[i + 1]))
+				break ;
+		}
+		i++;
+	}
+}
 
 void	get_min_width(t_flags *flags, char *fspec)
 {
 	int		i;
-	char	*s;
 
-	s = fspec;
 	i = -1;
-	while (s[++i])
+	while (fspec[++i])
 	{
-		if (flags->min_width == 0 && s[i] == '0')
+		if (flags->min_width == 0 && fspec[i] == '0')
 			continue ;
-		if (s[i] == '.')
+		if (fspec[i] == '.')
 			break ;
-		if (ft_isdigit(s[i]))
+		if (ft_isdigit(fspec[i]))
 		{
-			flags->min_width = ((flags->min_width) * 10 + (s[i] - '0'));
-			if (!ft_isdigit(s[i + 1]))
+			flags->min_width = ((flags->min_width) * 10
+					+ (fspec[i] - '0'));
+			if (!ft_isdigit(fspec[i + 1]))
 				break ;
 		}
 	}
@@ -66,7 +84,8 @@ t_flags	getflags(char *fspec)
 		flags.pref_space = 1;
 	if (ft_strchr(fspec, '+'))
 		flags.pref_plus = 1;
-	//get_min_width(&flags, fspec);
-	//get_precision(&flags, fspec);
+	flags.cspec = fspec[ft_strlen(fspec) - 1];
+	get_min_width(&flags, fspec);
+	get_precision(&flags, fspec);
 	return (flags);
 }
