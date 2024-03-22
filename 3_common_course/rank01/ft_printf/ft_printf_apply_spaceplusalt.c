@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_vptr.c                                   :+:      :+:    :+:   */
+/*   ft_printf_apply_spaceplusalt.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,60 +13,55 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-// char *fspec = %[flags][min width][precision][conv specifier]
-
-static size_t	get_vptr_len(uintptr_t nbr, size_t b_len)
+/*
+	int		pref_space;
+	int		pref_plus;
+*/
+char	*add_prefix(char *s, char *prefix)
 {
-	size_t	len;
+	char	*out;
+	size_t	s_len;
 
-	len = 0;
-	if (!nbr)
-		return (1);
-	while (nbr != 0)
-	{
-		len ++;
-		nbr /= b_len;
-	}
-	return (len);
+	if (!s)
+		return (NULL);
+	if (*s == '-')
+		return (s);
+	out = ft_strjoin(prefix, s);
+	free(s);
+	if (!out)
+		return (NULL);
+	return (out);
 }
 
-static char	*vptr_base(uintptr_t nbr, char *base, size_t b_len)
+char	*apply_spaceplus(char *s, t_flags f)
+{
+	if (f.pref_space && !f.pref_plus)
+		return (add_prefix(s, " "));
+	if (f.pref_plus)
+		return (add_prefix(s, "+"));
+	return (s);
+}
+
+char	*apply_altprint(char *s, t_flags f)
+{
+	if (f.cspec == 'x')
+		return (add_prefix(s, "0x"));
+	else
+		return (add_prefix(s, "0X"));
+}
+/*
+char	*apply_altprint(char *s)
 {
 	size_t	s_len;
-	size_t	i;
-	char	*s;
+	char	*out;
 
-	s_len = get_vptr_len(nbr, b_len);
-	s = malloc(s_len + 1);
 	if (!s)
 		return (NULL);
-	s[s_len] = 0;
-	while (s_len != 0)
-	{
-		s[s_len - 1] = *(base + (nbr % b_len));
-		nbr /= b_len;
-		s_len--;
-	}
-	return (s);
+	s_len = ft_strlen(s);
+	out = malloc(s_len + 3);
+	ft_strlcpy(out, "0x", s_len + 3);
+	ft_strlcat(out, s, s_len + 3);
+	free(s);
+	return (out);
 }
-
-static char	*empty_ptr(void)
-{
-	char	*s;
-
-	s = malloc(6);
-	if (!s)
-		return (NULL);
-	ft_strlcpy(s, "(nil)", 6);
-	return (s);
-}
-
-char	*get_vptr_base(uintptr_t nbr)
-{
-	char	*base;
-
-	base = "0123456789abcdef";
-	if (!nbr)
-		return (empty_ptr());
-	return (add_prefix(vptr_base(nbr, base, ft_strlen(base)), "0x"));
-}
+*/

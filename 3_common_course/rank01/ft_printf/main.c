@@ -22,9 +22,10 @@ int	main(int argc, char **argv)
 	void		*ptr 	= &a;
 	void		*var 	= 0;
 	
-	printf("xx%.dxx", -0);
-	printf("\n");
-	ft_printf("xx%.dxx", -0);
+	printf("==%#.6X==\n", 8234);
+	ft_printf("==%#.6X==\n", 8234);
+	//printf("\n");
+	//ft_printf("xx%.dxx", -0);
 
 	/*
 	//testing

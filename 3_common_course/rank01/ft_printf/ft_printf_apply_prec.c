@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_flags_utils.c                            :+:      :+:    :+:   */
+/*   ft_printf_apply_prec.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-char	*apply_precision_specialcase(char *s)
+static char	*apply_precision_specialcase(char *s)
 {
 	char	*tmp;
 
@@ -27,7 +27,7 @@ char	*apply_precision_specialcase(char *s)
 	return (tmp);
 }
 
-int	apply_precision_negative(char **tmp, char *s)
+static int	apply_precision_negative(char **tmp, char *s)
 {
 	char	*tmp2;
 
@@ -39,7 +39,7 @@ int	apply_precision_negative(char **tmp, char *s)
 	return (1);
 }
 
-int	apply_prec_nbr_newstr(char **s, char *abs, int len)
+static int	apply_prec_nbr_newstr(char **s, char *abs, int len)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -61,7 +61,7 @@ int	apply_prec_nbr_newstr(char **s, char *abs, int len)
 	return (1);
 }
 
-char	*apply_precision_nbr(char *s, t_flags f)
+static char	*apply_precision_nbr(char *s, t_flags f)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -103,19 +103,4 @@ char	*apply_precision(char *s, t_flags f)
 	else
 		return (apply_precision_nbr(s, f));
 	return (NULL);
-}
-
-char	*get_alt_print(char *s)
-{
-	size_t	s_len;
-	char	*out;
-
-	if (!s)
-		return (NULL);
-	s_len = ft_strlen(s);
-	out = malloc(s_len + 3);
-	ft_strlcpy(out, "0x", s_len + 3);
-	ft_strlcat(out, s, s_len + 3);
-	free(s);
-	return (out);
 }

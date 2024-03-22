@@ -52,9 +52,16 @@ typedef struct s_flags
 //	DEFINITIONS
 /******************************************************************************/
 
-	// ft_print_flags_utils.c
-char	*apply_precision(char *s, t_flags f);
+	// ft_printf_apply_flags_1.c
 char	*get_alt_print(char *s);
+
+	// ft_printf_apply_prec.c
+char	*apply_precision(char *s, t_flags f);
+
+	// ft_printf_apply_spaceplusalt.c
+char	*add_prefix(char *s, char *prefix);
+char	*apply_spaceplus(char *s, t_flags f);
+char	*apply_altprint(char *s, t_flags f);
 
 	// ft_print_vptr_base.c
 char	*get_vptr_base(uintptr_t nbr);
