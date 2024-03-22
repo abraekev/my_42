@@ -24,7 +24,6 @@ static size_t	itoa_len(int n)
 		n = n / 10;
 		len ++;
 	}
-	printf("len is %ld.\n", len);
 	return (len);
 }
 

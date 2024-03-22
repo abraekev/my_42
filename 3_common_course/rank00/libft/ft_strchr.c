@@ -19,7 +19,7 @@ char	*ft_strchr(const char *s, int c)
 	str = (char *)s;
 	while (*str)
 	{
-		if (*str == c)
+		if (*str == (char)c)
 			return (str);
 		str++;
 	}
@@ -27,3 +27,12 @@ char	*ft_strchr(const char *s, int c)
 		return (str);
 	return (NULL);
 }
+
+/*
+int	main(void)
+{
+	char	*s = "tripouille";
+	printf("%d\n", ft_strchr(s, 't' + 256) == s);
+	return (0);
+}
+*/
