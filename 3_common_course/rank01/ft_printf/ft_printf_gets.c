@@ -56,9 +56,11 @@ char	*get_str(char *s)
 
 char	*apply_flags(char *s, t_flags f)
 {
-	//if(f.min_wdith)
-	//if(f.precision)
-	
+//	1. precision
+	if (ft_strchr("sdiuxX", f.cspec))
+		s = apply_precision(s, f);
+//	2. min width
+//	3. other flags
 	return (s);
 }
 
@@ -68,7 +70,7 @@ char	*get_insertstr(char *fspec, va_list args, char cspec)
 	char	*out;
 
 	flags = initiate_flags();
-	if (!get_and_validate_flags(fspec, &flags))
+	if (!get_flags(fspec, &flags))
 		return (NULL);
 	out = NULL;
 	if (cspec == '%')

@@ -35,7 +35,22 @@ char	*update_s(char *s, char *insert, size_t i, size_t fspec_len)
 	return (out);
 }
 
-int	null_freestrs(size_t n, ...)
+char	*null_freestrs(size_t n, ...)
+{
+	size_t	i;
+	va_list	args;
+
+	va_start(args, n);
+	i = 0;
+	while (i < n)
+	{
+		free(va_arg(args, char *));
+		i++;
+	}
+	return (NULL);
+}
+
+int	zero_freestrs(size_t n, ...)
 {
 	size_t	i;
 	va_list	args;

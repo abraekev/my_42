@@ -53,6 +53,7 @@ typedef struct s_flags
 /******************************************************************************/
 
 	// ft_print_flags_utils.c
+char	*apply_precision(char *s, t_flags f);
 char	*get_alt_print(char *s);
 
 	// ft_print_vptr_base.c
@@ -66,7 +67,7 @@ int		validate_flags(char *s, t_flags *flags);
 void	get_precision(t_flags *flags, char *fspec);
 void	get_min_width(t_flags *flags, char *fspec);
 t_flags	initiate_flags(void);
-int		getflags(char *fspec, t_flags *flags);
+int		get_flags(char *fspec, t_flags *flags);
 
 	// ft_printf_gets.c
 char	*apply_flags(char *s, t_flags f);
@@ -75,7 +76,8 @@ char	*get_str(char *s);
 char	*get_insertstr(char *fspec, va_list args, char convspec);	
 
 	// ft_printf_s_utils.c
-int		null_freestrs(size_t n, ...);
+int		zero_freestrs(size_t n, ...);
+char	*null_freestrs(size_t n, ...);
 char	*update_s(char *s, char *insert, size_t i, size_t fspec_len);
 
 	// ft_printf.c

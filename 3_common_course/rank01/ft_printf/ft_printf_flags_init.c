@@ -70,10 +70,8 @@ void	get_precision(t_flags *flags, char *fspec)
 	nbr = ft_atoi((fspec + i));
 	if (nbr)
 		flags->precision = nbr;
-	else if (!nbr && fspec[i] == '0')
-		flags->precision = 0;
 	else
-		flags->precision = -1;
+		flags->precision = 0;
 }
 
 void	get_min_width(t_flags *flags, char *fspec)
@@ -93,7 +91,7 @@ void	get_min_width(t_flags *flags, char *fspec)
 		flags->min_width = nbr;
 }
 
-int	getflags(char *fspec, t_flags *flags)
+int	get_flags(char *fspec, t_flags *flags)
 {
 	if (!validate_flags(fspec, flags))
 		return (0);

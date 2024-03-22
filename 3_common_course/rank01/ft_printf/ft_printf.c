@@ -52,13 +52,13 @@ static int	process_formatspec(char **s, int i, va_list args)
 	convspec = fspec[fspec_len - 1];
 	insert = get_insertstr(fspec, args, convspec);
 	if (!insert)
-		return (null_freestrs(1, fspec));
+		return (zero_freestrs(1, fspec));
 	tmp = update_s(*s, insert, i, fspec_len);
 	free(*s);
 	if (!tmp)
-		return (null_freestrs(2, fspec, insert));
+		return (zero_freestrs(2, fspec, insert));
 	*s = tmp;
-	null_freestrs(2, fspec, insert);
+	zero_freestrs(2, fspec, insert);
 	return (fspec_len);
 }
 

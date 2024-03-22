@@ -22,13 +22,10 @@ int	main(int argc, char **argv)
 	void		*ptr 	= &a;
 	void		*var 	= 0;
 	
-	
-	
-	
-	//printf("%#d\n", 6);
-	printf("\n%d", ft_printf("%567+s", "123"));
-	//ft_printf("%10p\n", var);
-	
+	printf("xx%.dxx", -0);
+	printf("\n");
+	ft_printf("xx%.dxx", -0);
+
 	/*
 	//testing
 	ft_printf("ft_printfs: =%s=\n", "DEZESTRING");
@@ -39,7 +36,8 @@ int	main(int argc, char **argv)
 	ft_printf("ft_printfx: =%x=\n", (unsigned int)INT_MAX-2345);
 	ft_printf("ft_printfX: =%X=\n", (unsigned int)INT_MAX-2345);
 	ft_printf("ft_printfp: =%p=\n", ptr);
-	ft_printf("ft_printf: =%s= =%c= =%i= =%d= =%X=%%\n", "DEZESTRING", '@', 0, INT_MIN, 99, ptr);
+	ft_printf("ft_printf: =%s= =%c= =%i= =%d= =%X=%%\n",
+	"DEZESTRING", '@', 0, INT_MIN, 99, ptr);
 	*/
 	
 	printf("\n");
