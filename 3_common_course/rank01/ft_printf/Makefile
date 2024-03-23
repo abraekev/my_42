@@ -13,33 +13,36 @@
 # VARIABLES
 # **************************************************************************** #
 
-GCC =		cc
+SRC =		ft_printf.c ft_printf_apply_prec.c ft_printf_apply_spaceplusalt.c ft_printf_apply_width_others.c ft_printf_flags_init.c ft_printf_flags_validate.c ft_printf_gets.c ft_printf_s_utils.c ft_printf_uint_base.c ft_printf_vptr.c
 
-CFLAGS +=	-Wall -Wextra -Werror
+DIRINCL	=	./includes/
+DIRSRC	=	./srcs/
+LIBFT	=	./libft/libft.a
 
-SRCS =		
-
+SRCS =		$(addprefix $(DIRSRC), $(SRC))
 OBJS =		$(SRCS:.c=.o)
-
-INCL =		./
 
 NAME =		libftprintf.a	
 
-LIBC =		ar rc
-
-LIBX =		ranlib
-
+AR =		ar rcs
+RL =		ranlib
 RM =		rm -f
+GCC =		cc
+CFLAGS +=	-Wall -Wextra -Werror
 
 # RULES
 # **************************************************************************** #
 
 .c.o:
-			$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
+			$(GCC) $(CFLAGS) -c -I $(DIRINCL) $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
-				$(LIBC) $(NAME) $(OBJS)
-				$(LIBX) $(NAME)
+				$(AR) $(NAME) $(OBJS)
+				$(RL) $(NAME)
+
+main:		$(NAME)
+			$(GCC) main.c testing.c -I $(DIRINCL) $(NAME) $(LIBFT)
+			make clean
 
 all:		$(NAME)
 
@@ -51,5 +54,5 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all bonus clean fclean re
+.PHONY:		all bonus clean fclean re main make
 # **************************************************************************** #

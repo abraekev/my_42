@@ -15,34 +15,6 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-int	validate_flags(char *s, t_flags *flags)
-{
-	size_t		i;
-
-	i = 1;
-	if (s[i] == '%')
-		return (1);
-	while (ft_strchr("#0- +", s[i]))
-		i++;
-	while ((s[i] >= '1' && s[i] <= '9') || s[i] == '*')
-	{
-		if (s[i] == '*')
-			break ;
-		i++;
-	}
-	if (s[i] == '.')
-	{
-		i++;
-		if (s[i] == '-')
-			i++;
-		while (ft_isdigit(s[i]))
-			i++;
-	}
-	if (ft_strchr("cspdiuxX", s[i]) && !s[i + 1])
-		return (1);
-	return (0);
-}
-
 t_flags	initiate_flags(void)
 {
 	t_flags	flags;
@@ -58,7 +30,7 @@ t_flags	initiate_flags(void)
 	return (flags);
 }
 
-void	get_precision(t_flags *flags, char *fspec)
+static void	get_precision(t_flags *flags, char *fspec)
 {
 	int	i;
 	int	nbr;
@@ -66,6 +38,8 @@ void	get_precision(t_flags *flags, char *fspec)
 	i = 0;
 	while (fspec[i] && fspec[i] != '.')
 		i++;
+	if (!fspec[i])
+		return ;
 	i++;
 	nbr = ft_atoi((fspec + i));
 	if (nbr)
@@ -74,7 +48,7 @@ void	get_precision(t_flags *flags, char *fspec)
 		flags->precision = 0;
 }
 
-void	get_min_width(t_flags *flags, char *fspec)
+static void	get_min_width(t_flags *flags, char *fspec)
 {
 	int	i;
 	int	nbr;
@@ -97,8 +71,8 @@ int	get_flags(char *fspec, t_flags *flags)
 		return (0);
 	if (ft_strchr(fspec, '-'))
 		flags->just_l = 1;
-	if (ft_strchr(fspec, '0'))
-		flags->pad_zero = 1;
+	if (ft_strchr(fspec, '#'))
+		flags->alt_print = 1;
 	if (ft_strchr(fspec, ' '))
 		flags->pref_space = 1;
 	if (ft_strchr(fspec, '+'))

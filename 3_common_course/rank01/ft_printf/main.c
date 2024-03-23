@@ -12,35 +12,13 @@
 
 #include "ft_printf.h"
 
+//void	testing(void);
+
 int	main(int argc, char **argv)
 {
 	const char	*str;
 	t_flags		f 	= initiate_flags();
 	char		*fspec 	= "+#-0 40603.9090909c";
-
-	int 		a 	= 10;
-	void		*ptr 	= &a;
-	void		*var 	= 0;
-	
-	printf("==%#.6X==\n", 8234);
-	ft_printf("==%#.6X==\n", 8234);
-	//printf("\n");
-	//ft_printf("xx%.dxx", -0);
-
-	/*
-	//testing
-	ft_printf("ft_printfs: =%s=\n", "DEZESTRING");
-	ft_printf("ft_printfc: =%c=\n", '@');
-	ft_printf("ft_printfi: =%i=\n", 0);
-	ft_printf("ft_printfd: =%d=\n", INT_MIN);
-	ft_printf("ft_printfu: =%u=\n", (unsigned int)INT_MAX);
-	ft_printf("ft_printfx: =%x=\n", (unsigned int)INT_MAX-2345);
-	ft_printf("ft_printfX: =%X=\n", (unsigned int)INT_MAX-2345);
-	ft_printf("ft_printfp: =%p=\n", ptr);
-	ft_printf("ft_printf: =%s= =%c= =%i= =%d= =%X=%%\n",
-	"DEZESTRING", '@', 0, INT_MIN, 99, ptr);
-	*/
-	
-	printf("\n");
+	//testing();
 	return (0);
 }

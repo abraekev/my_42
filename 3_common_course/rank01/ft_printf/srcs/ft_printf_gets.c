@@ -56,16 +56,13 @@ char	*get_str(char *s)
 
 char	*apply_flags(char *s, t_flags f)
 {
-//	1. precision
 	if (ft_strchr("sdiuxX", f.cspec))
 		s = apply_precision(s, f);
-//	2. space and + flag
 	if (ft_strchr("di", f.cspec))
 		s = apply_spaceplus(s, f);
 	if (ft_strchr("xX", f.cspec))
 		s = apply_altprint(s, f);
-//	3. min width
-//	4. other flags
+	s = apply_width_others(s, f);
 	return (s);
 }
 

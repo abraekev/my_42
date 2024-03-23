@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_vptr.c                                   :+:      :+:    :+:   */
+/*   ft_printf_apply_spaceplusalt.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,60 +13,44 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-// char *fspec = %[flags][min width][precision][conv specifier]
-
-static size_t	get_vptr_len(uintptr_t nbr, size_t b_len)
+/*
+	int		pref_space;
+	int		pref_plus;
+*/
+char	*add_prefix(char *s, char *prefix)
 {
-	size_t	len;
+	char	*out;
 
-	len = 0;
-	if (!nbr)
-		return (1);
-	while (nbr != 0)
-	{
-		len ++;
-		nbr /= b_len;
-	}
-	return (len);
-}
-
-static char	*vptr_base(uintptr_t nbr, char *base, size_t b_len)
-{
-	size_t	s_len;
-	size_t	i;
-	char	*s;
-
-	s_len = get_vptr_len(nbr, b_len);
-	s = malloc(s_len + 1);
 	if (!s)
 		return (NULL);
-	s[s_len] = 0;
-	while (s_len != 0)
-	{
-		s[s_len - 1] = *(base + (nbr % b_len));
-		nbr /= b_len;
-		s_len--;
-	}
+	if (*s == '-')
+		return (s);
+	out = ft_strjoin(prefix, s);
+	free(s);
+	if (!out)
+		return (NULL);
+	return (out);
+}
+
+char	*apply_spaceplus(char *s, t_flags f)
+{
+	if (!s)
+		return (NULL);
+	if (f.pref_space && !f.pref_plus)
+		return (add_prefix(s, " "));
+	if (f.pref_plus)
+		return (add_prefix(s, "+"));
 	return (s);
 }
 
-static char	*empty_ptr(void)
+char	*apply_altprint(char *s, t_flags f)
 {
-	char	*s;
-
-	s = malloc(6);
 	if (!s)
 		return (NULL);
-	ft_strlcpy(s, "(nil)", 6);
-	return (s);
-}
-
-char	*get_vptr_base(uintptr_t nbr)
-{
-	char	*base;
-
-	base = "0123456789abcdef";
-	if (!nbr)
-		return (empty_ptr());
-	return (add_prefix(vptr_base(nbr, base, ft_strlen(base)), "0x"));
+	if (!f.alt_print)
+		return (s);
+	if (f.cspec == 'x')
+		return (add_prefix(s, "0x"));
+	else
+		return (add_prefix(s, "0X"));
 }

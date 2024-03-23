@@ -20,7 +20,6 @@ static char	*get_fspecstr(char *s, size_t i)
 {
 	char	*convspecs;
 	char	*lastchr;
-	char	*fspec;
 	size_t	j;
 
 	convspecs = "cspdiuxX%";
@@ -92,7 +91,6 @@ static int	get_len_and_print(char *s)
 int	ft_printf(const char *src, ...)
 {
 	char		*s;
-	int			ret;
 	size_t		i;
 	size_t		jump;
 	va_list		args;

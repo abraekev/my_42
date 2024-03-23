@@ -63,8 +63,6 @@ static int	apply_prec_nbr_newstr(char **s, char *abs, int len)
 
 static char	*apply_precision_nbr(char *s, t_flags f)
 {
-	char	*tmp;
-	char	*tmp2;
 	char	*abs;
 	int		len;
 
@@ -85,6 +83,8 @@ char	*apply_precision(char *s, t_flags f)
 {
 	char	*tmp;
 
+	if (!s)
+		return (NULL);
 	if (f.precision < 0)
 		return (s);
 	if (f.cspec == 's')
@@ -93,7 +93,7 @@ char	*apply_precision(char *s, t_flags f)
 		{
 			tmp = malloc(f.precision + 1);
 			if (!tmp)
-				return ((char *)null_freestrs(1, s));
+				return (null_freestrs(1, s));
 			ft_strlcpy(tmp, s, f.precision + 1);
 			free(s);
 			return (tmp);
@@ -102,5 +102,4 @@ char	*apply_precision(char *s, t_flags f)
 	}
 	else
 		return (apply_precision_nbr(s, f));
-	return (NULL);
 }

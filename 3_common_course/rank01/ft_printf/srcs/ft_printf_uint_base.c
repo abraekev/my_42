@@ -33,7 +33,6 @@ static size_t	get_uint_len(unsigned int nbr, size_t b_len)
 static char	*uint_base(unsigned int nbr, char *base, size_t b_len)
 {
 	size_t	s_len;
-	size_t	i;
 	char	*s;
 
 	s_len = get_uint_len(nbr, b_len);
