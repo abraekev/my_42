@@ -17,14 +17,17 @@ SRC =		ft_printf.c ft_printf_apply_prec.c ft_printf_apply_spaceplusalt.c ft_prin
 
 DIRINCL	=	./includes/
 DIRSRC	=	./srcs/
-LIBFT	=	./libft/libft.a
+DIRLIBFT=	./srcs/libft/
 
-SRCS =		$(addprefix $(DIRSRC), $(SRC))
+LIBFT =		libft.a
+OBJSLIBFT =	$(DIRLIBFT)*.o
 OBJS =		$(SRCS:.c=.o)
+SRCS =		$(addprefix $(DIRSRC), $(SRC))
 
 NAME =		libftprintf.a	
 
-AR =		ar rcs
+AX = 		ar -x
+AR =		ar -rcs
 RL =		ranlib
 RM =		rm -f
 GCC =		cc
@@ -34,25 +37,27 @@ CFLAGS +=	-Wall -Wextra -Werror
 # **************************************************************************** #
 
 .c.o:
-			$(GCC) $(CFLAGS) -c -I $(DIRINCL) $< -o $(<:.c=.o)
+		$(GCC) $(CFLAGS) -c -I $(DIRINCL) $< -o $(<:.c=.o)
 
-$(NAME):	$(OBJS)
-				$(AR) $(NAME) $(OBJS)
+$(NAME):	$(OBJS) $(OBJSLIBFT)
+				$(AR) $(NAME) $(OBJS) $(OBJSLIBFT)
 				$(RL) $(NAME)
-
-main:		$(NAME)
-			$(GCC) main.c testing.c -I $(DIRINCL) $(NAME) $(LIBFT)
-			make clean
 
 all:		$(NAME)
 
+main:
+			$(GCC) main.c testing.c -I $(DIRINCL) $(NAME)
+
+$(OBJSLIBFT):	
+		cd $(DIRLIBFT) && $(AX) $(LIBFT)
+		
 clean:
-			$(RM) $(OBJS)
+		$(RM) $(OBJS) $(OBJSLIBFT)
 
 fclean:		clean
-				$(RM) $(NAME)
+			$(RM) $(NAME)
 
-re:			fclean all
+re:		fclean all
 
-.PHONY:		all bonus clean fclean re main make
+.PHONY:		all bonus clean fclean re main extract
 # **************************************************************************** #

@@ -62,7 +62,8 @@ char	*apply_flags(char *s, t_flags f)
 		s = apply_spaceplus(s, f);
 	if (ft_strchr("xX", f.cspec))
 		s = apply_altprint(s, f);
-	s = apply_width_others(s, f);
+	if (ft_strchr("cspdiuxX", f.cspec))
+		s = apply_width_others(s, f);
 	return (s);
 }
 
@@ -73,7 +74,7 @@ char	*get_insertstr(char *fspec, va_list args, char cspec)
 
 	flags = initiate_flags();
 	if (!get_flags(fspec, &flags))
-		return (NULL);
+		return (fspec);
 	out = NULL;
 	if (cspec == '%')
 		out = get_char('%');
@@ -87,5 +88,6 @@ char	*get_insertstr(char *fspec, va_list args, char cspec)
 		out = get_vptr_base(va_arg(args, uintptr_t));
 	if (cspec == 'u' || cspec == 'x' || cspec == 'X')
 		out = get_uint_base(va_arg(args, unsigned int), cspec);
+	printf("XX%s\n", out);
 	return (apply_flags(out, flags));
 }

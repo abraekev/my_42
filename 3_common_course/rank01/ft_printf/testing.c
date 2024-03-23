@@ -15,6 +15,10 @@
 
 void	testing(void)
 {
+	// %
+	printf("\nl%%\n");
+	ft_printf("f%%\n");
+
 	// Character
 	printf("\nCharacter: %c\n", 'A');
     	ft_printf("Character: %c\n", 'A');

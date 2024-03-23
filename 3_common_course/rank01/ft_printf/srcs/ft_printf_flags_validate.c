@@ -38,8 +38,6 @@ int	validate_flags(char *s, t_flags *flags)
 	size_t		i;
 
 	i = 1;
-	if (s[i] == '%')
-		return (1);
 	while (ft_strchr("#0- +", s[i]))
 	{
 		if (s[i] == '0')
@@ -48,14 +46,14 @@ int	validate_flags(char *s, t_flags *flags)
 	}
 	if ((s[i] >= '1' && s[i] <= '9') || s[i] == '*')
 		i++;
-	while (ft_isdigit(s[i]) || s[i] == '*')
+	while (ft_isdigit(s[i]))
 	{
 		if (s[i - 1] == '*')
 			break ;
 		i++;
 	}
 	i = check_precision(s, i);
-	if (ft_strchr("cspdiuxX", s[i]) && !s[i + 1])
+	if (ft_strchr("cspdiuxX%", s[i]) && !s[i + 1])
 		return (1);
 	return (0);
 }
