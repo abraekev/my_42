@@ -12,20 +12,11 @@
 
 #include "ft_printf.h"
 
-//void	testing(void);
+void	testing(void);
 
 int	main(int argc, char **argv)
 {
-	const char	*str;
-	t_flags		f 	= initiate_flags();
-	char		*fspec 	= "+#-0 40603.9090909c";
-	
-	//ft_printf("%5%");
-	//printf("\n");
-	ft_printf("ft==%4532%==\n");
-	printf("lb==%4532%==\n");
-	
-	//ft_printf("\n\n");
-	//testing();
+
+	testing();
 	return (0);
 }

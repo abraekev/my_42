@@ -88,6 +88,5 @@ char	*get_insertstr(char *fspec, va_list args, char cspec)
 		out = get_vptr_base(va_arg(args, uintptr_t));
 	if (cspec == 'u' || cspec == 'x' || cspec == 'X')
 		out = get_uint_base(va_arg(args, unsigned int), cspec);
-	printf("XX%s\n", out);
 	return (apply_flags(out, flags));
 }
