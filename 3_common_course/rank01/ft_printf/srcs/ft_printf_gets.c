@@ -46,11 +46,21 @@ char	*get_str(char *s)
 	char	*out;
 	size_t	o_len;
 
-	o_len = ft_strlen(s);
-	out = malloc(o_len + 1);
-	if (!out)
-		return (NULL);
-	ft_strlcpy(out, s, o_len + 1);
+	if (!s)
+	{
+		out = malloc(7);
+		if (!out)
+			return (NULL);
+		ft_strlcpy(out, "(null)", 7);
+	}
+	else
+	{
+		o_len = ft_strlen(s);
+		out = malloc(o_len + 1);
+		if (!out)
+			return (NULL);
+		ft_strlcpy(out, s, o_len + 1);
+	}
 	return (out);
 }
 
