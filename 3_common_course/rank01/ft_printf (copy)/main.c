@@ -16,9 +16,6 @@ void	testing(void);
 
 int	main(int argc, char **argv)
 {
-	printf("%.2s%s", "hello", "world");
-	printf("\n");
-	ft_printf("%.2s%s", "hello", "world");
-	//testing();
+	testing();
 	return (0);
 }
