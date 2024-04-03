@@ -23,17 +23,19 @@ int	main(int argc, char **argv)
 	int		fd;
 	int		fd1;
 	int		fd2;
+	int		i = -1;
 
 	s = NULL;
 	if (argc == 2)
 	{
 		fd = ft_fd(argv[1]);
 		s = get_next_line(fd);
-		while (s)
+		while (++i < 3)
 		{
 			printf("%s", s);
 			free(s);
 			s = get_next_line(fd);
+			printf("====LINESEPERATOR====\n");
 		}
 	}
 	else if (argc == 3)

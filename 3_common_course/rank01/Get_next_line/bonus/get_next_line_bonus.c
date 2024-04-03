@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/16 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:09:10 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static int	init_str(char **str_address)
+static int	init_malloc(int size, char **str_address)
 {
 	char	*str;
 
 	str = (*str_address);
 	if (!str)
 	{
-		str = malloc(1);
+		str = malloc(size);
 		if (!str)
 			return (0);
 		str[0] = 0;
@@ -28,75 +28,86 @@ static int	init_str(char **str_address)
 	return (1);
 }
 
-static int	update_str(char	*buffer, int bytes_read, char **str_address)
+static int	update_line(char *buffer, int bytes_read, char **line)
 {
 	char	*tmp;
-	char	*str;
+	size_t	line_len;
+	size_t	tmp_len;
 
-	str = (*str_address);
-	tmp = malloc(ft_strlen(str) + bytes_read + 1);
-	if (!tmp)
-	{
-		free(*str_address);
+	if (!init_malloc(bytes_read + 1, line))
 		return (0);
-	}
-	ft_strlcpy(tmp, str, ft_strlen(str) + 1);
-	ft_strlcat(tmp, buffer, ft_strlen(str) + bytes_read + 1);
-	free(*str_address);
-	*str_address = tmp;
+	line_len = ft_strlen(*line);
+	tmp_len = line_len + bytes_read;
+	tmp = malloc(tmp_len + 1);
+	if (!tmp)
+		return (0);
+	ft_strlcpy(tmp, *line, tmp_len + 1);
+	ft_strlcat(tmp, buffer, tmp_len + 1);
+	free (*line);
+	*line = tmp;
 	return (1);
 }
 
-static char	*get_buffer(char *str, int fd)
+static int	last_update(char *buffer, int bytes_read, char **line)
 {
-	char	buffer[BUFFER_SIZE];
-	int		bytes_read;
+	int	i;
+	size_t	line_len;
+	size_t	tmp_len;
+	char	*tmp;
 
-	if (!init_str(&str))
-		return (NULL);
-	while (!ft_strchr(str, '\n'))
-	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read <= 0)
-			break ;
-		if (!update_str(buffer, bytes_read, &str))
-			return (NULL);
-	}
-	if (bytes_read < 0)
-	{
-		free(str);
-		return (NULL);
-	}
-	return (str);
+	i = 0;
+	while (buffer[i] != '\n' && buffer[i] != '\0')
+		i++;
+	if (!init_malloc(bytes_read + 1, line))
+		return (0);
+	line_len = ft_strlen(*line);
+	tmp_len = line_len + i + 1;
+	tmp = malloc(tmp_len + 1);
+	if (!tmp)
+		return (0);
+	ft_strlcpy(tmp, *line, tmp_len + 1);
+	ft_strlcat(tmp, buffer, tmp_len + 1);
+	ft_strlcpy(buffer, buffer + i + 1, bytes_read);
+	free (*line);
+	*line = tmp;
+	return (1);
 }
+
+
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
-	size_t		len;
-	char		*nl;
+	static char	*buffers[FOPEN_MAX];
+	char		*line;
+	int		bytes_read;
 
+		printf("main");
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (str && *str)
+	if (buffers[fd] && *buffers[fd])
 	{
-		if (ft_strchr(str, '\n'))
-			ft_strlcpy(str, ft_strchr(str, '\n') + 1, ft_strlen(str) + 1);
-		else
-			str[0] = 0;
+		last_update(buffers[fd], ft_strlen(buffers[fd]) + 1, &line);
 	}
-	if (!str || !*str || !ft_strchr(str, '\n'))
-		str = get_buffer(str, fd);
-	if (str && *str)
+	if ((!buffers[fd] || !*buffers[fd]) && (!line || !ft_strchr(line, '\n')))
 	{
-		nl = ft_strchr(str, '\n');
-		if (nl)
-			len = nl - str + 1;
-		else
-			len = ft_strlen(str);
-		return (ft_substr(str, 0, len));
+		if (!init_malloc(BUFFER_SIZE, &buffers[fd]))
+			return (NULL);
+		bytes_read = read(fd, buffers[fd], BUFFER_SIZE);
+		while (bytes_read > 0)
+		{
+			if (!update_line(buffers[fd], bytes_read, &line))
+				return (NULL);
+			if (ft_strchr(buffers[fd], '\n'))
+			{
+				last_update(buffers[fd], bytes_read, &line);
+				break ;
+			}
+			bytes_read = read(fd, buffers[fd], BUFFER_SIZE);
+		}
+		if (bytes_read < 0)
+			return (NULL);
+		if (!bytes_read)
+			free(buffers[fd]);
 	}
-	if (str)
-		free(str);
-	return (NULL);
+	return (line);
 }
