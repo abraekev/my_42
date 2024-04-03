@@ -13,22 +13,6 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-/*
-char *fspec = %[flags][min width][precision][conv specifier]
-
-typedef struct s_flags
-{
-	char	cspec;
-	int		just_l;
-	int		pad_zero;
-	int		pref_space;
-	int		pref_plus;
-	int		alt_print;
-	int		min_width;
-	int		precision;
-}	t_flags;
-*/
-
 char	*get_char(char c)
 {
 	char	*s;
@@ -64,7 +48,14 @@ char	*get_str(char *s)
 	return (out);
 }
 
-char	*apply_flags(char *s, t_flags f)
+static void	set_insert_len(char *s, t_data *d)
+{
+	d->i_len = ft_strlen(s);
+	if (d->cspec == 'c' && !ft_strlen(s))
+		d->i_len = 1;
+}
+
+char	*apply_flags(char *s, t_flags f, t_data *d)
 {
 	if (ft_strchr("sdiuxX", f.cspec))
 		s = apply_precision(s, f);
@@ -74,29 +65,30 @@ char	*apply_flags(char *s, t_flags f)
 		s = apply_altprint(s, f);
 	if (ft_strchr("cspdiuxX", f.cspec))
 		s = apply_width_others(s, f);
+	set_insert_len(s, d);
 	return (s);
 }
 
-char	*get_insertstr(char *fspec, va_list args, char cspec)
+char	*get_insertstr(t_data *d, va_list args)
 {
 	t_flags	flags;
 	char	*out;
 
 	flags = initiate_flags();
-	if (!get_flags(fspec, &flags))
-		return (fspec);
+	if (!get_flags(d->fspec, &flags))
+		return (d->fspec);
 	out = NULL;
-	if (cspec == '%')
+	if (d->cspec == '%')
 		out = get_char('%');
-	if (cspec == 'c')
+	if (d->cspec == 'c')
 		out = get_char(va_arg(args, int));
-	if (cspec == 's')
+	if (d->cspec == 's')
 		out = get_str(va_arg(args, char *));
-	if (cspec == 'd' || cspec == 'i')
+	if (d->cspec == 'd' || d->cspec == 'i')
 		out = ft_itoa(va_arg(args, int));
-	if (cspec == 'p')
+	if (d->cspec == 'p')
 		out = get_vptr_base(va_arg(args, uintptr_t));
-	if (cspec == 'u' || cspec == 'x' || cspec == 'X')
-		out = get_uint_base(va_arg(args, unsigned int), cspec);
-	return (apply_flags(out, flags));
+	if (d->cspec == 'u' || d->cspec == 'x' || d->cspec == 'X')
+		out = get_uint_base(va_arg(args, unsigned int), d->cspec);
+	return (apply_flags(out, flags, d));
 }

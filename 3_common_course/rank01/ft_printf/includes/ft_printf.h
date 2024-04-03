@@ -49,6 +49,17 @@ typedef struct s_flags
 	int		precision;
 }	t_flags;
 
+typedef struct s_data
+{
+	char	*s;
+	size_t	s_len;
+	char	cspec;
+	char	*fspec;
+	size_t	f_len;
+	char	*insert;
+	size_t	i_len;
+}	t_data;
+
 //	DEFINITIONS
 /******************************************************************************/
 
@@ -77,15 +88,15 @@ int		get_flags(char *fspec, t_flags *flags);
 int		validate_flags(char *s, t_flags *flags);
 
 	// ft_printf_gets.c
-char	*apply_flags(char *s, t_flags f);
+char	*apply_flags(char *s, t_flags f, t_data *d);
 char	*get_char(char c);
 char	*get_str(char *s);
-char	*get_insertstr(char *fspec, va_list args, char convspec);	
+char	*get_insertstr(t_data *d, va_list args);
 
 	// ft_printf_s_utils.c
 int		zero_freestrs(size_t n, ...);
 char	*null_freestrs(size_t n, ...);
-char	*update_s(char *s, char *insert, size_t i, size_t fspec_len);
+char	*update_s(t_data *d, size_t i);
 
 	// ft_printf.c
 int		ft_printf(const char *s, ...);

@@ -15,23 +15,24 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-char	*update_s(char *s, char *insert, size_t i, size_t fspec_len)
+char	*update_s(t_data *d, size_t i)
 {
 	char	*tmp;
 	char	*out;
 
-	tmp = ft_substr(s, 0, i);
+	tmp = ft_substr(d->s, 0, i);
 	if (!tmp)
 		return (NULL);
-	out = ft_strjoin(tmp, insert);
+	out = ft_strjoin(tmp, d->insert);
 	free(tmp);
 	if (!out)
 		return (NULL);
 	tmp = out;
-	out = ft_strjoin(tmp, (s + i + fspec_len));
+	out = ft_strjoin(tmp, (d->s + i + d->f_len));
 	free(tmp);
 	if (!out)
 		return (NULL);
+	d->s_len = d->s_len - d->f_len + d->i_len;
 	return (out);
 }
 
