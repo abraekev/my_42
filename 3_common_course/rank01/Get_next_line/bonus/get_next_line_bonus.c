@@ -12,25 +12,10 @@
 
 #include "get_next_line_bonus.h"
 
-static char	*free_strs(char **s1, char **s2)
-{
-	if (s1 &&*s1)
-	{
-		free(*s1);
-		*s1 = NULL;
-	}
-	if (s2 && *s2)
-	{
-		free(*s2);
-		*s2 = NULL;
-	}
-	return (NULL);
-}
-
 static int	init_malloc(int size, char **str_address)
 {
 	char	*str;
-	int	i;
+	int		i;
 
 	str = (*str_address);
 	i = -1;
@@ -68,7 +53,8 @@ static int	update_line(char *buffer, int bytes_read, char **line)
 		if (buffer[i - line_len] == '\n' || !buffer[i - line_len])
 			break ;
 		i++;
-	}	
+	}
+	tmp[i + 1] = 0;
 	free(*line);
 	*line = tmp;
 	return (1);
@@ -94,32 +80,45 @@ static int	read_and_update(int fd, char **buffer, char **line, int bytes_read)
 	return (bytes_read);
 }
 
+static int	check_and_update(char **buffer, char **line)
+{
+	int	bytes_read;
+
+	bytes_read = (int)ft_strlen(*buffer);
+	if (!update_line(*buffer, bytes_read, line))
+		return (0);
+	if (ft_strchr(*buffer, '\n'))
+		ft_strlcpy(*buffer, ft_strchr(*buffer, '\n') + 1, BUFFER_SIZE + 1);
+	else
+	{
+		free(*buffer);
+		*buffer = NULL;
+	}
+	return (1);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*buffers[FOPEN_MAX];
 	char		*line;
-	int		bytes_read;
+	int			bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
 	if (buffers[fd] && *buffers[fd])
-	{
-		bytes_read = (int)ft_strlen(buffers[fd]);
-		if (!update_line(buffers[fd], bytes_read, &line))
-			return (free_strs(&buffers[fd], &line));
-		if (ft_strchr(buffers[fd], '\n'))
-			ft_strlcpy(buffers[fd], ft_strchr(buffers[fd], '\n') + 1, BUFFER_SIZE + 1);
-		else
-			buffers[fd][0] = 0;
-	}
+		if (!check_and_update(&buffers[fd], &line))
+			return (NULL);
 	if ((!buffers[fd] || !*buffers[fd]) && (!line || !ft_strchr(line, '\n')))
 	{
 		bytes_read = read_and_update(fd, &buffers[fd], &line, -1);
 		if (bytes_read < 0)
-			return (free_strs(&buffers[fd], &line));
+			return (NULL);
 		if (!bytes_read && buffers[fd])
-			free_strs(&buffers[fd], NULL);
+		{
+			free(buffers[fd]);
+			buffers[fd] = NULL;
+		}
 	}
 	return (line);
 }
