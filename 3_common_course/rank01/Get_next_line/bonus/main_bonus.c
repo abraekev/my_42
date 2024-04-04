@@ -29,32 +29,43 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd = ft_fd(argv[1]);
-		while (++i < 8)
+		s = get_next_line(fd);
+		while (s)
 		{
-			s = get_next_line(fd);
-			printf("(LINE GNL)%s", s);
-			printf("====LINESEPERATOR====\n\n");
+			printf("%s", s);
+			//printf("====LINESEPERATOR====\n\n");
 			free(s);
+			s = get_next_line(fd);
 		}
 	}
 	else if (argc == 3)
 	{
 		fd1 = ft_fd(argv[1]);
 		fd2 = ft_fd(argv[2]);
-		while (++i< 2)
+		i = 0;
+		while (i< 2)
 		{
 			printf("%s", get_next_line(fd1));
-			printf("====LINESEPERATOR====\n");
+			printf("====1LINESEPERATOR====\n");
+			i++;
 		}
-		while (++i< 5)
+		while (i< 4)
 		{
 			printf("%s", get_next_line(fd2));
-			printf("====LINESEPERATOR====\n");
+			printf("====2LINESEPERATOR====\n");
+			i++;
 		}
-		while (++i< 8)
+		while (i< 6)
 		{
 			printf("%s", get_next_line(fd1));
-			printf("====LINESEPERATOR====\n");
+			printf("====3LINESEPERATOR====\n");
+			i++;
+		}
+		while (i< 8)
+		{
+			printf("%s", get_next_line(fd2));
+			printf("====4LINESEPERATOR====\n");
+			i++;
 		}
 			
 	}

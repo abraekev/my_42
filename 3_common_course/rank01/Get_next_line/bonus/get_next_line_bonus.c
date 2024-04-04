@@ -81,6 +81,7 @@ static int	read_and_update(int fd, char **buffer, char **line, int bytes_read)
 	bytes_read = read(fd, *buffer, BUFFER_SIZE);
 	while (bytes_read > 0)
 	{
+		(*buffer)[bytes_read] = 0;
 		if (!update_line(*buffer, bytes_read, line))
 			return (-1);
 		if (ft_strchr(*buffer, '\n'))
@@ -118,11 +119,7 @@ char	*get_next_line(int fd)
 		if (bytes_read < 0)
 			return (free_strs(&buffers[fd], &line));
 		if (!bytes_read && buffers[fd])
-		{
-			// zou hier moeten gaan na laatste buffer
-			printf("freeing buffer\n");
 			free_strs(&buffers[fd], NULL);
-		}
 	}
 	return (line);
 }
