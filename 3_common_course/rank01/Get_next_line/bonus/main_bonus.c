@@ -25,16 +25,16 @@ int	main(int argc, char **argv)
 	int		fd2;
 	int		i = -1;
 	
-	
-	printf("main");
 	s = NULL;
 	if (argc == 2)
 	{
 		fd = ft_fd(argv[1]);
-		while (++i < 2)
+		while (++i < 8)
 		{
-			printf("%s", get_next_line(fd));
-			printf("====LINESEPERATOR====\n");
+			s = get_next_line(fd);
+			printf("(LINE GNL)%s", s);
+			printf("====LINESEPERATOR====\n\n");
+			free(s);
 		}
 	}
 	else if (argc == 3)
