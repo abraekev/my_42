@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/03 14:09:28 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:23:46 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,22 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	i;
-	size_t	s_len;
-	char	*out;
+	unsigned char	*out;
+	size_t			total;
+	size_t			i;
 
-	if (!s)
+	if (nmemb && size > (SIZE_MAX / nmemb))
 		return (NULL);
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-	{
-		out = malloc(1);
-		if (!out)
-			return (NULL);
-		out[0] = 0;
-		return (out);
-	}
-	if (start + len > s_len)
-		len = s_len - start;
-	out = malloc(len + 1);
+	total = nmemb * size;
+	out = malloc(total);
 	if (!out)
 		return (NULL);
-	i = -1;
-	while (++i < len)
-		out[i] = s[start + i];
-	out[i] = 0;
-	return (out);
+	i = 0;
+	while (total > 0 && i < total)
+		out[i++] = 0;
+	return ((void *)out);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -85,26 +74,4 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t d_size)
 	}
 	dst[i] = 0;
 	return (s_len);
-}
-
-size_t	ft_strlcat(char *dest, const char *src, size_t d_size)
-{
-	size_t	i;
-	size_t	d_len;
-	size_t	s_len;
-
-	i = 0;
-	d_len = ft_strlen(dest);
-	s_len = ft_strlen(src);
-	if (!d_size)
-		return (s_len);
-	while (src[i] && d_len + i < d_size - 1)
-	{
-		dest[d_len + i] = src[i];
-		i++;
-	}
-	dest[d_len + i] = 0;
-	if (d_size < d_len)
-		return (d_size + s_len);
-	return (d_len + s_len);
 }

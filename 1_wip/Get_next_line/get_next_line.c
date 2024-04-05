@@ -12,42 +12,38 @@
 
 #include "get_next_line.h"
 
-static int	init_malloc(int size, char **str_address)
+static int	frees_and_nulls(char **s1, char **s2)
 {
-	char	*str;
-	int		i;
-
-	str = (*str_address);
-	i = -1;
-	if (!str)
+	if (s1 && *s1)
 	{
-		str = malloc(size);
-		if (!str)
-			return (0);
-		while (++i < size)
-			str[i] = 0;
-		*str_address = str;
+		free(*s1);
+		*s1 = NULL;
 	}
-	return (1);
+	if (s2 && *s2)
+	{
+		free(*s2);
+		*s2 = NULL;
+	}
+	return (0);
 }
 
 static int	update_line(char *buffer, int bytes_read, char **line)
 {
 	char	*tmp;
 	size_t	line_len;
-	size_t	tmp_len;
 	size_t	i;
 
-	if (!init_malloc(bytes_read + 1, line))
-		return (0);
+	if (!(*line))
+		*line = (char *)ft_calloc(bytes_read + 1, 1);
+	if (!(*line))
+		return (frees_and_nulls(&buffer, NULL));
 	line_len = ft_strlen(*line);
-	tmp_len = line_len + bytes_read;
-	tmp = malloc(tmp_len + 1);
+	tmp = malloc(line_len + bytes_read + 1);
 	if (!tmp)
-		return (0);
-	ft_strlcpy(tmp, *line, tmp_len + 1);
+		return (frees_and_nulls(&buffer, line));
+	ft_strlcpy(tmp, *line, line_len + bytes_read + 1);
 	i = line_len;
-	while (i < tmp_len)
+	while (i < line_len + bytes_read)
 	{
 		tmp[i] = buffer[i - line_len];
 		i++;
@@ -62,7 +58,9 @@ static int	update_line(char *buffer, int bytes_read, char **line)
 
 static int	read_and_update(int fd, char **buffer, char **line, int bytes_read)
 {
-	if (!init_malloc(BUFFER_SIZE + 1, buffer))
+	if (!(*buffer))
+		*buffer = (char *)ft_calloc(BUFFER_SIZE + 1, 1);
+	if (!(*buffer))
 		return (-1);
 	bytes_read = read(fd, *buffer, BUFFER_SIZE);
 	while (bytes_read > 0)
@@ -113,12 +111,12 @@ char	*get_next_line(int fd)
 	{
 		bytes_read = read_and_update(fd, &buffer, &line, -1);
 		if (bytes_read < 0)
-			return (NULL);
-		if (!bytes_read && buffer)
 		{
-			free(buffer);
-			buffer = NULL;
+			frees_and_nulls(&buffer, &line);
+			return (NULL);
 		}
+		if (!bytes_read && buffer)
+			frees_and_nulls(&buffer, NULL);
 	}
 	return (line);
 }
