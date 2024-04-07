@@ -13,6 +13,32 @@
 #include "ft_printf.h"
 #include "libft.h"
 
+void	to_file_ft();
+void	to_file_lb();
+void	to_stdout();
+int	compare();
+
+void	get_result(int a, int b)
+{
+	if (compare() && a == b)
+		ft_printf("\033[32mTRUE\033[0m\n");
+	else
+		ft_printf("\033[31mFALSE\033[0m\n");	
+}
+
+void	printline(char *s)
+{
+	if (s)
+		ft_printf("====================|\033[33m%s\033[0m\n", s);
+	else
+		ft_printf("==========================\n\n");
+}
+
+void	print_entry(char *s)
+{
+	ft_printf("%-20s|", s);
+}
+
 void	test_ptr_x(void *x, void *y, char * ptr)
 {
 	ft_printf("\nPTR\t%s\n", ptr);
@@ -55,63 +81,73 @@ void	test_uint(unsigned int d, char *ptr)
 	ft_printf("ft\t%d\n", ft_printf("ft\t>>%u<<\n", d));
 }
 
-void	digit_x(int d, char *ptr)
+void	test_di(int s, char *ptr)
 {
-	ft_printf("\nMULTI\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%d%d%dXX%d<<\n", d,d,d,d));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%d%d%dXX%d<<\n", d,d,d,d));
+	int	x = 42;
+	int	a;
+	int	b;
+	
+	print_entry(ptr);
+	to_file_lb();
+	a = printf("%d%d%d-%d-%d",s,x,s,x,s);
+	
+	to_file_ft();
+	b = ft_printf("%d%d%d-%d-%d",s,x,s,x,s);
+	
+	to_stdout();
+	get_result(a, b);
 }
 
-void	digit(int d, char *ptr)
+void	test_s(char	*s, char *ptr)
 {
-	ft_printf("\nINT\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%d<<\n", d));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%d<<\n", d));
-}
-void	str_test(char	*s, char *ptr)
-{
-	ft_printf("\nSTR\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%s<<\n", s));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%s<<\n", s));
-}
-
-
-void	printline(char *s)
-{
-	if (s)
-		ft_printf("=========%s=========\n", s);
-	else
-		ft_printf("=============================\n\n");
+	char	*x = "x";
+	int	a;
+	int	b;
+	
+	print_entry(ptr);
+	to_file_lb();
+	a = printf("%s%s%s-%s-%s",s,x,s,x,s);
+	
+	to_file_ft();
+	b = ft_printf("%s%s%s-%s-%s",s,x,s,x,s);
+	
+	to_stdout();
+	get_result(a, b);
 }
 
-
-void	percent(void)
+void	test_c(char c, char *ptr)
 {
-	ft_printf("\n");
-	printf("lb: %d\n", printf("lb\t>>%%<<\n"));
-	ft_printf("ft: %d\n", ft_printf("ft\t>>%%<<\n"));
+	char	x = 'x';
+	int	a;
+	int	b;
+	
+	print_entry(ptr);
+	to_file_lb();
+	a = printf("%c%c%c-%c-%c",c,x,c,x,c);
+	
+	to_file_ft();
+	b = ft_printf("%c%c%c-%c-%c",c,x,c,x,c);
+	
+	to_stdout();
+	get_result(a, b);
 }
 
-void	char_test(char c, char *ptr)
+void	test_percent(void)
 {
 	int	a;
 	int	b;
 	
-	ft_printf("\nCHAR\t%s\n", ptr);
+	print_entry("%");
 	
 	to_file_lb();
-	a = printf("lb\t%d\n", printf("lb\t>>%c<<\n", c));
+	a = printf("%%%%%%");
 	
 	to_file_ft();
-	b = ft_printf("ft\t%d\n", ft_printf("ft\t>>%c<<\n", c));
+	b = ft_printf("%%%%%%");
 	
-	if (compare() && a == b)
-		ft_printf("TRUE");
-	else
-		ft_printf("FALSE");
 	to_stdout();
+	get_result(a, b);
 }
-
 
 /****************************************************************************/
 
@@ -123,46 +159,57 @@ void	testing(void)
 	char	*nullstr = NULL;
 	char	*escstr = "new\nline";	
 
-
 //	% TESTING
-	percent();
+	printline("PERCENT");
+	test_percent();
+	printline(NULL);
 
 //	CHAR TESTING
-	char_test('A',"A");
-	char_test(65, "65");
-	char_test(-65, "-65");
-	char_test('\n', "\\n");
-	char_test('\t', "\\t");
-	char_test('\0', "\\0");
-	char_test('$', "$");
-	char_test(455, "455");
-	char_test(-322, "-322");
-	char_test(L'€', "L\'€\'");
-	char_test("hello", "hello");
+	printline("CHAR");
+	test_c('A',"A");
+	test_c(72, "72");
+	test_c(-72, "-72");
+	test_c('\n', "\\n");
+	test_c('\t', "\\t");
+	test_c('\0', "\\0");
+	test_c('$', "$");
+	test_c(455, "455");
+	test_c(-322, "-322");
+	test_c(L'€', "L'EUR sign'");
+	//char_test("hello", "hello");
+	printline(NULL);
+
+	char c = '\0';
+	char x = 'x';
+	printf(">>");
+	printf("%c%c%c-%c-%c",c,x,c,x,c);
+	printf("<<\n");
+	printf(">>");
+	ft_printf("%c%c%c-%c-%c",c,x,c,x,c);
+	printf("<<\n");
 /*
 //	STR TESTING
 	printline("STR");
-	str_test(lit, "str literal");
-	str_test(strarr, "str array");
-	str_test(emptystr, "empty str");
-	str_test(escstr, "special char");
-	str_test(nullstr, "NULL");
+	test_s(lit, "str literal");
+	test_s(strarr, "str array");
+	test_s(emptystr, "empty str");
+	test_s(escstr, "special char");
+	test_s(nullstr, "NULL");
 	// both lb and ft give core dump
 	//str_test('a', "char \'a\'");
 	printline(0);
 
 //	D & I TESTING
 	printline("INT (D AND I)");
-	digit(INT_MIN, "INT_MIN");
-	digit(-987654321, "-987654321");
-	digit(0, "0");
-	digit(987654321, "987654321");
-	digit(INT_MAX, "INT_MAX");
-	digit(LONG_MAX - 10, "LONG_MAX - 10");
-	digit(LONG_MAX + 10, "LONG_MAX + 10");
-	digit(LONG_MIN - 10, "LONG_MIN - 10");
-	digit(LONG_MIN + 10, "LONG_MIN + 10");
-	digit_x(1234, "1234");
+	test_di(INT_MIN, "INT_MIN");
+	test_di(-987654321, "-987654321");
+	test_di(0, "0");
+	test_di(987654321, "987654321");
+	test_di(INT_MAX, "INT_MAX");
+	test_di(LONG_MAX - 10, "LONG_MAX - 10");
+	test_di(LONG_MAX + 10, "LONG_MAX + 10");
+	test_di(LONG_MIN - 10, "LONG_MIN - 10");
+	test_di(LONG_MIN + 10, "LONG_MIN + 10");
 	printline(0);
 
 //	U TESTING

@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-
+void	testing(void);
 
 void	to_file_ft()
 {
@@ -34,12 +34,19 @@ int	compare()
 {
 	char	bff_ft[1024];
 	char	bff_lb[1024];
-
+	int	i = -1;
 	int fd_ft = open("./ft_output.txt", O_RDONLY);
 	int fd_lb = open("./lb_output.txt", O_RDONLY);
-	
+
+	while (++i < 1024)
+	{
+		bff_ft[i] = 0;
+		bff_lb[i] = 0;
+	};	
 	read(fd_ft, bff_ft, 1024);
 	read(fd_lb, bff_lb, 1024);
+	close(fd_ft);
+	close(fd_lb);
 	if (ft_strncmp(bff_ft, bff_lb, 1024) == 0)
 		return (1);
 	return (0);
