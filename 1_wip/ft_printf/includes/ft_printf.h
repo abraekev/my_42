@@ -95,6 +95,7 @@ char	*get_str(char *s);
 char	*get_insertstr(t_data *d, va_list args);
 
 	// ft_printf_s_utils.c
+char	*copy_fspec(char *str);
 char	*null_freestrs(size_t n, ...);
 int		ret_int_and_free_d(int nb, t_data *d);
 char	*update_s(t_data *d, size_t i);

@@ -15,8 +15,8 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*out;
-	size_t	total;
-	size_t	i;
+	size_t			total;
+	size_t			i;
 
 	if (nmemb && size > (SIZE_MAX / nmemb))
 		return (NULL);
@@ -26,6 +26,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (NULL);
 	i = 0;
 	while (total > 0 && i < total)
-		out[i++] = 0;	
+		out[i++] = 0;
 	return ((void *)out);
 }

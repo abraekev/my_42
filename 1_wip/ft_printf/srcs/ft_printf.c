@@ -27,13 +27,11 @@ static char	*get_fspecstr(t_data *d, size_t i)
 	while (d->s[j])
 	{
 		if (ft_strchr(convspecs, d->s[j]))
-		{
-			lastchr = d->s + j;
-			return (ft_substr(d->s, i, (lastchr - (d->s + i) + 1)));
-		}
+			break ;
 		j++;
 	}
-	return (NULL);
+	lastchr = d->s + j;
+	return (ft_substr(d->s, i, (lastchr - (d->s + i) + 1)));
 }
 
 static int	process_formatspec(t_data *d, int i, va_list args)

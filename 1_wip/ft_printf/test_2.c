@@ -26,59 +26,61 @@ void	get_result(int a, int b)
 		ft_printf("\033[31mFALSE\033[0m\n");	
 }
 
-void	printline(char *s)
+void	print_entry(char *s1, char *s2)
 {
-	if (s)
-		ft_printf("====================|\033[33m%s\033[0m\n", s);
-	else
-		ft_printf("==========================\n\n");
+	printf("\033[33m%-10s\033[0m\033[33m%s\033[0m\n", s1, s2);
 }
 
-void	print_entry(char *s)
+void	test_ptr(void *s, char *ptr)
 {
-	ft_printf("%-20s|", s);
+	int	y = 42;
+	void	*x = (void *)(&y);
+	int	a;
+	int	b;
+	
+	print_entry("VPTR", ptr);
+	to_file_lb();
+	a = printf("%p%p%p-%p-%p",s,x,s,x,s);
+	
+	to_file_ft();
+	b = ft_printf("%p%p%p-%p-%p",s,x,s,x,s);
+	
+	to_stdout();
+	get_result(a, b);
 }
 
-void	test_ptr_x(void *x, void *y, char * ptr)
+void	test_hex(unsigned int s, char *ptr)
 {
-	ft_printf("\nPTR\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%p%p%pXX%p<<\n", x,x,y,y));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%p%p%pXX%p<<\n", x,x,y,y));
+	unsigned int	x = 42;
+	int	a;
+	int	b;
+	
+	print_entry("HEX", ptr);
+	to_file_lb();
+	a = printf("%x%x%x-%x-%x",s,x,s,x,s);
+	
+	to_file_ft();
+	b = ft_printf("%x%x%x-%x-%x",s,x,s,x,s);
+	
+	to_stdout();
+	get_result(a, b);
 }
 
-void	test_ptr(void *d, char *ptr)
+void	test_uint(unsigned int s, char *ptr)
 {
-	ft_printf("\nPTR\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%p<<\n", d));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%p<<\n", d));
-}
-
-void	test_hex_x(unsigned int d, char *ptr)
-{
-	ft_printf("\nHEX\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%x%x%xXX%x<<\n", d,d,d,d));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%x%x%xXX%x<<\n", d,d,d,d));
-}
-
-void	test_hex(unsigned int d, char *ptr)
-{
-	ft_printf("\nHEX\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%x<<\n", d));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%x<<\n", d));
-}
-
-void	test_uint_x(unsigned int d, char *ptr)
-{
-	ft_printf("\nMULTI\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%u%u%uXX%u<<\n", d,d,d,d));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%u%u%uXX%u<<\n", d,d,d,d));
-}
-
-void	test_uint(unsigned int d, char *ptr)
-{
-	ft_printf("\nUINT\t%s\n", ptr);
-	printf("lb\t%d\n", printf("lb\t>>%u<<\n", d));
-	ft_printf("ft\t%d\n", ft_printf("ft\t>>%u<<\n", d));
+	unsigned int	x = 42;
+	int	a;
+	int	b;
+	
+	print_entry("UINT", ptr);
+	to_file_lb();
+	a = printf("%u%u%u-%u-%u",s,x,s,x,s);
+	
+	to_file_ft();
+	b = ft_printf("%u%u%u-%u-%u",s,x,s,x,s);
+	
+	to_stdout();
+	get_result(a, b);
 }
 
 void	test_di(int s, char *ptr)
@@ -87,7 +89,7 @@ void	test_di(int s, char *ptr)
 	int	a;
 	int	b;
 	
-	print_entry(ptr);
+	print_entry("DIGIT", ptr);
 	to_file_lb();
 	a = printf("%d%d%d-%d-%d",s,x,s,x,s);
 	
@@ -104,7 +106,7 @@ void	test_s(char	*s, char *ptr)
 	int	a;
 	int	b;
 	
-	print_entry(ptr);
+	print_entry("STR", ptr);
 	to_file_lb();
 	a = printf("%s%s%s-%s-%s",s,x,s,x,s);
 	
@@ -121,15 +123,10 @@ void	test_c(char c, char *ptr)
 	int	a;
 	int	b;
 	
-	print_entry(ptr);
-	to_file_lb();
-	a = printf("%c%c%c-%c-%c",c,x,c,x,c);
-	
-	to_file_ft();
-	b = ft_printf("%c%c%c-%c-%c",c,x,c,x,c);
+	print_entry("CHAR", ptr);
 
-	to_stdout();
-	get_result(a, b);
+	printf("(%d)\n", printf("%c%c%c-%c-%c",c,x,c,x,c));
+	printf("(%d)\n\n", ft_printf("%c%c%c-%c-%c",c,x,c,x,c));
 }
 
 void	test_percent(void)
@@ -137,8 +134,7 @@ void	test_percent(void)
 	int	a;
 	int	b;
 	
-	print_entry("%");
-	
+	print_entry("PERCENT", "%%%");
 	to_file_lb();
 	a = printf("%%%%%%");
 	
@@ -147,6 +143,9 @@ void	test_percent(void)
 	
 	to_stdout();
 	get_result(a, b);
+	
+	//printf("(lb %d)\n", printf("%%%%%%"));
+	//printf("(ft %d)\n", ft_printf("%%%%%%"));
 }
 
 /****************************************************************************/
@@ -159,31 +158,7 @@ void	testing(void)
 	char	*nullstr = NULL;
 	char	*escstr = "new\nline";	
 
-
-	char c = 0;
-	char x = 'x';
-	
-	
-	close(1);
-	int	fd = open("bigtest.txt", O_WRONLY | O_CREAT, 0644);
-	dup2(fd, 1);
-	printf("(%d)", ft_printf("%c%c%c-%c-%c",c,x,c,x,c));
-	
-	
-/*	
-	printf("(%d)", printf("%c%c%c-%c-%c",c,x,c,x,c));
-	printf("\n");
-	printf("(%d)", ft_printf("%c%c%c-%c-%c",c,x,c,x,c));
-	printf("\n");
-
-
-//	% TESTING
-	printline("PERCENT");
-	test_percent();
-	printline(NULL);
-
 //	CHAR TESTING
-	printline("CHAR");
 	test_c('A',"A");
 	test_c(72, "72");
 	test_c(-72, "-72");
@@ -195,21 +170,23 @@ void	testing(void)
 	test_c(-322, "-322");
 	test_c(L'€', "L'EUR sign'");
 	//char_test("hello", "hello");
-	printline(NULL);
+
+//	% TESTING
+	test_percent();
+
 
 //	STR TESTING
-	printline("STR");
 	test_s(lit, "str literal");
 	test_s(strarr, "str array");
 	test_s(emptystr, "empty str");
 	test_s(escstr, "special char");
 	test_s(nullstr, "NULL");
+	test_s("\0\0\0\0", "mtp nulls");
 	// both lb and ft give core dump
 	//str_test('a', "char \'a\'");
-	printline(0);
 
 //	D & I TESTING
-	printline("INT (D AND I)");
+	ft_printf("\n");
 	test_di(INT_MIN, "INT_MIN");
 	test_di(-987654321, "-987654321");
 	test_di(0, "0");
@@ -219,10 +196,10 @@ void	testing(void)
 	test_di(LONG_MAX + 10, "LONG_MAX + 10");
 	test_di(LONG_MIN - 10, "LONG_MIN - 10");
 	test_di(LONG_MIN + 10, "LONG_MIN + 10");
-	printline(0);
+
 
 //	U TESTING
-	printline("UINT");
+	ft_printf("\n");
 	test_uint(INT_MIN, "INT_MIN");
 	test_uint(-987654321, "-987654321");
 	test_uint(0, "0");
@@ -232,11 +209,9 @@ void	testing(void)
 	test_uint(ULONG_MAX + 10, "ULONG_MAX + 10");
 	test_uint(LONG_MIN - 10, "LONG_MIN - 10");
 	test_uint(LONG_MIN + 10, "LONG_MIN + 10");
-	test_uint_x(1234, "1234");
-	printline(0);
 
 //	X TESTING
-	printline("HEX");
+	ft_printf("\n");
 	test_hex(INT_MIN, "INT_MIN");
 	test_hex(-987654321, "-987654321");
 	test_hex(0, "0");
@@ -246,11 +221,10 @@ void	testing(void)
 	test_hex(ULONG_MAX + 10, "ULONG_MAX + 10");
 	test_hex(LONG_MIN - 10, "LONG_MIN - 10");
 	test_hex(LONG_MIN + 10, "LONG_MIN + 10");
-	test_hex_x(1234, "1234");
-	printline(0);
+
 
 //	P TESTING
-	printline("PTR");	
+	ft_printf("\n");
 	// NULL
 	test_ptr(NULL, "NULL");
 	
@@ -263,10 +237,10 @@ void	testing(void)
 	test_ptr((void *)&arr[2], "ARR[2]");
 	test_ptr((void *)arr, "ARR");
 	test_ptr((void *)(arr + 3), "ARR+3");
-	test_ptr((void *)(arr + 89), "ARR+89");
+	test_ptr((void *)(arr + 89), "ARR+89 out of bound");
 	
 	// function pointer
-	test_ptr((void *)ft_printf, "F PTR");
+	test_ptr((void *)ft_printf, "Function PTR");
 	
 	// struct pointer
 	t_data d;
@@ -280,11 +254,5 @@ void	testing(void)
 	// mallocd pointer
 	void *mem = malloc(5);
 	test_ptr(mem, "MALLOC");
-	
-	// multiple pointers
-	int	y = 56;
-	test_ptr_x((void *)&x, (void *)&y, "2xPTR");
-	printline(0);
-*/
 }
 

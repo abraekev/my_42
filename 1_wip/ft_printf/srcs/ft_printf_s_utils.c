@@ -15,6 +15,19 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
+char	*copy_fspec(char *str)
+{
+	char	*out;
+	size_t	len;
+
+	len = ft_strlen(str);
+	out = malloc(len + 1);
+	if (!out)
+		return (NULL);
+	ft_strlcpy(out, str, len + 1);
+	return (out);
+}
+
 char	*update_s(t_data *d, size_t i)
 {
 	char	*tmp;

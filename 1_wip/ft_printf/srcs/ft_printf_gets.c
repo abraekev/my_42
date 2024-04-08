@@ -77,7 +77,11 @@ char	*get_insertstr(t_data *d, va_list args)
 
 	flags = initiate_flags();
 	if (!get_flags(d->fspec, &flags))
-		return (d->fspec);
+	{
+		out =copy_fspec(d->fspec);
+		set_insert_len(out, d);
+		return (out);
+	}
 	out = NULL;
 	if (d->cspec == '%')
 		out = get_char('%');
