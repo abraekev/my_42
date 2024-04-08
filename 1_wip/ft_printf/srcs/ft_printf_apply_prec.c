@@ -33,7 +33,7 @@ static int	apply_precision_negative(char **tmp, char *s)
 
 	tmp2 = ft_strjoin("-", *tmp);
 	if (!tmp2)
-		return (zero_freestrs(2, s, *tmp));
+		return (zero_freestrs(2, &s, tmp));
 	free(*tmp);
 	*tmp = tmp2;
 	return (1);
@@ -46,7 +46,7 @@ static int	apply_prec_nbr_newstr(char **s, char *abs, int len)
 
 	tmp = malloc(len + 1);
 	if (!tmp)
-		return (zero_freestrs(1, *s));
+		return (zero_freestrs(1, s));
 	tmp[len] = 0;
 	while (--len >= 0)
 		tmp[len] = '0';
@@ -55,8 +55,8 @@ static int	apply_prec_nbr_newstr(char **s, char *abs, int len)
 			return (0);
 	tmp2 = ft_strjoin(tmp, abs);
 	if (!tmp)
-		return (zero_freestrs(2, *s, tmp));
-	zero_freestrs(2, *s, tmp);
+		return (zero_freestrs(2, s, &tmp));
+	zero_freestrs(2, s, &tmp);
 	*s = tmp2;
 	return (1);
 }
@@ -93,7 +93,7 @@ char	*apply_precision(char *s, t_flags f)
 		{
 			tmp = malloc(f.precision + 1);
 			if (!tmp)
-				return (null_freestrs(1, s));
+				return (null_freestrs(1, &s));
 			ft_strlcpy(tmp, s, f.precision + 1);
 			free(s);
 			return (tmp);

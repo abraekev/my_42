@@ -127,7 +127,7 @@ void	test_c(char c, char *ptr)
 	
 	to_file_ft();
 	b = ft_printf("%c%c%c-%c-%c",c,x,c,x,c);
-	
+
 	to_stdout();
 	get_result(a, b);
 }
@@ -159,6 +159,24 @@ void	testing(void)
 	char	*nullstr = NULL;
 	char	*escstr = "new\nline";	
 
+
+	char c = 0;
+	char x = 'x';
+	
+	
+	close(1);
+	int	fd = open("bigtest.txt", O_WRONLY | O_CREAT, 0644);
+	dup2(fd, 1);
+	printf("(%d)", ft_printf("%c%c%c-%c-%c",c,x,c,x,c));
+	
+	
+/*	
+	printf("(%d)", printf("%c%c%c-%c-%c",c,x,c,x,c));
+	printf("\n");
+	printf("(%d)", ft_printf("%c%c%c-%c-%c",c,x,c,x,c));
+	printf("\n");
+
+
 //	% TESTING
 	printline("PERCENT");
 	test_percent();
@@ -179,15 +197,6 @@ void	testing(void)
 	//char_test("hello", "hello");
 	printline(NULL);
 
-	char c = '\0';
-	char x = 'x';
-	printf(">>");
-	printf("%c%c%c-%c-%c",c,x,c,x,c);
-	printf("<<\n");
-	printf(">>");
-	ft_printf("%c%c%c-%c-%c",c,x,c,x,c);
-	printf("<<\n");
-/*
 //	STR TESTING
 	printline("STR");
 	test_s(lit, "str literal");

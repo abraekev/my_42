@@ -46,7 +46,7 @@ $(NAME):	$(OBJS) $(OBJSLIBFT)
 all:		$(NAME)
 
 main:
-			$(GCC) test*.c -I $(DIRINCL) $(NAME)
+			$(GCC) -g test*.c -I $(DIRINCL) $(NAME)
 
 $(OBJSLIBFT):	
 		cd $(DIRLIBFT) && $(AX) $(LIBFT)

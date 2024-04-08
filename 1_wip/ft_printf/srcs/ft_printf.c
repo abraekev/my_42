@@ -40,33 +40,37 @@ static int	process_formatspec(t_data *d, int i, va_list args)
 {
 	char	*tmp;
 
+	d->add_special = 0;
 	d->fspec = get_fspecstr(d, i);
 	if (!d->fspec)
-		return (0);
+		return (-1);
 	d->f_len = ft_strlen(d->fspec);
 	d->cspec = d->fspec[d->f_len - 1];
 	d->insert = get_insertstr(d, args);
 	if (!d->insert)
-		return (zero_freestrs(1, d->fspec));
+		return (-1);
 	tmp = update_s(d, i);
 	free(d->s);
 	if (!tmp)
-		return (zero_freestrs(2, d->fspec, d->insert));
+		return (-1);
 	d->s = tmp;
-	zero_freestrs(2, d->fspec, d->insert);
-	return (d->f_len);
+	null_freestrs(2, &(d->fspec), &(d->insert));
+	return (d->i_len);
 }
 
-static int	create_s(const char *src, t_data *d)
+static int	init_d(const char *src, t_data *d)
 {
-	size_t	src_len;
-
-	src_len = ft_strlen(src);
-	d->s_len = src_len;
-	d->s = malloc(src_len + 1);
+	d->s_len = ft_strlen(src);
+	d->s = malloc(d->s_len + 1);
 	if (!(d->s))
 		return (0);
-	ft_strlcpy(d->s, src, src_len + 1);
+	ft_strlcpy(d->s, src, d->s_len + 1);
+	d->add_special = 0;
+	d->cspec = 0;
+	d->f_len = 0;
+	d->i_len = 0;
+	d->fspec = NULL;
+	d->insert = NULL;
 	return (1);
 }
 
@@ -75,37 +79,35 @@ static int	get_len_and_print(t_data *d)
 	if (d->s)
 	{
 		ft_putstr_fd(d->s, 1);
-		free(d->s);
+		ret_int_and_free_d(1, d);
 		return (d->s_len);
 	}
 	else
-		return (-1);
+		return (ret_int_and_free_d(-1, d));
 }
 
 int	ft_printf(const char *src, ...)
 {
 	t_data		d;
 	size_t		i;
-	size_t		jump;
+	int			jump;
 	va_list		args;
 
 	va_start(args, src);
-	i = -1;
-	if (!create_s(src, &d))
+	i = 0;
+	if (!init_d(src, &d))
 		return (-1);
-	while (d.s[++i])
+	while (d.s[i])
 	{
 		if (d.s[i] == '%')
 		{
 			jump = process_formatspec(&d, i, args);
-			if (!jump)
-			{
-				if (d.s)
-					free(d.s);
-				return (-1);
-			}
-			i = i + jump - 2;
+			if (jump < 0)
+				return (ret_int_and_free_d(-1, &d));
+			i = i + jump;
 		}
+		else
+			i++;
 	}
 	return (get_len_and_print(&d));
 }

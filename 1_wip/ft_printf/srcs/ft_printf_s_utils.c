@@ -32,36 +32,68 @@ char	*update_s(t_data *d, size_t i)
 	free(tmp);
 	if (!out)
 		return (NULL);
-	d->s_len = d->s_len - d->f_len + d->i_len;
+	d->s_len = d->s_len - d->f_len + d->i_len + d->add_special;
 	return (out);
-}
-
-char	*null_freestrs(size_t n, ...)
-{
-	size_t	i;
-	va_list	args;
-
-	va_start(args, n);
-	i = 0;
-	while (i < n)
-	{
-		free(va_arg(args, char *));
-		i++;
-	}
-	return (NULL);
 }
 
 int	zero_freestrs(size_t n, ...)
 {
 	size_t	i;
+	char	**s;
 	va_list	args;
 
 	va_start(args, n);
 	i = 0;
 	while (i < n)
 	{
-		free(va_arg(args, char *));
+		s = va_arg(args, char **);
+		if (s && *s)
+		{
+			free(*s);
+			*s = NULL;
+		}
 		i++;
 	}
 	return (0);
+}
+
+char	*null_freestrs(size_t n, ...)
+{
+	size_t	i;
+	char	**s;
+	va_list	args;
+
+	va_start(args, n);
+	i = 0;
+	while (i < n)
+	{
+		s = va_arg(args, char **);
+		if (s && *s)
+		{
+			free(*s);
+			*s = NULL;
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+int	ret_int_and_free_d(int nb, t_data *d)
+{
+	if (d && d->s)
+	{
+		free(d->s);
+		d->s = NULL;
+	}
+	if (d && d->fspec)
+	{
+		free(d->fspec);
+		d->fspec = NULL;
+	}
+	if (d && d->insert)
+	{
+		free(d->insert);
+		d->insert = NULL;
+	}
+	return (nb);
 }

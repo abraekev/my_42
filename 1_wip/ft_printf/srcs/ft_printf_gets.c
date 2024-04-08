@@ -48,25 +48,26 @@ char	*get_str(char *s)
 	return (out);
 }
 
-static void	set_insert_len(char *s, t_data *d)
+// special case if %c and its the 0 terminator
+static void	set_insert_len(char *insert, t_data *d)
 {
-	d->i_len = ft_strlen(s);
-	if (d->cspec == 'c' && !ft_strlen(s))
-		d->i_len = 1;
+	d->i_len = ft_strlen(insert);
+	if (d->cspec == 'c' && !ft_strlen(insert))
+		d->add_special++;
 }
 
-char	*apply_flags(char *s, t_flags f, t_data *d)
+char	*apply_flags(char *insert, t_flags f, t_data *d)
 {
 	if (ft_strchr("sdiuxX", f.cspec))
-		s = apply_precision(s, f);
+		insert = apply_precision(insert, f);
 	if (ft_strchr("di", f.cspec))
-		s = apply_spaceplus(s, f);
+		insert = apply_spaceplus(insert, f);
 	if (ft_strchr("xX", f.cspec))
-		s = apply_altprint(s, f);
+		insert = apply_altprint(insert, f);
 	if (ft_strchr("cspdiuxX", f.cspec))
-		s = apply_width_others(s, f);
-	set_insert_len(s, d);
-	return (s);
+		insert = apply_width_others(insert, f);
+	set_insert_len(insert, d);
+	return (insert);
 }
 
 char	*get_insertstr(t_data *d, va_list args)
