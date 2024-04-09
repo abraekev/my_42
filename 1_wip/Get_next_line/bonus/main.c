@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 //	cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get*.c main.c
 
