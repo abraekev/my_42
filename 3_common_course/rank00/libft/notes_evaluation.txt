@@ -1,1 +1,0 @@
-- ft_split.c: null protection in het begin?
