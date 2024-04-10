@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+#include <limits.h>
+
+/*
+	Get the real OPEN_MAX by using
+	long OPEN_MAX = sysconf(_SC_OPEN_MAX));
+*/
 
 static int	frees_and_nulls(char **s1, char **s2)
 {
@@ -97,11 +103,11 @@ static int	check_and_update(char **buffer, char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffers[FOPEN_MAX];
+	static char	*buffers[OPEN_MAX];
 	char		*line;
 	int			bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE < 1)
 		return (NULL);
 	line = NULL;
 	if (buffers[fd] && *buffers[fd])

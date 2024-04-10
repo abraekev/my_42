@@ -35,6 +35,10 @@
 #  define BUFFER_SIZE 64
 # endif /*BUFFER_SIZE*/
 
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif /*OPEN_MAX*/
+
 //	STRUCTS & ENUMS
 /******************************************************************************/
 
