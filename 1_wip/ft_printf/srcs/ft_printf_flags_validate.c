@@ -55,6 +55,5 @@ int	validate_flags(char *s, t_flags *flags)
 	i = check_precision(s, i);
 	if (s[i] && ft_strchr("cspdiuxX%", s[i]) && !s[i + 1])
 		return (1);
-
 	return (0);
 }

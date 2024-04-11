@@ -1,0 +1,7 @@
+printf print daadwerking 0 terminators af, enkel bij %c, dit moet nog aangepast worden.
+
+check edge case
+
+check lengte berekening
+
+check how prints is done.

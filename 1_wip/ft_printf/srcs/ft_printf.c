@@ -76,6 +76,8 @@ static int	get_len_and_print(t_data *d)
 {
 	if (d->s)
 	{
+		printf(">%lu<\n", d->s_len);
+		printf(">%lu<\n", ft_strlen(d->s));
 		ft_putstr_fd(d->s, 1);
 		ret_int_and_free_d(1, d);
 		return (d->s_len);
