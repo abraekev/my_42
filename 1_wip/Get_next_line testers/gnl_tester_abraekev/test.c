@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+//# include <fcntl.h>
+//# include <sys/stat.h>
+//# include <sys/types.h>
+//# include <errno.h>
+//# include <string.h>
+//# include <libgen.h>
+//# include <stdio.h>
+//# include <limits.h>
 
 //	cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get*.c main.c
 

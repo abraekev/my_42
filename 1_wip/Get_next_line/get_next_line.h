@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/27 11:42:33 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:01:40 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,8 @@
 //	HEADERS
 /******************************************************************************/
 
-# include <fcntl.h>
 # include <unistd.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <errno.h>
-# include <string.h>
-# include <libgen.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
 # include <stdint.h>
 
 //	MACROS
