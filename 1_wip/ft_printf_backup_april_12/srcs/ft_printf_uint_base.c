@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_apply_width_others.c                     :+:      :+:    :+:   */
+/*   ft_printf_uint_base.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,46 +15,51 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-static void	fill_str(char *s, size_t len, char c)
+static size_t	get_uint_len(unsigned int nbr, size_t b_len)
 {
-	s[len] = 0;
-	while (--len != UINT_MAX)
+	size_t	len;
+
+	len = 0;
+	if (!nbr)
+		return (1);
+	while (nbr != 0)
 	{
-		s[len] = c;
-		if (!len)
-			break ;
+		len ++;
+		nbr /= b_len;
 	}
+	return (len);
 }
 
-static char	*apply_join(char *s, t_flags f, char *add)
+static char	*uint_base(unsigned int nbr, char *base, size_t b_len)
 {
-	char	*out;
+	size_t	s_len;
+	char	*s;
 
-	if (f.just_l)
-		out = ft_strjoin(s, add);
-	else
-		out = ft_strjoin(add, s);
-	free_strs(2, &add, &s);
-	return (out);
-}
-
-char	*apply_width_others(char *s, t_flags f)
-{
-	char	*add;
-	size_t	a_len;
-
+	s_len = get_uint_len(nbr, b_len);
+	s = malloc(s_len + 1);
 	if (!s)
 		return (NULL);
-	if ((unsigned int)f.min_width <= ft_strlen(s))
-		return (s);
-	a_len = f.min_width - ft_strlen(s);
-	add = malloc(a_len + 1);
-	if (!add)
-		return (free_strs(1, &s), NULL);
-	if (f.pad_zero && !f.just_l && f.precision < 0
-		&& ft_strchr("diuxX", f.cspec))
-		fill_str(add, a_len, '0');
+	s[s_len] = 0;
+	while (s_len != 0)
+	{
+		s[s_len - 1] = *(base + (nbr % b_len));
+		nbr /= b_len;
+		s_len--;
+	}
+	return (s);
+}
+
+char	*get_uint_base(unsigned int nbr, char c)
+{
+	char	*base;
+
+	if (c == 'u')
+		base = "0123456789";
+	else if (c == 'x')
+		base = "0123456789abcdef";
+	else if (c == 'X')
+		base = "0123456789ABCDEF";
 	else
-		fill_str(add, a_len, ' ');
-	return (apply_join(s, f, add));
+		return (NULL);
+	return (uint_base(nbr, base, ft_strlen(base)));
 }

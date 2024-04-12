@@ -24,40 +24,66 @@ static char	*get_fspecstr(t_data *d, size_t i)
 
 	convspecs = "cspdiuxX%";
 	j = i + 1;
-	while (d->src[j])
+	while (d->s[j])
 	{
-		if (ft_strchr(convspecs, d->src[j]))
+		if (ft_strchr(convspecs, d->s[j]))
 			break ;
 		j++;
 	}
-	lastchr = (char *)d->src + j;
-	return (ft_substr(d->src, i, (lastchr - (d->src + i) + 1)));
+	lastchr = d->s + j;
+	return (ft_substr(d->s, i, (lastchr - (d->s + i) + 1)));
 }
 
 static int	process_formatspec(t_data *d, int i, va_list args)
 {
+	char	*tmp;
+
+	d->add_special = 0;
 	d->fspec = get_fspecstr(d, i);
 	if (!d->fspec)
-		return (free_data(d), -1);
+		return (-1);
 	d->f_len = ft_strlen(d->fspec);
 	d->cspec = d->fspec[d->f_len - 1];
 	d->insert = get_insertstr(d, args);
 	if (!d->insert)
-		return (free_data(d), -1);
-	ft_putstr_special(d);
-	return (free_data(d), d->f_len);
+		return (-1);
+	tmp = update_s(d, i);
+	free(d->s);
+	if (!tmp)
+		return (-1);
+	d->s = tmp;
+	null_freestrs(2, &(d->fspec), &(d->insert));
+	return (d->i_len);
 }
 
 static int	init_d(const char *src, t_data *d)
 {
-	d->src = src;
 	d->s_len = ft_strlen(src);
+	d->s = malloc(d->s_len + 1);
+	if (!(d->s))
+		return (0);
+	ft_strlcpy(d->s, src, d->s_len + 1);
+	d->add_special = 0;
 	d->cspec = 0;
 	d->f_len = 0;
 	d->i_len = 0;
 	d->fspec = NULL;
 	d->insert = NULL;
 	return (1);
+}
+
+static int	get_len_and_print(t_data *d)
+{
+	if (d->s)
+	{
+		printf(">%lu<\n", d->s_len);
+		printf(">%lu<\n", ft_strlen(d->s));
+		ft_putstr_fd(d->s, 1);
+		ret_int_and_free_d(1, d);
+		return (d->s_len);
+	}
+	else
+		return (ret_int_and_free_d(-1, d));
 }
 
 int	ft_printf(const char *src, ...)
@@ -71,20 +97,17 @@ int	ft_printf(const char *src, ...)
 	i = 0;
 	if (!init_d(src, &d))
 		return (-1);
-	while (src[i])
+	while (d.s[i])
 	{
-		if (src[i] == '%')
+		if (d.s[i] == '%')
 		{
 			jump = process_formatspec(&d, i, args);
 			if (jump < 0)
-				return (free_data(&d), -1);
+				return (ret_int_and_free_d(-1, &d));
 			i = i + jump;
 		}
 		else
-		{
-			ft_putchar_fd(src[i], 1);
 			i++;
-		}
 	}
-	return (free_data(&d), d.s_len);
+	return (get_len_and_print(&d));
 }

@@ -49,12 +49,11 @@ char	*get_str(char *s)
 }
 
 // special case if %c and its the 0 terminator
-static void	set_lengths(char *insert, t_data *d)
+static void	set_insert_len(char *insert, t_data *d)
 {
 	d->i_len = ft_strlen(insert);
-	if (!d->i_len && d->cspec == 'c')
-		d->i_len++;
-	d->s_len = d->s_len - d->f_len + d->i_len;
+	if (d->cspec == 'c' && !ft_strlen(insert))
+		d->add_special++;
 }
 
 char	*apply_flags(char *insert, t_flags f, t_data *d)
@@ -67,34 +66,34 @@ char	*apply_flags(char *insert, t_flags f, t_data *d)
 		insert = apply_altprint(insert, f);
 	if (ft_strchr("cspdiuxX", f.cspec))
 		insert = apply_width_others(insert, f);
-	set_lengths(insert, d);
+	set_insert_len(insert, d);
 	return (insert);
 }
 
 char	*get_insertstr(t_data *d, va_list args)
 {
 	t_flags	flags;
-	char	*insert;
+	char	*out;
 
 	flags = initiate_flags();
 	if (!get_flags(d->fspec, &flags))
 	{
-		insert = ft_strdup(d->fspec);
-		set_lengths(insert, d);
-		return (insert);
+		out = copy_fspec(d->fspec);
+		set_insert_len(out, d);
+		return (out);
 	}
-	insert = NULL;
+	out = NULL;
 	if (d->cspec == '%')
-		insert = get_char('%');
+		out = get_char('%');
 	if (d->cspec == 'c')
-		insert = get_char(va_arg(args, int));
+		out = get_char(va_arg(args, int));
 	if (d->cspec == 's')
-		insert = get_str(va_arg(args, char *));
+		out = get_str(va_arg(args, char *));
 	if (d->cspec == 'd' || d->cspec == 'i')
-		insert = ft_itoa(va_arg(args, int));
+		out = ft_itoa(va_arg(args, int));
 	if (d->cspec == 'p')
-		insert = get_vptr_base(va_arg(args, uintptr_t));
+		out = get_vptr_base(va_arg(args, uintptr_t));
 	if (d->cspec == 'u' || d->cspec == 'x' || d->cspec == 'X')
-		insert = get_uint_base(va_arg(args, unsigned int), d->cspec);
-	return (apply_flags(insert, flags, d));
+		out = get_uint_base(va_arg(args, unsigned int), d->cspec);
+	return (apply_flags(out, flags, d));
 }

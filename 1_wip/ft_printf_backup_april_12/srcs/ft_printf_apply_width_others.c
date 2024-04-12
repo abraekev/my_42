@@ -34,7 +34,7 @@ static char	*apply_join(char *s, t_flags f, char *add)
 		out = ft_strjoin(s, add);
 	else
 		out = ft_strjoin(add, s);
-	free_strs(2, &add, &s);
+	null_freestrs(2, &add, &s);
 	return (out);
 }
 
@@ -50,7 +50,7 @@ char	*apply_width_others(char *s, t_flags f)
 	a_len = f.min_width - ft_strlen(s);
 	add = malloc(a_len + 1);
 	if (!add)
-		return (free_strs(1, &s), NULL);
+		return (null_freestrs(1, &s));
 	if (f.pad_zero && !f.just_l && f.precision < 0
 		&& ft_strchr("diuxX", f.cspec))
 		fill_str(add, a_len, '0');

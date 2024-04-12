@@ -56,14 +56,23 @@ int	compare()
 
 int	main()
 {
-	printf("(%d)LB\n", printf("XX%.03sYY", NULL));
-	printf("(%d)LB\n", printf("XX%.9sYY", NULL));
-	printf("(%d)LB\n", printf("XX%3sYY", NULL));
-	printf("(%d)LB\n", printf("XX%9sYY", NULL));
-
+	ft_printf("hallo%sdaar", "XXX");
 	
 	//printf("mm%cmm%cmm\n\0XXXX%cXXXX", 76, 76, 76);
 	//printf(" %c %c %c ", '0', 0, '1');
+
+/*
+	printf("failed francinette tests:\n");
+	
+	printf("\nlib:\n");
+	printf("(%d)", printf(" %c %c %c ", '0', 0, '1'));
+	
+	printf("\nft_:\n");
+	printf("(%d)", ft_printf(" %c %c %c ", '0', 0, '1'));
+	
+	
+	printf("==end==\n");
+*/
 
 
 	//testing();

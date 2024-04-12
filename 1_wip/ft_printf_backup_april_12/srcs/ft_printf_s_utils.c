@@ -15,16 +15,41 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-void	ft_putstr_special(t_data *d)
+char	*copy_fspec(char *str)
 {
-	size_t	i;
+	char	*out;
+	size_t	len;
 
-	i = 0;
-	while (i < d->i_len)
-		ft_putchar_fd(d->insert[i++], 1);
+	len = ft_strlen(str);
+	out = malloc(len + 1);
+	if (!out)
+		return (NULL);
+	ft_strlcpy(out, str, len + 1);
+	return (out);
 }
 
-void	free_strs(size_t n, ...)
+char	*update_s(t_data *d, size_t i)
+{
+	char	*tmp;
+	char	*out;
+
+	tmp = ft_substr(d->s, 0, i);
+	if (!tmp)
+		return (NULL);
+	out = ft_strjoin(tmp, d->insert);
+	free(tmp);
+	if (!out)
+		return (NULL);
+	tmp = out;
+	out = ft_strjoin(tmp, (d->s + i + d->f_len));
+	free(tmp);
+	if (!out)
+		return (NULL);
+	d->s_len = d->s_len - d->f_len + d->i_len + d->add_special;
+	return (out);
+}
+
+int	zero_freestrs(size_t n, ...)
 {
 	size_t	i;
 	char	**s;
@@ -42,11 +67,37 @@ void	free_strs(size_t n, ...)
 		}
 		i++;
 	}
-	return ;
+	return (0);
 }
 
-void	free_data(t_data *d)
+char	*null_freestrs(size_t n, ...)
 {
+	size_t	i;
+	char	**s;
+	va_list	args;
+
+	va_start(args, n);
+	i = 0;
+	while (i < n)
+	{
+		s = va_arg(args, char **);
+		if (s && *s)
+		{
+			free(*s);
+			*s = NULL;
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+int	ret_int_and_free_d(int nb, t_data *d)
+{
+	if (d && d->s)
+	{
+		free(d->s);
+		d->s = NULL;
+	}
 	if (d && d->fspec)
 	{
 		free(d->fspec);
@@ -57,5 +108,5 @@ void	free_data(t_data *d)
 		free(d->insert);
 		d->insert = NULL;
 	}
-	return ;
+	return (nb);
 }

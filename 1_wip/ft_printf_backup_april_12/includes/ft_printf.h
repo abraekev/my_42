@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/12 14:01:58 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:42:33 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,14 @@ typedef struct s_flags
 
 typedef struct s_data
 {
-	const char	*src;
-	size_t		s_len;
-	char		cspec;
-	char		*fspec;
-	size_t		f_len;
-	char		*insert;
-	size_t		i_len;
+	char	*s;
+	size_t	s_len;
+	char	cspec;
+	char	*fspec;
+	size_t	f_len;
+	char	*insert;
+	size_t	i_len;
+	size_t	add_special;
 }	t_data;
 
 //	DEFINITIONS
@@ -94,9 +95,12 @@ char	*get_str(char *s);
 char	*get_insertstr(t_data *d, va_list args);
 
 	// ft_printf_s_utils.c
-void	ft_putstr_special(t_data *d);
-void	free_strs(size_t n, ...);
-void	free_data(t_data *d);
+char	*copy_fspec(char *str);
+char	*null_freestrs(size_t n, ...);
+int		ret_int_and_free_d(int nb, t_data *d);
+char	*update_s(t_data *d, size_t i);
+int		zero_freestrs(size_t n, ...);
+
 	// ft_printf.c
 int		ft_printf(const char *s, ...);
 

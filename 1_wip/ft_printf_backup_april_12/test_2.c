@@ -117,22 +117,16 @@ void	test_s(char	*s, char *ptr)
 	get_result(a, b);
 }
 
-
-void	test_c(char	s, char *ptr)
+void	test_c(char c, char *ptr)
 {
 	char	x = 'x';
 	int	a;
 	int	b;
 	
 	print_entry("CHAR", ptr);
-	to_file_lb();
-	a = printf("%c%c%c-%c-%c",s,x,s,x,s);
-	
-	to_file_ft();
-	b = ft_printf("%c%c%c-%c-%c",s,x,s,x,s);
-	
-	to_stdout();
-	get_result(a, b);
+
+	printf("(%d)\n", printf("%c%c%c-%c-%c",c,x,c,x,c));
+	printf("(%d)\n\n", ft_printf("%c%c%c-%c-%c",c,x,c,x,c));
 }
 
 void	test_percent(void)
@@ -178,12 +172,10 @@ void	testing(void)
 	//char_test("hello", "hello");
 
 //	% TESTING
-	ft_printf("\n");
 	test_percent();
 
 
 //	STR TESTING
-	ft_printf("\n");
 	test_s(lit, "str literal");
 	test_s(strarr, "str array");
 	test_s(emptystr, "empty str");
