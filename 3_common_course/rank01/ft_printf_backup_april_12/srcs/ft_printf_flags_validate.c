@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_apply_width_others.c                     :+:      :+:    :+:   */
+/*   ft_printf_flags_validate.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,46 +15,45 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-static void	fill_str(char *s, size_t len, char c)
+static int	check_precision(char *s, size_t i)
 {
-	s[len] = 0;
-	while (--len != UINT_MAX)
+	if (s[i] == '.')
 	{
-		s[len] = c;
-		if (!len)
-			break ;
+		i++;
+		if (s[i] == '*')
+			i++;
+		else
+		{
+			if (s[i] == '-')
+				i++;
+			while (ft_isdigit(s[i]))
+				i++;
+		}
 	}
+	return (i);
 }
 
-static char	*apply_join(char *s, t_flags f, char *add)
+int	validate_flags(char *s, t_flags *flags)
 {
-	char	*out;
+	size_t		i;
 
-	if (f.just_l)
-		out = ft_strjoin(s, add);
-	else
-		out = ft_strjoin(add, s);
-	free_strs(2, &add, &s);
-	return (out);
-}
-
-char	*apply_width_others(char *s, t_flags f)
-{
-	char	*add;
-	size_t	a_len;
-
-	if (!s)
-		return (NULL);
-	if ((unsigned int)f.min_width <= ft_strlen(s))
-		return (s);
-	a_len = f.min_width - ft_strlen(s);
-	add = malloc(a_len + 1);
-	if (!add)
-		return (free_strs(1, &s), NULL);
-	if (f.pad_zero && !f.just_l && f.precision < 0
-		&& ft_strchr("diuxX", f.cspec))
-		fill_str(add, a_len, '0');
-	else
-		fill_str(add, a_len, ' ');
-	return (apply_join(s, f, add));
+	i = 1;
+	while (ft_strchr("#0- +", s[i]))
+	{
+		if (s[i] == '0')
+			flags->pad_zero = 1;
+		i++;
+	}
+	if ((s[i] >= '1' && s[i] <= '9') || s[i] == '*')
+		i++;
+	while (ft_isdigit(s[i]))
+	{
+		if (s[i - 1] == '*')
+			break ;
+		i++;
+	}
+	i = check_precision(s, i);
+	if (s[i] && ft_strchr("cspdiuxX%", s[i]) && !s[i + 1])
+		return (1);
+	return (0);
 }
