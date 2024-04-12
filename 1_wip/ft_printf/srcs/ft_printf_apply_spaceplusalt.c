@@ -17,10 +17,13 @@
 	int		pref_space;
 	int		pref_plus;
 */
-char	*add_prefix(char *s, char *prefix)
+
+char	*add_prefix(t_data *d, char *prefix)
 {
 	char	*out;
+	char	*s;
 
+	s = d->insert;
 	if (!s)
 		return (NULL);
 	if (*s == '-')
@@ -32,25 +35,31 @@ char	*add_prefix(char *s, char *prefix)
 	return (out);
 }
 
-char	*apply_spaceplus(char *s, t_flags f)
+char	*apply_spaceplus(t_data *d, t_flags f)
 {
+	char	*s;
+
+	s = d->insert;	
 	if (!s)
 		return (NULL);
 	if (f.pref_space && !f.pref_plus)
-		return (add_prefix(s, " "));
+		return (add_prefix(d, " "));
 	if (f.pref_plus)
-		return (add_prefix(s, "+"));
+		return (add_prefix(d, "+"));
 	return (s);
 }
 
-char	*apply_altprint(char *s, t_flags f)
+char	*apply_altprint(t_data *d, t_flags f)
 {
+	char	*s;
+
+	s = d->insert;	
 	if (!s)
 		return (NULL);
 	if (!f.alt_print)
 		return (s);
 	if (f.cspec == 'x')
-		return (add_prefix(s, "0x"));
+		return (add_prefix(d, "0x"));
 	else
-		return (add_prefix(s, "0X"));
+		return (add_prefix(d, "0X"));
 }

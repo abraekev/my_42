@@ -66,6 +66,8 @@ static char	*apply_precision_nbr(char *s, t_flags f)
 	char	*abs;
 	int		len;
 
+	if (f.precision < 0)
+		return (s);
 	if (*s == '0' && f.precision == 0)
 		return (apply_precision_specialcase(s));
 	abs = s;
@@ -78,18 +80,24 @@ static char	*apply_precision_nbr(char *s, t_flags f)
 	return (s);
 }
 
-//	only for: s or diuxX
-char	*apply_precision(char *s, t_flags f)
+//	only for: sdiuxX
+char	*apply_precision(t_data *d, t_flags f)
 {
 	char	*tmp;
+	char	*s;
 
-	if (!s)
-		return (NULL);
-	if (f.precision < 0)
-		return (s);
+	s = d->insert;
 	if (f.cspec == 's')
 	{
-		if ((size_t)f.precision < ft_strlen(s))
+		if (!s && (f.precision >= 7 || f.precision == -1))
+		{
+			s = get_null_str(d);
+			if (!s)
+				return (NULL);
+		}
+		if (!s && f.precision < 7)
+			return (NULL);
+		if ((size_t)f.precision < ft_strlen(s) && f.precision >= 0)
 		{
 			tmp = malloc(f.precision + 1);
 			if (!tmp)

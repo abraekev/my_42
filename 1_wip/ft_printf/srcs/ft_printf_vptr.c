@@ -60,12 +60,13 @@ static char	*empty_ptr(void)
 	return (s);
 }
 
-char	*get_vptr_base(uintptr_t nbr)
+char	*get_vptr_base(uintptr_t nbr, t_data *d)
 {
 	char	*base;
 
 	base = "0123456789abcdef";
 	if (!nbr)
 		return (empty_ptr());
-	return (add_prefix(vptr_base(nbr, base, ft_strlen(base)), "0x"));
+	d->insert = vptr_base(nbr, base, ft_strlen(base));
+	return (add_prefix(d, "0x"));
 }

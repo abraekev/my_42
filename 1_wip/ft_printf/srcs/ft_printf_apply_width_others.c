@@ -15,6 +15,28 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
+static char	*strjoin_printf(char *s1, char *s2, size_t s1_len, size_t s2_len)
+{
+	char	*out;
+	size_t	i;
+
+	out = malloc(s1_len + s2_len + 1);
+	if (!out)
+		return (NULL);
+	i = -1;
+	while (++i < s1_len)
+	{
+		out[i] = s1[i];
+	}
+	i = -1;
+	while (++i < s2_len)
+	{	
+		out[s1_len + i] = s2[i];
+	}
+	out[s1_len + i] = 0;
+	return (out);
+}
+
 static void	fill_str(char *s, size_t len, char c)
 {
 	s[len] = 0;
@@ -26,35 +48,39 @@ static void	fill_str(char *s, size_t len, char c)
 	}
 }
 
-static char	*apply_join(char *s, t_flags f, char *add)
+static char	*apply_join(t_data *d, t_flags f, char *add)
 {
 	char	*out;
+	size_t	a_len;
 
+
+	a_len = ft_strlen(add);
 	if (f.just_l)
-		out = ft_strjoin(s, add);
+		out = strjoin_printf(d->insert, add, d->i_len, a_len);
 	else
-		out = ft_strjoin(add, s);
-	free_strs(2, &add, &s);
+		out = strjoin_printf(add, d->insert, a_len, d->i_len);
+	d->i_len = a_len + d->i_len;
+	free_strs(2, &add, &d->insert);
 	return (out);
 }
 
-char	*apply_width_others(char *s, t_flags f)
+char	*apply_width_others(t_data *d, t_flags f)
 {
 	char	*add;
 	size_t	a_len;
 
-	if (!s)
+	if (!d->insert)
 		return (NULL);
-	if ((unsigned int)f.min_width <= ft_strlen(s))
-		return (s);
-	a_len = f.min_width - ft_strlen(s);
+	if ((unsigned int)f.min_width <= d->i_len)
+		return (d->insert);
+	a_len = f.min_width - d->i_len;
 	add = malloc(a_len + 1);
 	if (!add)
-		return (free_strs(1, &s), NULL);
+		return (free_data(d), NULL);
 	if (f.pad_zero && !f.just_l && f.precision < 0
 		&& ft_strchr("diuxX", f.cspec))
 		fill_str(add, a_len, '0');
 	else
 		fill_str(add, a_len, ' ');
-	return (apply_join(s, f, add));
+	return (apply_join(d, f, add));
 }

@@ -56,12 +56,14 @@ int	compare()
 
 int	main()
 {
-	printf("(%d)LB\n", printf("XX%.03sYY", NULL));
-	printf("(%d)LB\n", printf("XX%.9sYY", NULL));
-	printf("(%d)LB\n", printf("XX%3sYY", NULL));
-	printf("(%d)LB\n", printf("XX%9sYY", NULL));
-
-	
+	printf("(%d)LB\n", printf("1X%.03sYY", NULL));
+	printf("(%d)LB\n", printf("2X%.9sYY", NULL));
+	printf("(%d)LB\n", printf("3X%3sYY", NULL));
+	printf("(%d)LB\n", printf("4X%9sYY", NULL));
+	printf("(%d)LB\n", printf("5X%.-12sYY", NULL));
+	printf("(%d)LB\n", ft_printf("6X%.-12sYY", NULL));
+	printf("(%d)LB\n", printf("7X%.12sYY", NULL));
+		
 	//printf("mm%cmm%cmm\n\0XXXX%cXXXX", 76, 76, 76);
 	//printf(" %c %c %c ", '0', 0, '1');
 

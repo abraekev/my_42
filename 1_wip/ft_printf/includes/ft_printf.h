@@ -64,18 +64,18 @@ typedef struct s_data
 /******************************************************************************/
 
 	// ft_printf_apply_width_others.c
-char	*apply_width_others(char *s, t_flags f);
+char	*apply_width_others(t_data *d, t_flags f);
 
 	// ft_printf_apply_prec.c
-char	*apply_precision(char *s, t_flags f);
+char	*apply_precision(t_data *d, t_flags f);
 
 	// ft_printf_apply_spaceplusalt.c
-char	*add_prefix(char *s, char *prefix);
-char	*apply_spaceplus(char *s, t_flags f);
-char	*apply_altprint(char *s, t_flags f);
+char	*add_prefix(t_data *d, char *prefix);
+char	*apply_spaceplus(t_data *d, t_flags f);
+char	*apply_altprint(t_data *d, t_flags f);
 
 	// ft_print_vptr_base.c
-char	*get_vptr_base(uintptr_t nbr);
+char	*get_vptr_base(uintptr_t nbr, t_data *d);
 
 	// ft_printf_uint_base.c
 char	*get_uint_base(unsigned int nbr, char c);
@@ -88,12 +88,13 @@ int		get_flags(char *fspec, t_flags *flags);
 int		validate_flags(char *s, t_flags *flags);
 
 	// ft_printf_gets.c
-char	*apply_flags(char *s, t_flags f, t_data *d);
+char	*apply_flags(t_flags f, t_data *d);
 char	*get_char(char c);
 char	*get_str(char *s);
 char	*get_insertstr(t_data *d, va_list args);
 
 	// ft_printf_s_utils.c
+char	*get_null_str(t_data *d);
 void	ft_putstr_special(t_data *d);
 void	free_strs(size_t n, ...);
 void	free_data(t_data *d);
