@@ -15,13 +15,24 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
+char	*get_null_str(t_data *d)
+{
+	char	*str;
+
+	str = malloc(7);
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, "(null)", 7);
+	d->i_len = 6;
+	return (str);
+}
+
 void	ft_putstr_special(t_data *d)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < d->i_len)
-		ft_putchar_fd(d->insert[i++], 1);
+	if (d->cspec == 'c')
+		write(1, d->insert, d->i_len);
+	else
+		ft_putstr_fd(d->insert, 1);
 }
 
 void	free_strs(size_t n, ...)
