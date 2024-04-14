@@ -56,14 +56,6 @@ int	compare()
 
 int	main()
 {
-
-//	printf("(%d)LB\n", printf("1%-1c2%-2c3", 'x', 0));
-//	printf("(%d)FT\n", ft_printf("1%-1c2%-2c3", 'x', 0));
-
-//	printf("(%d)LB\n", printf("2%-4c3", 0));
-//	printf("(%d)FT\n", ft_printf("2%-4c3", 0));
-
-
 	testing();
 	return 0;
 }

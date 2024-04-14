@@ -30,7 +30,7 @@ static char	*strjoin_printf(char *s1, char *s2, size_t s1_len, size_t s2_len)
 	}
 	i = -1;
 	while (++i < s2_len)
-	{	
+	{
 		out[s1_len + i] = s2[i];
 	}
 	out[s1_len + i] = 0;
@@ -50,7 +50,8 @@ static void	fill_str(char *s, size_t len, char c)
 
 static void	process_nbrs(char **out, size_t a_len, t_data *d, t_flags f)
 {
-	if (ft_strchr("di", d->cspec) && ft_strchr(" +-", (*out)[a_len]) && !f.just_l)
+	if (ft_strchr("di", d->cspec)
+		&& ft_strchr(" +-", (*out)[a_len]) && !f.just_l)
 	{
 		(*out)[0] = *(ft_strchr(" +-", (*out)[a_len]));
 		(*out)[a_len] = '0';
@@ -61,7 +62,6 @@ static char	*apply_join(t_data *d, t_flags f, char *add)
 {
 	char	*out;
 	size_t	a_len;
-
 
 	a_len = ft_strlen(add);
 	if (f.just_l)

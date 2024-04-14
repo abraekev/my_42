@@ -16,7 +16,8 @@
 SRC =		ft_printf.c ft_printf_apply_prec.c ft_printf_apply_spaceplusalt.c \
 			ft_printf_apply_width_others.c ft_printf_flags_init.c \
 			ft_printf_flags_validate.c ft_printf_gets.c ft_printf_s_utils.c \
-			ft_printf_uint_base.c ft_printf_vptr.c
+			ft_printf_uint_base.c ft_printf_vptr.c ft_printf_apply_prec_s.c \
+			ft_printf_d_lens.c
 
 DIRINCL	=	./includes/
 DIRSRC	=	./srcs/

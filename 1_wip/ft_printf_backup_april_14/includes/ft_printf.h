@@ -63,6 +63,14 @@ typedef struct s_data
 //	DEFINITIONS
 /******************************************************************************/
 
+	// ft_printf_apply_prec_s.c
+char	*apply_precision_s(t_data *d, t_flags f);
+
+	// ft_printf_d_len.c
+void	set_i_len(t_data *d);
+void	set_s_len(t_data *d);
+void	set_lengths(t_data *d);
+
 	// ft_printf_apply_width_others.c
 char	*apply_width_others(t_data *d, t_flags f);
 

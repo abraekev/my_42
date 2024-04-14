@@ -83,31 +83,8 @@ static char	*apply_precision_nbr(char *s, t_flags f)
 //	only for: sdiuxX
 char	*apply_precision(t_data *d, t_flags f)
 {
-	char	*tmp;
-	char	*s;
-
-	s = d->insert;
 	if (f.cspec == 's')
-	{
-		if (!s && (f.precision >= 7 || f.precision == -1))
-		{
-			s = get_null_str(d);
-			if (!s)
-				return (NULL);
-		}
-		if (!s && f.precision < 7)
-			return (NULL);
-		if ((size_t)f.precision < ft_strlen(s) && f.precision >= 0)
-		{
-			tmp = malloc(f.precision + 1);
-			if (!tmp)
-				return (free_strs(1, &s), NULL);
-			ft_strlcpy(tmp, s, f.precision + 1);
-			free(s);
-			return (tmp);
-		}
-		return (s);
-	}
+		return (apply_precision_s(d, f));
 	else
-		return (apply_precision_nbr(s, f));
+		return (apply_precision_nbr(d->insert, f));
 }

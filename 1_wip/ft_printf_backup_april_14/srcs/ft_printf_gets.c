@@ -43,34 +43,18 @@ char	*get_str(char *s)
 	return (out);
 }
 
-static void	set_i_len(t_data *d)
-{
-	if (!d->insert)
-		d->i_len = 0;
-	else
-		d->i_len = ft_strlen(d->insert);
-	if (!d->i_len && d->cspec == 'c')
-		d->i_len++;
-}
-static void	set_s_len(t_data *d)
-{
-	d->s_len = d->s_len - d->f_len + d->i_len;
-}
-static void	set_lengths(t_data *d)
-{
-	set_i_len(d);
-	set_s_len(d);
-}
-
 char	*apply_flags(t_flags f, t_data *d)
 {
 	set_i_len(d);
 	if (ft_strchr("sdiuxX", f.cspec))
 		d->insert = apply_precision(d, f);
+	set_i_len(d);
 	if (ft_strchr("di", f.cspec))
 		d->insert = apply_spaceplus(d, f);
+	set_i_len(d);
 	if (ft_strchr("xX", f.cspec))
 		d->insert = apply_altprint(d, f);
+	set_i_len(d);
 	if (ft_strchr("cspdiuxX", f.cspec))
 		d->insert = apply_width_others(d, f);
 	set_s_len(d);

@@ -29,7 +29,10 @@ char	*get_null_str(t_data *d)
 
 void	ft_putstr_special(t_data *d)
 {
-	write(1, d->insert , d->i_len);
+	if (d->cspec == 'c')
+		write(1, d->insert, d->i_len);
+	else
+		ft_putstr_fd(d->insert, 1);
 }
 
 void	free_strs(size_t n, ...)

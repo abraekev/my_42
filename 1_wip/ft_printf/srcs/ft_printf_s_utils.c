@@ -30,7 +30,7 @@ char	*get_null_str(t_data *d)
 void	ft_putstr_special(t_data *d)
 {
 	if (d->cspec == 'c')
-		write(1, d->insert , d->i_len);
+		write(1, d->insert, d->i_len);
 	else
 		ft_putstr_fd(d->insert, 1);
 }
