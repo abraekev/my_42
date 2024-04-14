@@ -56,7 +56,7 @@ char	*apply_altprint(t_data *d, t_flags f)
 	s = d->insert;	
 	if (!s)
 		return (NULL);
-	if (!f.alt_print || (f.alt_print && !ft_strncmp(s, "0", d->i_len + 1)))
+	if (!f.alt_print)
 		return (s);
 	if (f.cspec == 'x')
 		return (add_prefix(d, "0x"));

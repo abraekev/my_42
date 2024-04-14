@@ -1,0 +1,2 @@
+clean up norminette
+check bonus francinette stuff

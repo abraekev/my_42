@@ -50,7 +50,7 @@ static void	set_i_len(t_data *d)
 	else
 		d->i_len = ft_strlen(d->insert);
 	if (!d->i_len && d->cspec == 'c')
-		d->i_len = 1;
+		d->i_len++;
 }
 static void	set_s_len(t_data *d)
 {
@@ -67,17 +67,12 @@ char	*apply_flags(t_flags f, t_data *d)
 	set_i_len(d);
 	if (ft_strchr("sdiuxX", f.cspec))
 		d->insert = apply_precision(d, f);
-	set_i_len(d);
 	if (ft_strchr("di", f.cspec))
 		d->insert = apply_spaceplus(d, f);
-	set_i_len(d);
 	if (ft_strchr("xX", f.cspec))
 		d->insert = apply_altprint(d, f);
-	set_i_len(d);
-	//printf("1_ilen is nu %lu\n", d->i_len);
 	if (ft_strchr("cspdiuxX", f.cspec))
 		d->insert = apply_width_others(d, f);
-	//printf("2_ilen is nu %lu\n", d->i_len);
 	set_s_len(d);
 	return (d->insert);
 }

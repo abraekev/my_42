@@ -49,7 +49,7 @@ $(NAME):	$(OBJS) $(OBJSLIBFT)
 
 all:		$(NAME)
 
-bonus:	all
+#bonus:	all
 
 main:
 			@$(GCC) -g test*.c -I $(DIRINCL) $(NAME)

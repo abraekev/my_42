@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_apply_spaceplusalt.c                     :+:      :+:    :+:   */
+/*   ft_printf_s_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,53 +13,57 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-/*
-	int		pref_space;
-	int		pref_plus;
-*/
+// char *fspec = %[flags][min width][precision][conv specifier]
 
-char	*add_prefix(t_data *d, char *prefix)
+char	*get_null_str(t_data *d)
 {
-	char	*out;
-	char	*s;
+	char	*str;
 
-	s = d->insert;
-	if (!s)
+	str = malloc(7);
+	if (!str)
 		return (NULL);
-	if (*s == '-')
-		return (s);
-	out = ft_strjoin(prefix, s);
-	free(s);
-	if (!out)
-		return (NULL);
-	return (out);
+	ft_strlcpy(str, "(null)", 7);
+	d->i_len = 6;
+	return (str);
 }
 
-char	*apply_spaceplus(t_data *d, t_flags f)
+void	ft_putstr_special(t_data *d)
 {
-	char	*s;
-
-	s = d->insert;	
-	if (!s)
-		return (NULL);
-	if (f.pref_space && !f.pref_plus)
-		return (add_prefix(d, " "));
-	if (f.pref_plus)
-		return (add_prefix(d, "+"));
-	return (s);
+	write(1, d->insert , d->i_len);
 }
 
-char	*apply_altprint(t_data *d, t_flags f)
+void	free_strs(size_t n, ...)
 {
-	char	*s;
+	size_t	i;
+	char	**s;
+	va_list	args;
 
-	s = d->insert;	
-	if (!s)
-		return (NULL);
-	if (!f.alt_print || (f.alt_print && !ft_strncmp(s, "0", d->i_len + 1)))
-		return (s);
-	if (f.cspec == 'x')
-		return (add_prefix(d, "0x"));
-	else
-		return (add_prefix(d, "0X"));
+	va_start(args, n);
+	i = 0;
+	while (i < n)
+	{
+		s = va_arg(args, char **);
+		if (s && *s)
+		{
+			free(*s);
+			*s = NULL;
+		}
+		i++;
+	}
+	return ;
+}
+
+void	free_data(t_data *d)
+{
+	if (d && d->fspec)
+	{
+		free(d->fspec);
+		d->fspec = NULL;
+	}
+	if (d && d->insert)
+	{
+		free(d->insert);
+		d->insert = NULL;
+	}
+	return ;
 }

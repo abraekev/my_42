@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_apply_spaceplusalt.c                     :+:      :+:    :+:   */
+/*   ft_printf_uint_base.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,53 +13,53 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-/*
-	int		pref_space;
-	int		pref_plus;
-*/
+// char *fspec = %[flags][min width][precision][conv specifier]
 
-char	*add_prefix(t_data *d, char *prefix)
+static size_t	get_uint_len(unsigned int nbr, size_t b_len)
 {
-	char	*out;
-	char	*s;
+	size_t	len;
 
-	s = d->insert;
-	if (!s)
-		return (NULL);
-	if (*s == '-')
-		return (s);
-	out = ft_strjoin(prefix, s);
-	free(s);
-	if (!out)
-		return (NULL);
-	return (out);
+	len = 0;
+	if (!nbr)
+		return (1);
+	while (nbr != 0)
+	{
+		len ++;
+		nbr /= b_len;
+	}
+	return (len);
 }
 
-char	*apply_spaceplus(t_data *d, t_flags f)
+static char	*uint_base(unsigned int nbr, char *base, size_t b_len)
 {
+	size_t	s_len;
 	char	*s;
 
-	s = d->insert;	
+	s_len = get_uint_len(nbr, b_len);
+	s = malloc(s_len + 1);
 	if (!s)
 		return (NULL);
-	if (f.pref_space && !f.pref_plus)
-		return (add_prefix(d, " "));
-	if (f.pref_plus)
-		return (add_prefix(d, "+"));
+	s[s_len] = 0;
+	while (s_len != 0)
+	{
+		s[s_len - 1] = *(base + (nbr % b_len));
+		nbr /= b_len;
+		s_len--;
+	}
 	return (s);
 }
 
-char	*apply_altprint(t_data *d, t_flags f)
+char	*get_uint_base(unsigned int nbr, char c)
 {
-	char	*s;
+	char	*base;
 
-	s = d->insert;	
-	if (!s)
-		return (NULL);
-	if (!f.alt_print || (f.alt_print && !ft_strncmp(s, "0", d->i_len + 1)))
-		return (s);
-	if (f.cspec == 'x')
-		return (add_prefix(d, "0x"));
+	if (c == 'u')
+		base = "0123456789";
+	else if (c == 'x')
+		base = "0123456789abcdef";
+	else if (c == 'X')
+		base = "0123456789ABCDEF";
 	else
-		return (add_prefix(d, "0X"));
+		return (NULL);
+	return (uint_base(nbr, base, ft_strlen(base)));
 }

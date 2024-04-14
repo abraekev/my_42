@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_apply_spaceplusalt.c                     :+:      :+:    :+:   */
+/*   ft_printf_flags_validate.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,53 +13,47 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-/*
-	int		pref_space;
-	int		pref_plus;
-*/
+// char *fspec = %[flags][min width][precision][conv specifier]
 
-char	*add_prefix(t_data *d, char *prefix)
+static int	check_precision(char *s, size_t i)
 {
-	char	*out;
-	char	*s;
-
-	s = d->insert;
-	if (!s)
-		return (NULL);
-	if (*s == '-')
-		return (s);
-	out = ft_strjoin(prefix, s);
-	free(s);
-	if (!out)
-		return (NULL);
-	return (out);
+	if (s[i] == '.')
+	{
+		i++;
+		if (s[i] == '*')
+			i++;
+		else
+		{
+			if (s[i] == '-')
+				i++;
+			while (ft_isdigit(s[i]))
+				i++;
+		}
+	}
+	return (i);
 }
 
-char	*apply_spaceplus(t_data *d, t_flags f)
+int	validate_flags(char *s, t_flags *flags)
 {
-	char	*s;
+	size_t		i;
 
-	s = d->insert;	
-	if (!s)
-		return (NULL);
-	if (f.pref_space && !f.pref_plus)
-		return (add_prefix(d, " "));
-	if (f.pref_plus)
-		return (add_prefix(d, "+"));
-	return (s);
-}
-
-char	*apply_altprint(t_data *d, t_flags f)
-{
-	char	*s;
-
-	s = d->insert;	
-	if (!s)
-		return (NULL);
-	if (!f.alt_print || (f.alt_print && !ft_strncmp(s, "0", d->i_len + 1)))
-		return (s);
-	if (f.cspec == 'x')
-		return (add_prefix(d, "0x"));
-	else
-		return (add_prefix(d, "0X"));
+	i = 1;
+	while (ft_strchr("#0- +", s[i]))
+	{
+		if (s[i] == '0')
+			flags->pad_zero = 1;
+		i++;
+	}
+	if ((s[i] >= '1' && s[i] <= '9') || s[i] == '*')
+		i++;
+	while (ft_isdigit(s[i]))
+	{
+		if (s[i - 1] == '*')
+			break ;
+		i++;
+	}
+	i = check_precision(s, i);
+	if (s[i] && ft_strchr("cspdiuxX%", s[i]) && !s[i + 1])
+		return (1);
+	return (0);
 }

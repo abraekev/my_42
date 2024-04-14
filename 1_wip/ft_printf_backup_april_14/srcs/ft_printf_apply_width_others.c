@@ -48,15 +48,6 @@ static void	fill_str(char *s, size_t len, char c)
 	}
 }
 
-static void	process_nbrs(char **out, size_t a_len, t_data *d, t_flags f)
-{
-	if (ft_strchr("di", d->cspec) && ft_strchr(" +-", (*out)[a_len]) && !f.just_l)
-	{
-		(*out)[0] = *(ft_strchr(" +-", (*out)[a_len]));
-		(*out)[a_len] = '0';
-	}
-}
-
 static char	*apply_join(t_data *d, t_flags f, char *add)
 {
 	char	*out;
@@ -69,7 +60,6 @@ static char	*apply_join(t_data *d, t_flags f, char *add)
 	else
 		out = strjoin_printf(add, d->insert, a_len, d->i_len);
 	d->i_len = a_len + d->i_len;
-	process_nbrs(&out, a_len, d, f);
 	free_strs(2, &add, &d->insert);
 	return (out);
 }
