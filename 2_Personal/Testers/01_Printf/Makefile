@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/12 17:50:50 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/15 10:28:37 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,9 @@ all:		$(NAME)
 
 bonus:	all
 
-main:
+test:	re
 			@$(GCC) -g test*.c -I $(DIRINCL) $(NAME)
+			@./a.out
 
 $(OBJSLIBFT):	
 		@cd $(DIRLIBFT) && $(AX) $(LIBFT)
@@ -69,5 +70,6 @@ fclean:		clean
 
 re:		fclean all
 
-.PHONY:		all bonus clean fclean re main extract
+.PHONY:		all bonus clean fclean re test
+
 # **************************************************************************** #

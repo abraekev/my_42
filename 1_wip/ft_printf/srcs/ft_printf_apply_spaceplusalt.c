@@ -13,11 +13,6 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-/*
-	int		pref_space;
-	int		pref_plus;
-*/
-
 char	*add_prefix(t_data *d, char *prefix)
 {
 	char	*out;

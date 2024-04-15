@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/10 13:50:09 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/15 10:14:33 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ $(NAME):	$(OBJS) $(BOBJS)
 bonus:		$(OBJS) $(BOBJS)
 				@$(LIBC) $(NAME) $(OBJS) $(BOBJS)
 				@$(LIBX) $(NAME)
+				@echo "$(NAME) + bonus built."
 clean:
 			@$(RM) $(OBJS)
 			@$(RM) $(BOBJS)

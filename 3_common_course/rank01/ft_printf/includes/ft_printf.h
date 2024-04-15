@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/12 14:01:58 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:10:20 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,11 @@
 //	HEADERS
 /******************************************************************************/
 
-# include <fcntl.h>
 # include <unistd.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <errno.h>
-# include <string.h>
-# include <libgen.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
 # include <stdint.h>
 
-//	needed for variadic functions
+	// Variadic functions.
 # include <stdarg.h>
-
-//	MACROS
-/******************************************************************************/
 
 //	STRUCTS & ENUMS
 /******************************************************************************/
@@ -68,7 +56,7 @@ char	*apply_precision_s(t_data *d, t_flags f);
 
 	// ft_printf_d_len.c
 void	set_i_len(t_data *d);
-void	set_s_len(t_data *d);
+void	set_s_len_and_nullprotect(t_data *d);
 void	set_lengths(t_data *d);
 
 	// ft_printf_apply_width_others.c
@@ -90,7 +78,7 @@ char	*get_uint_base(unsigned int nbr, char c);
 
 	// ft_printf_flags_init.c
 t_flags	initiate_flags(void);
-int		get_flags(char *fspec, t_flags *flags);
+int		get_flags(char *fspec, t_flags *flags, va_list args);
 
 	// ft_print_flags_validate.c
 int		validate_flags(char *s, t_flags *flags);
@@ -102,6 +90,7 @@ char	*get_str(char *s);
 char	*get_insertstr(t_data *d, va_list args);
 
 	// ft_printf_s_utils.c
+char	*get_empty_str(t_data *d);
 char	*get_null_str(t_data *d);
 void	ft_putstr_special(t_data *d);
 void	free_strs(size_t n, ...);

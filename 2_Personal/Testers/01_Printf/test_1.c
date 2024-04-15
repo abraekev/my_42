@@ -1,59 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_flags_validate.c                         :+:      :+:    :+:   */
+/*   testing_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:25:35 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
+#include <stdio.h>
+#include <fcntl.h>
 
-// char *fspec = %[flags][min width][precision][conv specifier]
+void	testing(void);
 
-static int	check_precision(char *s, size_t i)
+void	to_file_ft()
 {
-	if (s[i] == '.')
-	{
-		i++;
-		if (s[i] == '*')
-			i++;
-		else
-		{
-			if (s[i] == '-')
-				i++;
-			while (ft_isdigit(s[i]))
-				i++;
-		}
-	}
-	return (i);
+	freopen("ft_output.txt", "w+", stdout);
 }
 
-int	validate_flags(char *s, t_flags *flags)
+void	to_file_lb()
 {
-	size_t		i;
+	freopen("lb_output.txt", "w+", stdout);
+}
 
-	i = 1;
-	while (ft_strchr("#0- +", s[i]))
+void	to_stdout()
+{
+	freopen("/dev/tty", "w", stdout);
+}
+
+int	compare()
+{
+	char	bff_ft[1024];
+	char	bff_lb[1024];
+	int	i = -1;
+
+	int fd_ft = open("./ft_output.txt", O_RDWR);
+	int fd_lb = open("./lb_output.txt", O_RDWR);
+
+	while (++i < 1024)
 	{
-		if (s[i] == '0')
-			flags->pad_zero = 1;
-		i++;
+		bff_ft[i] = 0;
+		bff_lb[i] = 0;
 	}
-	if ((s[i] >= '1' && s[i] <= '9') || s[i] == '*')
-		i++;
-	while (ft_isdigit(s[i]))
-	{
-		if (s[i - 1] == '*')
-			break ;
-		i++;
-	}
-	i = check_precision(s, i);
-	if (s[i] && ft_strchr("cspdiuxX%", s[i]) && !s[i + 1])
+	read(fd_ft, bff_ft, 1023);
+	read(fd_lb, bff_lb, 1023);
+	close(fd_ft);
+	close(fd_lb);
+
+	if (ft_strncmp(bff_ft, bff_lb, 1024) == 0)
 		return (1);
 	return (0);
+}
+
+int	main(int c, char** v)
+{
+	testing();
+	return 0;
 }

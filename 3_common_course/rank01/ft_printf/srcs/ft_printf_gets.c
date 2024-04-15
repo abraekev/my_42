@@ -57,7 +57,7 @@ char	*apply_flags(t_flags f, t_data *d)
 	set_i_len(d);
 	if (ft_strchr("cspdiuxX", f.cspec))
 		d->insert = apply_width_others(d, f);
-	set_s_len(d);
+	set_s_len_and_nullprotect(d);
 	return (d->insert);
 }
 
@@ -66,7 +66,7 @@ char	*get_insertstr(t_data *d, va_list args)
 	t_flags	flags;
 
 	flags = initiate_flags();
-	if (!get_flags(d->fspec, &flags))
+	if (!get_flags(d->fspec, &flags, args))
 	{
 		d->insert = ft_strdup(d->fspec);
 		set_lengths(d);

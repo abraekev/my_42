@@ -30,7 +30,7 @@ t_flags	initiate_flags(void)
 	return (flags);
 }
 
-static void	get_precision(t_flags *flags, char *fspec)
+static void	get_precision(t_flags *flags, char *fspec, va_list args)
 {
 	int	i;
 	int	nbr;
@@ -41,6 +41,11 @@ static void	get_precision(t_flags *flags, char *fspec)
 	if (!fspec[i])
 		return ;
 	i++;
+	if (fspec[i] == '*')
+	{
+		flags->precision = va_arg(args, int);
+		return ;
+	}
 	nbr = ft_atoi((fspec + i));
 	if (nbr)
 		flags->precision = nbr;
@@ -48,7 +53,7 @@ static void	get_precision(t_flags *flags, char *fspec)
 		flags->precision = 0;
 }
 
-static void	get_min_width(t_flags *flags, char *fspec)
+static void	get_min_width(t_flags *flags, char *fspec, va_list args)
 {
 	int	i;
 	int	nbr;
@@ -56,6 +61,16 @@ static void	get_min_width(t_flags *flags, char *fspec)
 	i = 0;
 	while (fspec[i] && (fspec[i] < '1' || fspec[i] > '9'))
 	{
+		if (fspec[i] == '*' && fspec[i - 1] != '.')
+		{
+			flags->min_width = va_arg(args, int);
+			if (flags->min_width < 0)
+			{
+				flags->just_l = 1;
+				flags->min_width *= (-1);
+			}
+			return ;
+		}
 		if (fspec[i] == '.')
 			return ;
 		i++;
@@ -65,7 +80,7 @@ static void	get_min_width(t_flags *flags, char *fspec)
 		flags->min_width = nbr;
 }
 
-int	get_flags(char *fspec, t_flags *flags)
+int	get_flags(char *fspec, t_flags *flags, va_list args)
 {
 	if (!validate_flags(fspec, flags))
 		return (0);
@@ -78,7 +93,7 @@ int	get_flags(char *fspec, t_flags *flags)
 	if (ft_strchr(fspec, '+'))
 		flags->pref_plus = 1;
 	flags->cspec = fspec[ft_strlen(fspec) - 1];
-	get_min_width(flags, fspec);
-	get_precision(flags, fspec);
+	get_min_width(flags, fspec, args);
+	get_precision(flags, fspec, args);
 	return (1);
 }

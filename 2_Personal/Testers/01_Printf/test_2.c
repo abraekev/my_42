@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 #include "libft.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 void	to_file_ft();
 void	to_file_lb();

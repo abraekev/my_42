@@ -14,6 +14,17 @@
 #include "libft.h"
 
 // char *fspec = %[flags][min width][precision][conv specifier]
+char	*get_empty_str(t_data *d)
+{
+	char	*str;
+
+	str = malloc(1);
+	if (!str)
+		return (NULL);
+	str[0] = 0;
+	d->insert = str;
+	return (str);
+}
 
 char	*get_null_str(t_data *d)
 {
