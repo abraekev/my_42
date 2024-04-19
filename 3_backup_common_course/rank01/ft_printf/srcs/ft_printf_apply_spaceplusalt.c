@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft.h"
+#include "../ft_printf.h"
+#include "./libft/libft.h"
 
 char	*add_prefix(t_data *d, char *prefix)
 {

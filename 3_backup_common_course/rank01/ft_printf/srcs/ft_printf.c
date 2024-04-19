@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft.h"
+#include "../ft_printf.h"
+#include "./libft/libft.h"
 
 //	format specifier:
 //	char *fspec = %[flags][min width][precision][conversion specifier]

@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/15 10:14:33 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/19 13:33:52 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,19 +23,16 @@ SRCS =		ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c	\
 			ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c 	\
 			ft_memcmp.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c	\
 			ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c	\
-			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-
-BSRCS = 	ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstsize.c		\
+			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c	\
+			ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstsize.c		\
 			ft_lstlast.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c 			\
 			ft_lstmap.c
 
 OBJS =		$(SRCS:.c=.o)
 
-BOBJS =		$(BSRCS:.c=.o)
-
 INCL =		./
 
-NAME =		libft.a	
+NAME =		libft.a
 
 LIBC =		ar rc
 
@@ -46,28 +43,26 @@ RM =		rm -f
 # RULES
 # **************************************************************************** #
 
+all:		$(NAME)
+
 .c.o:
 			@$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-all:		$(NAME)
-
-$(NAME):	$(OBJS) $(BOBJS)
-				@$(LIBC) $(NAME) $(OBJS) $(BOBJS)
+$(NAME):	$(OBJS)
+				@$(LIBC) $(NAME) $(OBJS)
 				@$(LIBX) $(NAME)
-				@echo "$(NAME) built."
+				@echo "\033[32mcompiled $(NAME)\033[0m"
 
-bonus:		$(OBJS) $(BOBJS)
-				@$(LIBC) $(NAME) $(OBJS) $(BOBJS)
-				@$(LIBX) $(NAME)
-				@echo "$(NAME) + bonus built."
+bonus:		all
+
 clean:
 			@$(RM) $(OBJS)
 			@$(RM) $(BOBJS)
-			@echo cleaned objects.
+			@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
 
 fclean:		clean
 				@$(RM) $(NAME)
-				@echo cleaned all.
+				@echo "\033[36mcleaned $(NAME) LIBRARY.\033[0m" 
 re:			fclean all
 
 .PHONY:		all bonus clean fclean re

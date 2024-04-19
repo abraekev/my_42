@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/15 10:31:54 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/19 15:05:33 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,50 +19,52 @@ SRC =		ft_printf.c ft_printf_apply_prec.c ft_printf_apply_spaceplusalt.c \
 			ft_printf_uint_base.c ft_printf_vptr.c ft_printf_apply_prec_s.c \
 			ft_printf_d_lens.c
 
-DIRINCL	=	./includes/
 DIRSRC	=	./srcs/
 DIRLIBFT=	./srcs/libft/
+DIRINC =	./
 
-LIBFT =		libft.a
+LIBFT =		$(DIRLIBFT)libft.a
 SRCS =      $(addprefix $(DIRSRC), $(SRC)) 
-OBJSLIBFT =	$(DIRLIBFT)*.o
 OBJS =		$(SRCS:.c=.o)
 
 NAME =		libftprintf.a
 
-AX = 		ar -x
 AR =		ar -rcs
 RL =		ranlib
 RM =		rm -f
 GCC =		cc
 CFLAGS +=	-Wall -Wextra -Werror
+INCLUDES =	-I./ -I$(DIRLIBFT)
 
 # RULES
 # **************************************************************************** #
 
-.c.o:
-		@$(GCC) $(CFLAGS) -c -I $(DIRINCL) $< -o $(<:.c=.o)
+all:		$(LIBFT) $(NAME)
 
-$(NAME):	$(OBJS) $(OBJSLIBFT)
-				@$(AR) $(NAME) $(OBJS) $(OBJSLIBFT)
+$(NAME):	$(LIBFT) $(OBJS)
+				@$(AR) $(NAME) $(OBJS)
 				@$(RL) $(NAME)
-				@echo "compilation \t\tSUCCESS."
+				@echo "\033[32mcompiled $(NAME)\033[0m"
 
-all:		$(NAME)
+$(LIBFT):
+				@$(MAKE) -C $(DIRLIBFT)
+				@cp ./srcs/libft/libft.a .
+				@mv libft.a $(NAME)
+
+.c.o:
+		@$(GCC) $(CFLAGS) $(LINKHEAD) -c $< -o $(<:.c=.o)
 
 bonus:	all
 
-$(OBJSLIBFT):	
-		@cd $(DIRLIBFT) && $(AX) $(LIBFT)
-		@echo "extract libft.a \tSUCCESS."
-
 clean:
 		@$(RM) $(OBJS) $(OBJSLIBFT)
-		@echo "cleaned objects."
+		@$(MAKE) -C $(DIRLIBFT) clean
+		@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
 
 fclean:		clean
 			@$(RM) $(NAME)
-			@echo "cleaned $(NAME)."
+			@$(MAKE) -C $(DIRLIBFT) fclean
+			@echo "\033[36mcleaned $(NAME) LIBRARY.\033[0m"
 
 re:		fclean all
 
