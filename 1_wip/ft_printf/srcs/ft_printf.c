@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:31:22 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ static int	process_formatspec(t_data *d, int i, va_list args)
 	return (free_data(d), d->f_len);
 }
 
-static int	init_d(const char *src, t_data *d)
+static void	init_d(const char *src, t_data *d, size_t *i)
 {
+	*i = 0;
 	d->src = src;
 	d->s_len = ft_strlen(src);
 	d->cspec = 0;
@@ -57,7 +58,6 @@ static int	init_d(const char *src, t_data *d)
 	d->i_len = 0;
 	d->fspec = NULL;
 	d->insert = NULL;
-	return (1);
 }
 
 int	ft_printf(const char *src, ...)
@@ -67,10 +67,10 @@ int	ft_printf(const char *src, ...)
 	int			jump;
 	va_list		args;
 
+	if (!src)
+		return (0);
 	va_start(args, src);
-	i = 0;
-	if (!init_d(src, &d))
-		return (-1);
+	init_d(src, &d, &i);
 	while (src[i])
 	{
 		if (src[i] == '%')
