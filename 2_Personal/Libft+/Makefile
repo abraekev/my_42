@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/19 13:33:52 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/19 14:24:57 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ RM =		rm -f
 all:		$(NAME)
 
 .c.o:
-			@$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
+			@$(GCC) $(CFLAGS) -I$(INCL) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
 				@$(LIBC) $(NAME) $(OBJS)
@@ -58,7 +58,9 @@ bonus:		all
 clean:
 			@$(RM) $(OBJS)
 			@$(RM) $(BOBJS)
-			@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
+ifndef QUIET
+				@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
+endif
 
 fclean:		clean
 				@$(RM) $(NAME)

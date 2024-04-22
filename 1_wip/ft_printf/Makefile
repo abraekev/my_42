@@ -34,7 +34,7 @@ RL =		ranlib
 RM =		rm -f
 GCC =		cc
 CFLAGS +=	-Wall -Wextra -Werror
-INCLUDES =	-I./ -I$(DIRLIBFT)
+MAKEFLAGS +=--no-print-directory
 
 # RULES
 # **************************************************************************** #
@@ -52,7 +52,7 @@ $(LIBFT):
 				@mv libft.a $(NAME)
 
 .c.o:
-		@$(GCC) $(CFLAGS) $(LINKHEAD) -c $< -o $(<:.c=.o)
+		@$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 bonus:	all
 
@@ -63,7 +63,7 @@ clean:
 
 fclean:		clean
 			@$(RM) $(NAME)
-			@$(MAKE) -C $(DIRLIBFT) fclean
+			@$(MAKE) -C $(DIRLIBFT) QUIET=1 fclean
 			@echo "\033[36mcleaned $(NAME) LIBRARY.\033[0m"
 
 re:		fclean all

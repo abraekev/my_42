@@ -58,7 +58,9 @@ bonus:		all
 clean:
 			@$(RM) $(OBJS)
 			@$(RM) $(BOBJS)
-			@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
+ifndef QUIET
+				@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
+endif
 
 fclean:		clean
 				@$(RM) $(NAME)

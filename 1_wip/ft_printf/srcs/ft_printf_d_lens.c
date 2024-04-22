@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-#include "./libft/libft.h"
 
 void	set_i_len(t_data *d)
 {

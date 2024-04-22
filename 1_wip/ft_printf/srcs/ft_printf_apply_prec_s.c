@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-#include "./libft/libft.h"
 
 char	*apply_precision_s(t_data *d, t_flags f)
 {

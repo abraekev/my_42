@@ -21,6 +21,7 @@
 
 	// Variadic functions.
 # include <stdarg.h>
+# include "./srcs/libft/libft.h"
 
 //	STRUCTS & ENUMS
 /******************************************************************************/

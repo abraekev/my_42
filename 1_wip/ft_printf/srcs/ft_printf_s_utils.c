@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-#include "./libft/libft.h"
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 char	*get_empty_str(t_data *d)
