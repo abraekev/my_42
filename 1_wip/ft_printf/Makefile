@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/19 15:05:33 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/23 10:03:13 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC =		ft_printf.c ft_printf_apply_prec.c ft_printf_apply_spaceplusalt.c \
 
 DIRSRC	=	./srcs/
 DIRLIBFT=	./srcs/libft/
-DIRINC =	./
+DIRINC =	./includes/
 
 LIBFT =		$(DIRLIBFT)libft.a
 SRCS =      $(addprefix $(DIRSRC), $(SRC)) 
@@ -52,7 +52,7 @@ $(LIBFT):
 				@mv libft.a $(NAME)
 
 .c.o:
-		@$(GCC) $(CFLAGS) -c $< -o $(<:.c=.o)
+		@$(GCC) $(CFLAGS) -I$(DIRINC) -c $< -o $(<:.c=.o)
 
 bonus:	all
 

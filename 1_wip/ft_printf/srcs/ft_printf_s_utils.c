@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 char	*get_empty_str(t_data *d)

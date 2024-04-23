@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
 //	format specifier:
 //	char *fspec = %[flags][min width][precision][conversion specifier]

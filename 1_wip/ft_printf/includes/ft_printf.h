@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/15 10:10:20 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/23 09:44:29 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 	// Variadic functions.
 # include <stdarg.h>
-# include "./srcs/libft/libft.h"
+# include "libft.h"
 
 //	STRUCTS & ENUMS
 /******************************************************************************/
