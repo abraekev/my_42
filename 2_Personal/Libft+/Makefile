@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/23 09:28:45 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/23 17:34:43 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC		=	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c	\
 			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c	\
 			ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstsize.c		\
 			ft_lstlast.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c 			\
-			ft_lstmap.c
+			ft_lstmap.c get_next_line_bonus.c
+
 DIRSRC	=	./srcs/
 SRCS	=	$(addprefix $(DIRSRC), $(SRC))
 

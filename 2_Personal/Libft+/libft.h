@@ -24,6 +24,17 @@
 //	MACROS
 /******************************************************************************/
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 64
+# endif /*BUFFER_SIZE*/
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif /*OPEN_MAX*/
+
+//	STRUCTS & ENUMS
+/******************************************************************************/
+
 typedef struct s_list
 {
 	void			*content;
@@ -76,5 +87,6 @@ char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+char	*get_next_line(int fd);
 
 #endif /*LIBFT_H*/
