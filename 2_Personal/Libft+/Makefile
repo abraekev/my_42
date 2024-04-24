@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/24 09:18:31 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/24 09:49:01 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,10 @@ LIBX	=	ranlib
 
 RM		=	rm -f
 
+GREEN	=	\033[032m
+CYAN	=	\033[036m
+NOCLR	=	\033[0m
+
 # RULES
 # **************************************************************************** #
 
@@ -59,8 +63,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 				@$(LIBC) $(NAME) $(OBJS)
 				@$(LIBX) $(NAME)
-				@echo "\033[32m$(shell printf "%-12s%-12s" "compiled"		\
-				"$(NAME)")\033[0m"
+				@printf "$(GREEN)%-12s%-12s\n$(NOCLR)" "compiled" "$(NAME)"
 
 bonus:		all
 
@@ -68,14 +71,12 @@ clean:
 			@$(RM) $(OBJS)
 			@$(RM) $(BOBJS)
 ifndef QUIET
-			@echo "\033[36m$(shell printf "%-12s%-12s%-12s" "cleaned"		\
-			"$(NAME)" "OBJECTS")\033[0m" 
+			@printf "$(CYAN)%-12s%-12s%-12s\n$(NOCLR)" "cleaned" "$(NAME)" "OBJECTS"
 endif
 
 fclean:		clean
 				@$(RM) $(NAME)
-				@echo "\033[36m$(shell printf "%-12s%-12s%-12s" "cleaned"	\
-				"$(NAME)" "LIBRARY")\033[0m"
+			@printf "$(CYAN)%-12s%-12s%-12s\n$(NOCLR)" "cleaned" "$(NAME)" "LIBRARY"
 
 re:			fclean all
 
