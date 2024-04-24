@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 17:37:51 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/23 17:43:23 by abraekev         ###   ########.fr       */
+/*   Created: 2024/02/09 11:12:52 by abraekev          #+#    #+#             */
+/*   Updated: 2024/02/27 17:45:49 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main()
+void	ft_putstr_fd(char *s, int fd)
 {
-	ft_printf(">>%s<<>>%d<<>>%c<<\n", "teststr", 1234, '@');  	
-	//get_next_line(1);
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+		ft_putchar_fd(s[i++], fd);
 }

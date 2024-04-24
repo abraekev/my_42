@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 17:37:51 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/23 17:43:23 by abraekev         ###   ########.fr       */
+/*   Created: 2024/02/07 16:58:41 by abraekev          #+#    #+#             */
+/*   Updated: 2024/04/08 14:00:52 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main()
+int	ft_isalnum(int c)
 {
-	ft_printf(">>%s<<>>%d<<>>%c<<\n", "teststr", 1234, '@');  	
-	//get_next_line(1);
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	return (0);
 }

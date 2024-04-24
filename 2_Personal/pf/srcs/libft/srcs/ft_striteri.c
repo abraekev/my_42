@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 17:37:51 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/23 17:43:23 by abraekev         ###   ########.fr       */
+/*   Created: 2024/02/13 10:44:29 by abraekev          #+#    #+#             */
+/*   Updated: 2024/04/09 11:16:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main()
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	ft_printf(">>%s<<>>%d<<>>%c<<\n", "teststr", 1234, '@');  	
-	//get_next_line(1);
+	size_t	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
 }

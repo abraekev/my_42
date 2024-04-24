@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 17:37:51 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/23 17:43:23 by abraekev         ###   ########.fr       */
+/*   Created: 2024/02/13 10:44:29 by abraekev          #+#    #+#             */
+/*   Updated: 2024/02/13 12:21:02 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main()
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	ft_printf(">>%s<<>>%d<<>>%c<<\n", "teststr", 1234, '@');  	
-	//get_next_line(1);
+	size_t	len;
+	size_t	i;
+	char	*out;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	out = malloc(len + 1);
+	if (!out)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		out[i] = (*f)(i, s[i]);
+		i++;
+	}
+	out[i] = 0;
+	return (out);
 }

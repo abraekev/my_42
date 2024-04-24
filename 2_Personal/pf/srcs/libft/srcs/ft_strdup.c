@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 17:37:51 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/23 17:43:23 by abraekev         ###   ########.fr       */
+/*   Created: 2024/02/09 11:12:52 by abraekev          #+#    #+#             */
+/*   Updated: 2024/04/08 16:20:56 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main()
+char	*ft_strdup(const char *s)
 {
-	ft_printf(">>%s<<>>%d<<>>%c<<\n", "teststr", 1234, '@');  	
-	//get_next_line(1);
+	char		*out;
+	size_t		i;
+	size_t		len;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	out = malloc(len + 1);
+	if (!out)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		out[i] = s[i];
+	out[i] = 0;
+	return (out);
 }

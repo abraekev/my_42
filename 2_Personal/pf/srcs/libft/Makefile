@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/24 09:18:31 by abraekev         ###   ########.fr        #
+#    Updated: 2024/04/23 09:56:46 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,13 @@ SRC		=	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c	\
 			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c	\
 			ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstsize.c		\
 			ft_lstlast.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c 			\
-			ft_lstmap.c get_next_line_bonus.c ft_printf.c					\
-			ft_printf_apply_prec.c ft_printf_apply_prec_s.c					\
-			ft_printf_apply_spaceplusalt.c ft_printf_apply_width_others.c	\
-			ft_printf_d_lens.c ft_printf_flags_init.c						\
-			ft_printf_flags_validate.c ft_printf_gets.c ft_printf_s_utils.c	\
-			ft_printf_uint_base.c ft_printf_vptr.c
-
+			ft_lstmap.c
 DIRSRC	=	./srcs/
 SRCS	=	$(addprefix $(DIRSRC), $(SRC))
 
 OBJS	=	$(SRCS:.c=.o)
 
-INCL	=	./
+INCL	=	../../includes/
 
 NAME	=	libft.a
 
@@ -59,8 +53,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 				@$(LIBC) $(NAME) $(OBJS)
 				@$(LIBX) $(NAME)
-				@echo "\033[32m$(shell printf "%-12s%-12s" "compiled"		\
-				"$(NAME)")\033[0m"
+				@echo "\033[32mcompiled $(NAME)\033[0m"
 
 bonus:		all
 
@@ -68,15 +61,12 @@ clean:
 			@$(RM) $(OBJS)
 			@$(RM) $(BOBJS)
 ifndef QUIET
-			@echo "\033[36m$(shell printf "%-12s%-12s%-12s" "cleaned"		\
-			"$(NAME)" "OBJECTS")\033[0m" 
+				@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
 endif
 
 fclean:		clean
 				@$(RM) $(NAME)
-				@echo "\033[36m$(shell printf "%-12s%-12s%-12s" "cleaned"	\
-				"$(NAME)" "LIBRARY")\033[0m"
-
+				@echo "\033[36mcleaned $(NAME) LIBRARY.\033[0m" 
 re:			fclean all
 
 .PHONY:		all bonus clean fclean re

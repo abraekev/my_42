@@ -20,44 +20,9 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <stdint.h>
-# include <stdarg.h>
 
 //	MACROS
 /******************************************************************************/
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 64
-# endif /*BUFFER_SIZE*/
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 1024
-# endif /*OPEN_MAX*/
-
-//	STRUCTS & ENUMS
-/******************************************************************************/
-
-typedef struct s_flags
-{
-	char	cspec;
-	int		just_l;
-	int		pad_zero;
-	int		pref_space;
-	int		pref_plus;
-	int		alt_print;
-	int		min_width;
-	int		precision;
-}	t_flags;
-
-typedef struct s_data
-{
-	const char	*src;
-	size_t		s_len;
-	char		cspec;
-	char		*fspec;
-	size_t		f_len;
-	char		*insert;
-	size_t		i_len;
-}	t_data;
 
 typedef struct s_list
 {
@@ -111,33 +76,5 @@ char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-char	*get_next_line(int fd);
-
-	//	ft_printf START
-char	*apply_precision_s(t_data *d, t_flags f);
-void	set_i_len(t_data *d);
-void	set_s_len_and_nullprotect(t_data *d);
-void	set_lengths(t_data *d);
-char	*apply_width_others(t_data *d, t_flags f);
-char	*apply_precision(t_data *d, t_flags f);
-char	*add_prefix(t_data *d, char *prefix);
-char	*apply_spaceplus(t_data *d, t_flags f);
-char	*apply_altprint(t_data *d, t_flags f);
-char	*get_vptr_base(uintptr_t nbr, t_data *d);
-char	*get_uint_base(unsigned int nbr, char c);
-t_flags	initiate_flags(void);
-int		get_flags(char *fspec, t_flags *flags, va_list args);
-int		validate_flags(char *s, t_flags *flags);
-char	*apply_flags(t_flags f, t_data *d);
-char	*get_char(char c);
-char	*get_str(char *s);
-char	*get_insertstr(t_data *d, va_list args);
-char	*get_empty_str(t_data *d);
-char	*get_null_str(t_data *d);
-void	ft_putstr_special(t_data *d);
-void	free_strs(size_t n, ...);
-void	free_data(t_data *d);
-int		ft_printf(const char *s, ...);
-	//	ft_printf END
 
 #endif /*LIBFT_H*/
