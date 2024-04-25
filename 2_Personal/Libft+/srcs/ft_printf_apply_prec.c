@@ -54,8 +54,8 @@ static int	apply_prec_nbr_newstr(char **s, char *abs, int len)
 			return (0);
 	tmp2 = ft_strjoin(tmp, abs);
 	if (!tmp2)
-		return (free_strs(1, &tmp), 0);
-	free_strs(2, s, &tmp);
+		return (ftpf_free_strs(1, &tmp), 0);
+	ftpf_free_strs(2, s, &tmp);
 	*s = tmp2;
 	return (1);
 }
@@ -80,10 +80,10 @@ static char	*apply_precision_nbr(char *s, t_flags f)
 }
 
 //	only for: sdiuxX
-char	*apply_precision(t_data *d, t_flags f)
+char	*ftpf_apply_precision(t_data *d, t_flags f)
 {
 	if (f.cspec == 's')
-		return (apply_precision_s(d, f));
+		return (ftpf_apply_precision_s(d, f));
 	else
 		return (apply_precision_nbr(d->insert, f));
 }

@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*get_char(char c)
+char	*ftpf_get_char(char c)
 {
 	char	*s;
 
@@ -24,7 +24,7 @@ char	*get_char(char c)
 	return (s);
 }
 
-char	*get_str(char *s)
+char	*ftpf_get_str(char *s)
 {
 	char	*out;
 	size_t	o_len;
@@ -42,47 +42,47 @@ char	*get_str(char *s)
 	return (out);
 }
 
-char	*apply_flags(t_flags f, t_data *d)
+static char	*apply_flags(t_flags f, t_data *d)
 {
-	set_i_len(d);
+	ftpf_set_i_len(d);
 	if (ft_strchr("sdiuxX", f.cspec))
-		d->insert = apply_precision(d, f);
-	set_i_len(d);
+		d->insert = ftpf_apply_precision(d, f);
+	ftpf_set_i_len(d);
 	if (ft_strchr("di", f.cspec))
-		d->insert = apply_spaceplus(d, f);
-	set_i_len(d);
+		d->insert = ftpf_apply_spaceplus(d, f);
+	ftpf_set_i_len(d);
 	if (ft_strchr("xX", f.cspec))
-		d->insert = apply_altprint(d, f);
-	set_i_len(d);
+		d->insert = ftpf_apply_altprint(d, f);
+	ftpf_set_i_len(d);
 	if (ft_strchr("cspdiuxX", f.cspec))
-		d->insert = apply_width_others(d, f);
-	set_s_len_and_nullprotect(d);
+		d->insert = ftpf_apply_width_others(d, f);
+	ftpf_set_s_len_and_nullprotect(d);
 	return (d->insert);
 }
 
-char	*get_insertstr(t_data *d, va_list args)
+char	*ftpf_get_insertstr(t_data *d, va_list args)
 {
 	t_flags	flags;
 
-	flags = initiate_flags();
-	if (!get_flags(d->fspec, &flags, args))
+	flags = ftpf_initiate_flags();
+	if (!ftpf_get_flags(d->fspec, &flags, args))
 	{
 		d->insert = ft_strdup(d->fspec);
-		set_lengths(d);
+		ftpf_set_lengths(d);
 		return (d->insert);
 	}
 	d->insert = NULL;
 	if (d->cspec == '%')
-		d->insert = get_char('%');
+		d->insert = ftpf_get_char('%');
 	if (d->cspec == 'c')
-		d->insert = get_char(va_arg(args, int));
+		d->insert = ftpf_get_char(va_arg(args, int));
 	if (d->cspec == 's')
-		d->insert = get_str(va_arg(args, char *));
+		d->insert = ftpf_get_str(va_arg(args, char *));
 	if (d->cspec == 'd' || d->cspec == 'i')
 		d->insert = ft_itoa(va_arg(args, int));
 	if (d->cspec == 'p')
-		d->insert = get_vptr_base(va_arg(args, uintptr_t), d);
+		d->insert = ftpf_get_vptr_base(va_arg(args, uintptr_t), d);
 	if (d->cspec == 'u' || d->cspec == 'x' || d->cspec == 'X')
-		d->insert = get_uint_base(va_arg(args, unsigned int), d->cspec);
+		d->insert = ftpf_get_uint_base(va_arg(args, unsigned int), d->cspec);
 	return (apply_flags(flags, d));
 }

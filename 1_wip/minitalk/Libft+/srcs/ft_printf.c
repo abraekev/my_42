@@ -37,14 +37,14 @@ static int	process_formatspec(t_data *d, int i, va_list args)
 {
 	d->fspec = get_fspecstr(d, i);
 	if (!d->fspec)
-		return (free_data(d), -1);
+		return (ftpf_free_data(d), -1);
 	d->f_len = ft_strlen(d->fspec);
 	d->cspec = d->fspec[d->f_len - 1];
-	d->insert = get_insertstr(d, args);
+	d->insert = ftpf_get_insertstr(d, args);
 	if (!d->insert)
-		return (free_data(d), -1);
-	ft_putstr_special(d);
-	return (free_data(d), d->f_len);
+		return (ftpf_free_data(d), -1);
+	ftpf_putstr_special(d);
+	return (ftpf_free_data(d), d->f_len);
 }
 
 static void	init_d(const char *src, t_data *d, size_t *i)
@@ -76,7 +76,7 @@ int	ft_printf(const char *src, ...)
 		{
 			jump = process_formatspec(&d, i, args);
 			if (jump < 0)
-				return (free_data(&d), -1);
+				return (ftpf_free_data(&d), -1);
 			i = i + jump;
 		}
 		else
@@ -85,5 +85,5 @@ int	ft_printf(const char *src, ...)
 			i++;
 		}
 	}
-	return (free_data(&d), d.s_len);
+	return (ftpf_free_data(&d), d.s_len);
 }

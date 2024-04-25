@@ -32,7 +32,7 @@ static int	check_precision(char *s, size_t i)
 	return (i);
 }
 
-int	validate_flags(char *s, t_flags *flags)
+int	ftpf_validate_flags(char *s, t_flags *flags)
 {
 	size_t		i;
 

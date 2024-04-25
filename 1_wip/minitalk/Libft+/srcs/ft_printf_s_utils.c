@@ -13,7 +13,7 @@
 #include "libft.h"
 
 // char *fspec = %[flags][min width][precision][conv specifier]
-char	*get_empty_str(t_data *d)
+char	*ftpf_get_empty_str(t_data *d)
 {
 	char	*str;
 
@@ -25,7 +25,7 @@ char	*get_empty_str(t_data *d)
 	return (str);
 }
 
-char	*get_null_str(t_data *d)
+char	*ftpf_get_null_str(t_data *d)
 {
 	char	*str;
 
@@ -37,7 +37,7 @@ char	*get_null_str(t_data *d)
 	return (str);
 }
 
-void	ft_putstr_special(t_data *d)
+void	ftpf_putstr_special(t_data *d)
 {
 	if (d->cspec == 'c')
 		write(1, d->insert, d->i_len);
@@ -45,7 +45,7 @@ void	ft_putstr_special(t_data *d)
 		ft_putstr_fd(d->insert, 1);
 }
 
-void	free_strs(size_t n, ...)
+void	ftpf_free_strs(size_t n, ...)
 {
 	size_t	i;
 	char	**s;
@@ -66,7 +66,7 @@ void	free_strs(size_t n, ...)
 	return ;
 }
 
-void	free_data(t_data *d)
+void	ftpf_free_data(t_data *d)
 {
 	if (d && d->fspec)
 	{

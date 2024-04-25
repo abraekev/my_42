@@ -70,11 +70,11 @@ static char	*apply_join(t_data *d, t_flags f, char *add)
 		out = strjoin_printf(add, d->insert, a_len, d->i_len);
 	d->i_len = a_len + d->i_len;
 	process_nbrs(&out, a_len, d, f);
-	free_strs(2, &add, &d->insert);
+	ftpf_free_strs(2, &add, &d->insert);
 	return (out);
 }
 
-char	*apply_width_others(t_data *d, t_flags f)
+char	*ftpf_apply_width_others(t_data *d, t_flags f)
 {
 	char	*add;
 	size_t	a_len;
@@ -86,7 +86,7 @@ char	*apply_width_others(t_data *d, t_flags f)
 	a_len = f.min_width - d->i_len;
 	add = malloc(a_len + 1);
 	if (!add)
-		return (free_data(d), NULL);
+		return (ftpf_free_data(d), NULL);
 	if (f.pad_zero && !f.just_l && f.precision < 0
 		&& ft_strchr("diuxX", f.cspec))
 		fill_str(add, a_len, '0');

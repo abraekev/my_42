@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	set_i_len(t_data *d)
+void	ftpf_set_i_len(t_data *d)
 {
 	if (!d->insert)
 		d->i_len = 0;
@@ -22,15 +22,15 @@ void	set_i_len(t_data *d)
 		d->i_len = 1;
 }
 
-void	set_s_len_and_nullprotect(t_data *d)
+void	ftpf_set_s_len_and_nullprotect(t_data *d)
 {
 	if (!d->i_len && d->insert == NULL)
-		get_empty_str(d);
+		ftpf_get_empty_str(d);
 	d->s_len = d->s_len - d->f_len + d->i_len;
 }
 
-void	set_lengths(t_data *d)
+void	ftpf_set_lengths(t_data *d)
 {
-	set_i_len(d);
-	set_s_len_and_nullprotect(d);
+	ftpf_set_i_len(d);
+	ftpf_set_s_len_and_nullprotect(d);
 }

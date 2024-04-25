@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*add_prefix(t_data *d, char *prefix)
+char	*ftpf_add_prefix(t_data *d, char *prefix)
 {
 	char	*out;
 	char	*s;
@@ -29,7 +29,7 @@ char	*add_prefix(t_data *d, char *prefix)
 	return (out);
 }
 
-char	*apply_spaceplus(t_data *d, t_flags f)
+char	*ftpf_apply_spaceplus(t_data *d, t_flags f)
 {
 	char	*s;
 
@@ -37,13 +37,13 @@ char	*apply_spaceplus(t_data *d, t_flags f)
 	if (!s)
 		return (NULL);
 	if (f.pref_space && !f.pref_plus)
-		return (add_prefix(d, " "));
+		return (ftpf_add_prefix(d, " "));
 	if (f.pref_plus)
-		return (add_prefix(d, "+"));
+		return (ftpf_add_prefix(d, "+"));
 	return (s);
 }
 
-char	*apply_altprint(t_data *d, t_flags f)
+char	*ftpf_apply_altprint(t_data *d, t_flags f)
 {
 	char	*s;
 
@@ -53,7 +53,7 @@ char	*apply_altprint(t_data *d, t_flags f)
 	if (!f.alt_print || (f.alt_print && !ft_strncmp(s, "0", d->i_len + 1)))
 		return (s);
 	if (f.cspec == 'x')
-		return (add_prefix(d, "0x"));
+		return (ftpf_add_prefix(d, "0x"));
 	else
-		return (add_prefix(d, "0X"));
+		return (ftpf_add_prefix(d, "0X"));
 }

@@ -48,7 +48,7 @@ static char	*uint_base(unsigned int nbr, char *base, size_t b_len)
 	return (s);
 }
 
-char	*get_uint_base(unsigned int nbr, char c)
+char	*ftpf_get_uint_base(unsigned int nbr, char c)
 {
 	char	*base;
 

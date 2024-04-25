@@ -59,7 +59,7 @@ static char	*empty_ptr(void)
 	return (s);
 }
 
-char	*get_vptr_base(uintptr_t nbr, t_data *d)
+char	*ftpf_get_vptr_base(uintptr_t nbr, t_data *d)
 {
 	char	*base;
 
@@ -67,5 +67,5 @@ char	*get_vptr_base(uintptr_t nbr, t_data *d)
 	if (!nbr)
 		return (empty_ptr());
 	d->insert = vptr_base(nbr, base, ft_strlen(base));
-	return (add_prefix(d, "0x"));
+	return (ftpf_add_prefix(d, "0x"));
 }

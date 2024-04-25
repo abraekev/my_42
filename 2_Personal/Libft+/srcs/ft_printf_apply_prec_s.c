@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*apply_precision_s(t_data *d, t_flags f)
+char	*ftpf_apply_precision_s(t_data *d, t_flags f)
 {
 	char	*tmp;
 	char	*s;
@@ -20,7 +20,7 @@ char	*apply_precision_s(t_data *d, t_flags f)
 	s = d->insert;
 	if (!s && (f.precision >= 6 || f.precision == -1))
 	{
-		s = get_null_str(d);
+		s = ftpf_get_null_str(d);
 		if (!s)
 			return (NULL);
 	}
@@ -30,7 +30,7 @@ char	*apply_precision_s(t_data *d, t_flags f)
 	{
 		tmp = malloc(f.precision + 1);
 		if (!tmp)
-			return (free_strs(1, &s), NULL);
+			return (ftpf_free_strs(1, &s), NULL);
 		ft_strlcpy(tmp, s, f.precision + 1);
 		free(s);
 		return (tmp);

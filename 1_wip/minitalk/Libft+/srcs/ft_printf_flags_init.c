@@ -14,7 +14,7 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-t_flags	initiate_flags(void)
+t_flags	ftpf_initiate_flags(void)
 {
 	t_flags	flags;
 
@@ -79,9 +79,9 @@ static void	get_min_width(t_flags *flags, char *fspec, va_list args)
 		flags->min_width = nbr;
 }
 
-int	get_flags(char *fspec, t_flags *flags, va_list args)
+int	ftpf_get_flags(char *fspec, t_flags *flags, va_list args)
 {
-	if (!validate_flags(fspec, flags))
+	if (!ftpf_validate_flags(fspec, flags))
 		return (0);
 	if (ft_strchr(fspec, '-'))
 		flags->just_l = 1;
