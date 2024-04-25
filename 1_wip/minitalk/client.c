@@ -6,31 +6,43 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:29:30 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/24 14:55:27 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:36:16 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <signal.h>
 
+void	send_char(int pid, char c)
+{
+	int	i;
+	int	bit;
 
+	i = 7;
+	while (i >= 0)
+	{
+		bit = (c >> i) & 1;
+		if (!bit)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		i--;
+		usleep(250);
+	}
+}
 
 void	send_string(int pid, char *s, size_t len)
 {
-	int	i;
-
 	if (!s)
 		return ((void)ft_printf("No string to be sent.\n"));
-	while(s)
+	while(*s)
 	{
-		i = -1;
-		while (++i < 7)
-		{
-			/*	send over bits of *s	*/
-			usleep(250);
-		}
+		send_char(pid, *s);
 		s++;
+		usleep(10000);
 	}
+	send_char(pid, 0);
+	usleep(10000);
 }
 
 int	main(int argc, char **argv)
@@ -45,4 +57,5 @@ int	main(int argc, char **argv)
 		return (ft_printf("bad pid\n"), 0);
 	str = argv[2];
 	send_string(pid, str, ft_strlen(str));
+	return (0);
 }

@@ -6,38 +6,70 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:23:12 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/24 14:55:29 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:36:20 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//       pid_t getpid(void);
-
-#include <sys/types.h>
-#include <unistd.h>
-#include "libft.h"
 #include <signal.h>
+#include <sys/types.h>
+
+#include "libft.h"
+
+int BIT = -1;
 
 void	sig_handler(int	signal)
 {
-	ft_printf("sig received (in handler fnction)\n");
+	if(signal == SIGUSR1)
+		BIT = 0;
+	else if (signal == SIGUSR2)
+		BIT = 1;
+}
+
+void	cleanup()
+{
+	ft_printf("EOF reached.\n");
+}
+
+int	mt_get_char()
+{
+	int	c;
+	int	base;
+	
+	base = 128;
+	c = 0;
+	while (base != 0)
+	{
+		pause();
+		c += BIT * base;
+		base /= 2;
+		if (BIT == -1)
+			exit(0);
+		BIT = -1;
+	}
+	ft_putchar_fd(c, 1);
+	return (c);
 }
 
 int	main()
 {
-	if (argc != 1)
-		return (ft_printf("Error. Check your arguments.\n"), 0);	
-	pid_t pid = getpid();
-	ft_printf("pid = %d\n", (int)pid);
+	struct sigaction sa;
 
-	signal(SIGUSR1, sig_handler);
+	sa.sa_handler = sig_handler;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
+	sa.sa_flags = 0;
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	
-	int	i = 0;
-	while (i <10)
+	ft_printf("pid is: %d\n", getpid();
+	atexit(cleanup);
+		
+	while (1)
 	{
-		ft_printf("program running and paused, waiting for sig (press CTRL-C)\n");
 		pause();
-		ft_printf("continueing MAIN\n");
-		i++;
+		c = mt_get_char();
+		write(1, &c, 1);
+		write(1, "\n", 1);
 	}
-	ft_printf("end");
 }
