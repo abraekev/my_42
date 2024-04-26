@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:29:30 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/25 14:36:16 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:00:58 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	send_char(int pid, char c)
 		else
 			kill(pid, SIGUSR2);
 		i--;
-		usleep(500);
+		usleep(1000);
 	}
 }
 
@@ -39,7 +39,7 @@ void	send_string(int pid, char *s, size_t len)
 	{
 		send_char(pid, *s);
 		s++;
-		usleep(500);
+		usleep(1000);
 	}
 	send_char(pid, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:23:12 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/25 14:36:20 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:01:55 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,32 @@
 
 #include "libft.h"
 
-int BIT = -1;
+
+#include  <stdio.h>
+
 
 void	sig_handler(int	signal)
 {
-	if(signal == SIGUSR1)
-		BIT = 0;
-	else if (signal == SIGUSR2)
-		BIT = 1;
+	static int	i = 0;
+	static int	c = 0;
+	int			bit;
+	
+	bit = 1;
+	if (signal == SIGUSR1)
+		bit = 0;
+	if (i++ < 8)
+		c = (c << 1) | bit;
+	if (i == 8)
+	{
+		write(1, &c, 1);
+		i = 0;
+		c = 0;
+	}
 }
 
 void	cleanup()
 {
 	ft_printf("EOF reached.\n");
-}
-
-int	mt_get_char()
-{
-	int	c;
-	int	i;
-
-	i = 0;
-	c = 0;
-	while (i != 8)
-	{
-		pause();
-		c = (c | BIT) << 1;
-		if (BIT == -1)
-			exit(0);
-		BIT = -1;
-		i++;
-	}
-	return (c);
 }
 
 int	main()
@@ -66,10 +60,5 @@ int	main()
 	atexit(cleanup);
 		
 	while (1)
-	{
 		pause();
-		c = mt_get_char();
-		write(1, &c, 1);
-		write(1, "\n", 1);
-	}
 }
