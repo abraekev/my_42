@@ -33,26 +33,26 @@ void	cleanup()
 int	mt_get_char()
 {
 	int	c;
-	int	base;
-	
-	base = 128;
+	int	i;
+
+	i = 0;
 	c = 0;
-	while (base != 0)
+	while (i != 8)
 	{
 		pause();
-		c += BIT * base;
-		base /= 2;
+		c = (c | BIT) << 1;
 		if (BIT == -1)
 			exit(0);
 		BIT = -1;
+		i++;
 	}
-	ft_putchar_fd(c, 1);
 	return (c);
 }
 
 int	main()
 {
 	struct sigaction sa;
+	int	c;
 
 	sa.sa_handler = sig_handler;
 	sigemptyset(&sa.sa_mask);
@@ -62,7 +62,7 @@ int	main()
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	
-	ft_printf("pid is: %d\n", getpid();
+	ft_printf("pid is: %d\n", getpid());
 	atexit(cleanup);
 		
 	while (1)
