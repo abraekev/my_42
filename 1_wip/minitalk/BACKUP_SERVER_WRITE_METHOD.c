@@ -17,14 +17,11 @@
 
 
 #include  <stdio.h>
-#define SIZE 1024
 
-char	*BUFF;
 
 void	sig_handler(int	signal, siginfo_t *info, void *context)
 {
 	static int	i = 0;
-	static int	j = 0;
 	static int	c = 0;
 	int			bit;
 	
@@ -36,14 +33,10 @@ void	sig_handler(int	signal, siginfo_t *info, void *context)
 		c = (c << 1) | bit;
 	if (i == 8)
 	{
-		BUFF[j++] = c;
+		write(1, &c, 1);
 		i = 0;
 		if (!c)
-		{
-			ft_printf("%s", BUFF);
-			ft_memset(BUFF, 0, j - 2);
 			return ((void)kill(info->si_pid, SIGUSR2));
-		}
 		c = 0;
 	}
 	kill(info->si_pid, SIGUSR1);
@@ -62,9 +55,6 @@ int	main()
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	ft_printf("pid is: %d\n", getpid());
-	
-	BUFF = ft_calloc(SIZE, sizeof(char));
-	
 	while (1)
 		pause();
 }
