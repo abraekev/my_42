@@ -13,35 +13,11 @@
 #include "libft.h"
 #include <signal.h>
 
-void	sig_handler_1(int signal)
+void	sig_handler(int signal)
 {
-	//write(1, "bit was processed\n", 18);
+	//write(1, "sig1 received, continuing...\n", 29);
 }
 
-void	sig_handler_2(int signal)
-{
-	write(1, "EOF processed\n", 14);
-}
-
-/*
-void	send_char(int pid, char c)
-{
-	int	i;
-	int	bit;
-
-	i = 8;
-	while (--i >= 0)
-	{
-		bit = (c >> i) & 1;
-		if (!bit)
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		pause();
-		usleep(250);
-	}
-}
-*/
 
 void	send_string(int pid, char *s, size_t len)
 {
@@ -56,26 +32,25 @@ void	send_string(int pid, char *s, size_t len)
 		while (--i >= 0)
 		{
 			bit = (s[j] >> i) & 1;
+			usleep(10);
 			if (!bit)
 				kill(pid, SIGUSR1); // 0
 			else
 				kill(pid, SIGUSR2); // 1
 			pause();
-			usleep(400);
 		}
 	}
+	write(1, "END REACHED.\n", 13);
 }
 
 int	main(int argc, char **argv)
 {
-	struct sigaction	sa;
 	int		pid;
 	char	*str;
 
 	if (argc != 3)
 		return (ft_printf("Error. Check your arguments.\n"), 0);                
-	signal(SIGUSR1, sig_handler_1);
-	signal(SIGUSR2, sig_handler_2);	
+	signal(SIGUSR1, sig_handler);	
 	pid = ft_atoi(argv[1]);
 	if (pid <= 0)
 		return (ft_printf("bad pid\n"), 0);
