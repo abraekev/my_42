@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <signal.h>
 
-/* for time recording
+// for time recording
 #include <time.h>
 #include <stdio.h>
 
@@ -22,7 +22,7 @@ double	elapsed_time_ms(struct timespec *start, struct timespec *end)
 	return ((end->tv_sec - start->tv_sec) * 1000.0
 		+ (end->tv_nsec - start->tv_nsec) / 1000000.0);
 }
-*/
+
 
 //sigusr1 requires a custom handler,
 // but i just need the client to receive the sig to continue.
@@ -40,7 +40,7 @@ void	sig_handler(int signal)
 	if (signal == SIGUSR1)
 		g_sig_received = 1;
 	if (signal == SIGUSR2)
-		ft_exit("Message was succesfully sent.");
+		/*ft_exit("Message was succesfully sent.")*/;
 }
 
 void	send_signal(int pid, int bit)
@@ -81,8 +81,8 @@ void	send_string(int pid, char *s, size_t len)
 
 int	main(int argc, char **argv)
 {
-	//struct timespec	start;
-	//struct timespec	end;
+	struct timespec	start;
+	struct timespec	end;
 	int				pid;
 	char			*str;
 
@@ -94,10 +94,10 @@ int	main(int argc, char **argv)
 	if (pid <= 0)
 		return (ft_printf("Error. Bad pid.\n"), 0);
 	str = argv[2];
-	//clock_gettime(CLOCK_MONOTONIC, &start);
+	clock_gettime(CLOCK_MONOTONIC, &start);
 	send_string(pid, str, ft_strlen(str));
-	//clock_gettime(CLOCK_MONOTONIC, &end);
-	//printf("Elapsed time: %.3f ms\n", elapsed_time_ms(&start, &end));
+	clock_gettime(CLOCK_MONOTONIC, &end);
+	printf("Elapsed time: %.3f ms\n", elapsed_time_ms(&start, &end));
 	return (0);
 }
 
