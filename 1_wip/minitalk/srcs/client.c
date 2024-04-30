@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <signal.h>
+#include "minitalk.h"
 
 // for time recording
 #include <time.h>
@@ -40,7 +39,9 @@ void	sig_handler(int signal)
 	if (signal == SIGUSR1)
 		g_sig_received = 1;
 	if (signal == SIGUSR2)
-		/*ft_exit("Message was succesfully sent.")*/;
+	{
+		//ft_exit("Message was succesfully sent.");
+	}
 }
 
 void	send_signal(int pid, int bit)
@@ -67,7 +68,7 @@ void	send_string(int pid, char *s, size_t len)
 	int	bit;
 
 	j = -1;
-	while (++j <= len)
+	while (++j <= (int)len)
 	{
 		i = 8;
 		while (--i >= 0)

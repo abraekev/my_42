@@ -13,6 +13,8 @@
 # VARIABLES
 # **************************************************************************** #
 
+PROJECT		=	minitalk
+
 SRCSERV		=	server.c
 SRCCLNT		=	client.c
 
@@ -35,17 +37,24 @@ RM			=	rm -f
 GCC			=	cc
 CFLAGS		+=	-Wall -Wextra -Werror
 MAKEFLAGS	+=	--no-print-directory
+LINK		=	-L$(DIRLIBFT) -lft
+
+GREEN		=	\033[032m
+CYAN		=	\033[036m
+NOCLR		=	\033[0m
 
 # RULES
 # **************************************************************************** #
 
-all:		$(LIBFT) $(NAME)
+all:		$(LIBFT) $(NAMECLNT) $(NAMESERV)
 
-$(NAME):	$(LIBFT) $(OBJSSERV) $(OBJSCLNT)
-				$(GCC) $(CFLAGS) $(OBJSSERV) -o $(NAMESERV)
-				$(GCC) $(CFLAGS) $(OBJSCLNT) -o $(NAMECLNT)				
-#VOEG HIER NOG DE LINKER NAAR DE LIBRARY TOE
+$(NAMECLNT):	$(OBJSCLNT)
+					@$(GCC) $(CFLAGS) $(OBJSCLNT) -o $(NAMECLNT) $(LINK)
+					@printf "$(GREEN)%-12s%-12s\n$(NOCLR)" "compiled" "$(NAMECLNT)"
 
+$(NAMESERV):	$(OBJSSERV)
+					@$(GCC) $(CFLAGS) $(OBJSSERV) -o $(NAMESERV) $(LINK)
+					@printf "$(GREEN)%-12s%-12s\n$(NOCLR)" "compiled" "$(NAMESERV)"
 $(LIBFT):
 				@$(MAKE) -C $(DIRLIBFT)
 
@@ -55,14 +64,14 @@ $(LIBFT):
 bonus:	all
 
 clean:
-		@$(RM) $(OBJS) $(OBJSLIBFT)
+		@$(RM) $(OBJSSERV) $(OBJSCLNT)
 		@$(MAKE) -C $(DIRLIBFT) clean
-		@echo "\033[36mcleaned $(NAME) OBJECTS.\033[0m"
+		@echo "\033[36mcleaned $(PROJECT) OBJECTS.\033[0m"
 
 fclean:		clean
-			@$(RM) $(NAME)
+			@$(RM) $(NAMESERV) $(NAMECLNT)
 			@$(MAKE) -C $(DIRLIBFT) QUIET=1 fclean
-			@echo "\033[36mcleaned $(NAME) LIBRARY.\033[0m"
+			@echo "\033[36mcleaned $(PROJECT) programs.\033[0m"
 
 re:		fclean all
 

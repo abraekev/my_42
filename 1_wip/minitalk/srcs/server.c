@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <sys/types.h>
-#include "libft.h"
+#include "minitalk.h"
+
 #include <stdio.h>
 
 int	g_siginfo[2];
