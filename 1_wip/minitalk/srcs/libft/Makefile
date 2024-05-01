@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/24 09:49:01 by abraekev         ###   ########.fr        #
+#    Updated: 2024/05/01 09:26:23 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRCS	=	$(addprefix $(DIRSRC), $(SRC))
 
 OBJS	=	$(SRCS:.c=.o)
 
-INCL	=	./
+INCL	=	../../includes/
 
 NAME	=	libft.a
 

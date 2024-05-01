@@ -6,27 +6,14 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:29:30 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/30 11:34:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/05/01 10:22:34 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-// for time recording
-#include <time.h>
-#include <stdio.h>
-
-double	elapsed_time_ms(struct timespec *start, struct timespec *end)
-{
-	return ((end->tv_sec - start->tv_sec) * 1000.0
-		+ (end->tv_nsec - start->tv_nsec) / 1000000.0);
-}
-
-
-//sigusr1 requires a custom handler,
-// but i just need the client to receive the sig to continue.
-
-int	g_sig_received = 0;
+// global to handle acknowledge (no inputs or output in handler)
+int	g_acknowledge = 0;
 
 void	ft_exit(char *str)
 {
@@ -37,16 +24,14 @@ void	ft_exit(char *str)
 void	sig_handler(int signal)
 {
 	if (signal == SIGUSR1)
-		g_sig_received = 1;
+		g_acknowledge = 1;
 	if (signal == SIGUSR2)
-	{
-		//ft_exit("Message was succesfully sent.");
-	}
+		ft_exit("\033[32mMessage was succesfully sent.\033[32m");
 }
 
 void	send_signal(int pid, int bit)
 {
-	usleep(125);
+	usleep(175);
 	if (!bit)
 	{
 		if (kill(pid, SIGUSR1) == -1)
@@ -57,7 +42,7 @@ void	send_signal(int pid, int bit)
 		if (kill(pid, SIGUSR2) == -1)
 			ft_exit("Error. Signal was not sent.");
 	}
-	while (!g_sig_received)
+	while (!g_acknowledge)
 		pause();
 }
 
@@ -73,7 +58,7 @@ void	send_string(int pid, char *s, size_t len)
 		i = 8;
 		while (--i >= 0)
 		{
-			g_sig_received = 0;
+			g_acknowledge = 0;
 			bit = (s[j] >> i) & 1;
 			send_signal(pid, bit);
 		}
@@ -82,23 +67,18 @@ void	send_string(int pid, char *s, size_t len)
 
 int	main(int argc, char **argv)
 {
-	struct timespec	start;
-	struct timespec	end;
-	int				pid;
-	char			*str;
+	int		pid;
+	char	*str;
 
 	if (argc != 3)
 		return (ft_printf("Error. Check your arguments.\n"), 0);
-	signal(SIGUSR1, sig_handler);
-	signal(SIGUSR2, sig_handler);
 	pid = ft_atoi(argv[1]);
 	if (pid <= 0)
 		return (ft_printf("Error. Bad pid.\n"), 0);
 	str = argv[2];
-	clock_gettime(CLOCK_MONOTONIC, &start);
+	signal(SIGUSR1, sig_handler);
+	signal(SIGUSR2, sig_handler);
 	send_string(pid, str, ft_strlen(str));
-	clock_gettime(CLOCK_MONOTONIC, &end);
-	printf("Elapsed time: %.3f ms\n", elapsed_time_ms(&start, &end));
 	return (0);
 }
 

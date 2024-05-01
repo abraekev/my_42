@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/04/30 16:35:10 by abraekev         ###   ########.fr        #
+#    Updated: 2024/05/01 09:31:08 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,12 +66,12 @@ bonus:	all
 clean:
 		@$(RM) $(OBJSSERV) $(OBJSCLNT)
 		@$(MAKE) -C $(DIRLIBFT) clean
-		@echo "\033[36mcleaned $(PROJECT) OBJECTS.\033[0m"
+		@printf "$(CYAN)%-12s%-12sOBJECTS\n$(NOCLR)" "cleaned" "$(PROJECT)"
 
 fclean:		clean
 			@$(RM) $(NAMESERV) $(NAMECLNT)
 			@$(MAKE) -C $(DIRLIBFT) QUIET=1 fclean
-			@echo "\033[36mcleaned $(PROJECT) programs.\033[0m"
+			@printf "$(CYAN)%-12s%-12sPROGRAMS\n$(NOCLR)" "cleaned" "$(PROJECT)"
 
 re:		fclean all
 

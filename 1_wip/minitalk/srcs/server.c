@@ -6,14 +6,13 @@
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:23:12 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/30 11:40:54 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/05/01 09:51:41 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-#include <stdio.h>
-
+//global to store handler info (no inputs or outputs possible)
 int	g_siginfo[2];
 
 void	ft_exit(char *str)
@@ -22,10 +21,10 @@ void	ft_exit(char *str)
 	exit(0);
 }
 
-void	acknowledge(int endofstr)
+void	acknowledge(int isendofstr)
 {
-	usleep(125);
-	if (endofstr)
+	usleep(175);
+	if (isendofstr)
 	{
 		if (kill(g_siginfo[0], SIGUSR2) == -1)
 			ft_exit("\nError. Signal was not sent.");
@@ -66,6 +65,7 @@ void	sig_handler(int signal, siginfo_t *info, void *context)
 	g_siginfo[1] = signal;
 }
 
+/*
 void	ini_sa(void)
 {
 	struct sigaction	sa;
@@ -78,13 +78,21 @@ void	ini_sa(void)
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 }
+*/
 
 int	main(void)
 {
-	char	c;
+	char				c;
+	struct sigaction	sa;
 
-	ini_sa();
-	ft_printf("pid is: %d\n", getpid());
+	sa.sa_sigaction = sig_handler;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+	ft_printf("server pid is: %d\n", getpid());
 	c = 0;
 	while (1)
 	{
