@@ -6,34 +6,25 @@
 #    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/05/01 09:31:08 by abraekev         ###   ########.fr        #
+#    Updated: 2024/05/02 11:15:03 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLES
 # **************************************************************************** #
 
-PROJECT		=	minitalk
-
-SRCSERV		=	server.c
-SRCCLNT		=	client.c
+SRC			=	#
 
 DIRSRC		=	./srcs/
 DIRLIBFT	=	./srcs/libft/
 DIRINC		=	./includes/
 
 LIBFT		=	$(DIRLIBFT)libft.a
-SRCSSERV	=	$(addprefix $(DIRSRC), $(SRCSERV)) 
-SRCSCLNT	=	$(addprefix $(DIRSRC), $(SRCCLNT))
-OBJSSERV	=	$(SRCSSERV:.c=.o)
-OBJSCLNT	=	$(SRCSCLNT:.c=.o)
+SRCS		=	$(addprefix $(DIRSRC), $(SRC)) 
+OBJS		=	$(SRCS:.c=.o)
 
-NAMESERV	=	server
-NAMECLNT	=	client
+NAME		=	push_swap
 
-AR			=	ar -rcs
-RL			=	ranlib
-RM			=	rm -f
 GCC			=	cc
 CFLAGS		+=	-Wall -Wextra -Werror
 MAKEFLAGS	+=	--no-print-directory
@@ -46,15 +37,11 @@ NOCLR		=	\033[0m
 # RULES
 # **************************************************************************** #
 
-all:		$(LIBFT) $(NAMECLNT) $(NAMESERV)
+all:			$(LIBFT) $(NAME)
 
-$(NAMECLNT):	$(OBJSCLNT)
-					@$(GCC) $(CFLAGS) $(OBJSCLNT) -o $(NAMECLNT) $(LINK)
-					@printf "$(GREEN)%-12s%-12s\n$(NOCLR)" "compiled" "$(NAMECLNT)"
-
-$(NAMESERV):	$(OBJSSERV)
-					@$(GCC) $(CFLAGS) $(OBJSSERV) -o $(NAMESERV) $(LINK)
-					@printf "$(GREEN)%-12s%-12s\n$(NOCLR)" "compiled" "$(NAMESERV)"
+$(NAME):		$(OBJS)
+					@$(GCC) $(CFLAGS) $(OBJS) -o $(NAME) $(LINK)
+					@printf "$(GREEN)%-12s%-12s\n$(NOCLR)" "compiled" "$(NAME)"
 $(LIBFT):
 				@$(MAKE) -C $(DIRLIBFT)
 
@@ -64,14 +51,14 @@ $(LIBFT):
 bonus:	all
 
 clean:
-		@$(RM) $(OBJSSERV) $(OBJSCLNT)
+		@$(RM) $(OBJS)
 		@$(MAKE) -C $(DIRLIBFT) clean
-		@printf "$(CYAN)%-12s%-12sOBJECTS\n$(NOCLR)" "cleaned" "$(PROJECT)"
+		@printf "$(CYAN)%-12s%-12sOBJECTS\n$(NOCLR)" "cleaned" "$(NAME)"
 
 fclean:		clean
-			@$(RM) $(NAMESERV) $(NAMECLNT)
+			@$(RM) $(NAME)
 			@$(MAKE) -C $(DIRLIBFT) QUIET=1 fclean
-			@printf "$(CYAN)%-12s%-12sPROGRAMS\n$(NOCLR)" "cleaned" "$(PROJECT)"
+			@printf "$(CYAN)%-12s%-12sPROGRAMS\n$(NOCLR)" "cleaned" "$(NAME)"
 
 re:		fclean all
 
