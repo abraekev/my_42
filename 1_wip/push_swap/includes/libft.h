@@ -68,6 +68,7 @@ typedef struct s_list
 //	DEFINITIONS
 /******************************************************************************/
 
+	//*** libft
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -111,9 +112,11 @@ char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+
+	//*** get_next_line
 char	*get_next_line(int fd);
 
-	//	ft_printf START
+	//***	ft_printf
 char	*ftpf_apply_precision_s(t_data *d, t_flags f);
 void	ftpf_set_i_len(t_data *d);
 void	ftpf_set_s_len_and_nullprotect(t_data *d);
@@ -133,10 +136,9 @@ char	*ftpf_get_str(char *s);
 char	*ftpf_get_insertstr(t_data *d, va_list args);
 char	*ftpf_get_empty_str(t_data *d);
 char	*ftpf_get_null_str(t_data *d);
-void	ftpf_putstr_special(t_data *d);
+void	ftpf_putstr_special(t_data *d, int fd);
 void	ftpf_free_strs(size_t n, ...);
 void	ftpf_free_data(t_data *d);
-int		ft_printf(const char *s, ...);
-	//	ft_printf END
+int		ft_printf(int fd, const char *s, ...);
 
 #endif /*LIBFT_H*/

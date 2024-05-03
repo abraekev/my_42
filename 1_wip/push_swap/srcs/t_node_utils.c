@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   t_node_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,49 +12,39 @@
 
 #include "push_swap.h"
 
-void	ft_exit(char *str, int exit_code)
+t_node	*create_node(char	*str, int position)
 {
-	ft_printf(2, "%s\n", str);
-	exit(exit_code);
-}
-
-t_node	*init_stack(int argc, char **argv, t_node *a)
-{
-	int		i;
-	int		position;
 	t_node	*new;
 
-	i = -1;
-	position = 0;
-	if (argc != 2)
-		i++;
-	while (argv[++i])
-	{
-		new = create_node(argv[i], position++);
-		if (!new)
-		{}	/***error***/
-		stck_add_back(&a, new);
-	}
-	return (a);
+	new = malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
+	new->value = ft_atoi(str);
+	new->next = NULL;
+	new->previous = NULL;
+	new->position = position;
+	return (new);
 }
 
-int	main(int argc, char **argv)
+t_node	*stck_last(t_node *stck)
 {
-	t_node	*a;
-	t_node	*b;
+	while(stck->next)
+		stck = stck->next;
+	return (stck);
+}
 
-	a = NULL;
-	b = NULL;	
-	if (argc == 1)
-		ft_exit("Error", 0);
-	if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	a = init_stack(argc, argv, a);
-	(void)b;
-	while (a)
+void	stck_add_back(t_node **stck, t_node *new)
+{
+	t_node	*last;
+
+	if (!stck || !new)
+		return ;
+	if (*stck)
 	{
-		ft_printf(1, "node op positie %d bevat value %d (prev: %d)\n", a->position, a->value, (a->previous) ? a->previous->value: 0);
-		a = a->next;
+		last = stck_last(*stck);
+		last->next = new;
+		new->previous = last;
 	}
-	return (0);
+	else
+		*stck = new;
 }

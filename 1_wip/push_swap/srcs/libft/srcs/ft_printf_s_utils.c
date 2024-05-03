@@ -37,12 +37,12 @@ char	*ftpf_get_null_str(t_data *d)
 	return (str);
 }
 
-void	ftpf_putstr_special(t_data *d)
+void	ftpf_putstr_special(t_data *d, int fd)
 {
 	if (d->cspec == 'c')
-		write(1, d->insert, d->i_len);
+		write(fd, d->insert, d->i_len);
 	else
-		ft_putstr_fd(d->insert, 1);
+		ft_putstr_fd(d->insert, fd);
 }
 
 void	ftpf_free_strs(size_t n, ...)

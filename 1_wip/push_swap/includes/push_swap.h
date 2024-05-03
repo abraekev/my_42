@@ -27,11 +27,17 @@
 typedef struct s_stack_node
 {
 	int					value;
+	int					position;
 	struct s_stack_node	*next;
-	struct s_stack_node	*prev;
-}	node;
+	struct s_stack_node	*previous;
+}	t_node;
 
 //	DEFINITIONS
 /******************************************************************************/
+
+//***t_node_utils.c
+t_node	*create_node(char	*str, int position);
+t_node	*stck_last(t_node *stck);
+void	stck_add_back(t_node **stck, t_node *new);
 
 #endif /*PUSH_SWAP_H*/

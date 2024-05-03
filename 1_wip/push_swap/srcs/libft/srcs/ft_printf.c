@@ -33,7 +33,7 @@ static char	*get_fspecstr(t_data *d, size_t i)
 	return (ft_substr(d->src, i, (lastchr - (d->src + i) + 1)));
 }
 
-static int	process_formatspec(t_data *d, int i, va_list args)
+static int	process_formatspec(t_data *d, int i, va_list args, int fd)
 {
 	d->fspec = get_fspecstr(d, i);
 	if (!d->fspec)
@@ -43,7 +43,7 @@ static int	process_formatspec(t_data *d, int i, va_list args)
 	d->insert = ftpf_get_insertstr(d, args);
 	if (!d->insert)
 		return (ftpf_free_data(d), -1);
-	ftpf_putstr_special(d);
+	ftpf_putstr_special(d, fd);
 	return (ftpf_free_data(d), d->f_len);
 }
 
@@ -59,7 +59,7 @@ static void	init_d(const char *src, t_data *d, size_t *i)
 	d->insert = NULL;
 }
 
-int	ft_printf(const char *src, ...)
+int	ft_printf(int fd, const char *src, ...)
 {
 	t_data		d;
 	size_t		i;
@@ -74,14 +74,14 @@ int	ft_printf(const char *src, ...)
 	{
 		if (src[i] == '%')
 		{
-			jump = process_formatspec(&d, i, args);
+			jump = process_formatspec(&d, i, args, fd);
 			if (jump < 0)
 				return (ftpf_free_data(&d), -1);
 			i = i + jump;
 		}
 		else
 		{
-			ft_putchar_fd(src[i], 1);
+			ft_putchar_fd(src[i], fd);
 			i++;
 		}
 	}
