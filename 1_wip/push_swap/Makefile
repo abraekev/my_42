@@ -13,7 +13,8 @@
 # VARIABLES
 # **************************************************************************** #
 
-SRC			=	push_swap.c	t_node_utils.c
+SRC			=	push_swap.c	t_node_utils.c allocation_utils.c				\
+				argument_utils.c
 
 DIRSRC		=	./srcs/
 DIRLIBFT	=	./srcs/libft/

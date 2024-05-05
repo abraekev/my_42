@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_node_utils.c                                     :+:      :+:    :+:   */
+/*   allocation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,39 +12,15 @@
 
 #include "push_swap.h"
 
-t_node	*stck_create_node(char	*str, int position)
+void	ft_free_strarr(char **strs)
 {
-	t_node	*new;
+	int	i;
 
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->value = ft_atoi(str);
-	new->next = NULL;
-	new->previous = NULL;
-	new->position = position;
-	return (new);
-}
-
-t_node	*stck_last(t_node *stck)
-{
-	while(stck->next)
-		stck = stck->next;
-	return (stck);
-}
-
-void	stck_add_back(t_node **stck, t_node *new)
-{
-	t_node	*last;
-
-	if (!stck || !new)
-		return ;
-	if (*stck)
+	i = -1;
+	while (strs && strs[++i])
 	{
-		last = stck_last(*stck);
-		last->next = new;
-		new->previous = last;
+		free(strs[i]);
+		strs[i] = NULL;
 	}
-	else
-		*stck = new;
+	free(strs);
 }

@@ -36,8 +36,14 @@ typedef struct s_stack_node
 /******************************************************************************/
 
 //***t_node_utils.c
-t_node	*create_node(char	*str, int position);
+t_node	*stck_create_node(char	*str, int position);
 t_node	*stck_last(t_node *stck);
 void	stck_add_back(t_node **stck, t_node *new);
+
+//***allocation_utils.c
+void	ft_free_strarr(char **strs);
+
+//***argument_utils.c
+char	**get_argv(int argc, char **argv);
 
 #endif /*PUSH_SWAP_H*/

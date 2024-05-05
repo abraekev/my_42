@@ -12,39 +12,47 @@
 
 #include "push_swap.h"
 
-t_node	*stck_create_node(char	*str, int position)
+char	**get_argv(int argc, char **argv)
 {
-	t_node	*new;
+	int		i;
+	char	*tmp;
+	char	**tmps;
 
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->value = ft_atoi(str);
-	new->next = NULL;
-	new->previous = NULL;
-	new->position = position;
-	return (new);
-}
-
-t_node	*stck_last(t_node *stck)
-{
-	while(stck->next)
-		stck = stck->next;
-	return (stck);
-}
-
-void	stck_add_back(t_node **stck, t_node *new)
-{
-	t_node	*last;
-
-	if (!stck || !new)
-		return ;
-	if (*stck)
-	{
-		last = stck_last(*stck);
-		last->next = new;
-		new->previous = last;
-	}
+	if (argc == 2)
+		argv = ft_split(argv[1], ' ');
 	else
-		*stck = new;
+	{
+		i = 0;
+		tmps = ft_calloc(argc, sizeof(char*));
+		if (!tmps)
+			return (NULL);
+		while(argv[++i])
+		{
+			tmps[i - 1] = ft_strdup(argv[i]);
+			if (!tmps[i - 1])
+				return (ft_free_strarr(tmps), NULL);
+		}
+		tmps[i - 1] = NULL;
+		argv = tmps;
+	}
+	i = -1;
+	while(argv[++i])
+	{
+		tmp = ft_strtrim(argv[i], " \t\n\v\f\r");
+		if (!tmp)
+			return (ft_free_strarr(argv), NULL);
+		free(argv[i]);
+		argv[i] = tmp;
+	}
+	i = -1;
+	while (argv[++i])
+	{
+		tmp = ft_itoa(ft_atoi(argv[i]));
+		if (!tmp)
+			return (ft_free_strarr(argv), NULL);
+		if (!*(argv[i]) || ft_strncmp(argv[i], tmp, ft_strlen(argv[i]) + 1) != 0)
+			return (free(tmp), ft_free_strarr(argv), NULL);
+		free(tmp);
+	}
+	return (argv);
 }
