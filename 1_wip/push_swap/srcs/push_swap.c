@@ -49,12 +49,12 @@ int	main(int argc, char **argv)
 		ft_exit(NULL, 0);
 	argv = get_argv(argc, argv);
 	if (!argv)
-		ft_exit("Invalid Arguments. Please provide a list of positive and/or negative integers.", 0); /*check opgave voor print statement*/
+		ft_exit("Invalid arguments. Please provide a list of positive and/or negative integers.", 0); /*check opgave voor print statement*/
 	a = init_stack(argv, a);
 	(void)b;
 	while (a)
 	{
-		ft_printf(1, "node op positie %d bevat value %d (prev: %d)\n", a->position, a->value, (a->previous) ? a->previous->value: 0);
+		ft_printf(1, "Node op positie %d bevat value %d (prev: %d)\n", a->position, a->value, (a->previous) ? a->previous->value: 0);
 		a = a->next;
 	}
 	return (0);
