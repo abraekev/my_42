@@ -24,26 +24,33 @@
 //	STRUCTS & ENUMS
 /******************************************************************************/
 
-typedef struct s_stack_node
+typedef struct s_circular_stack
 {
-	int					value;
-	int					position;
-	struct s_stack_node	*next;
-	struct s_stack_node	*previous;
-}	t_node;
+	int	*buffer;
+	int	top;
+	int	size;
+	int	capacity;
+}	Stack;
 
 //	DEFINITIONS
 /******************************************************************************/
 
-//***t_node_utils.c
-t_node	*stck_create_node(char	*str, int position);
-t_node	*stck_last(t_node *stck);
-void	stck_add_back(t_node **stck, t_node *new);
+// exist_utils
+void ft_exit(char *errorMessage, int errorCode);
 
-//***allocation_utils.c
-void	ft_free_strarr(char **strs);
+// stack_utils_1
+Stack * init_stack(int capacity);
+int is_full(Stack *stack);
+int is_empty(Stack *stack);
+void push(Stack *stack, int value);
+int pop(Stack *stack);
 
-//***argument_utils.c
-char	**get_argv(int argc, char **argv);
+// stack_utils_2
+int peek(Stack *stack);
+void free_stack(Stack *stack);
+void print_stack(Stack *stack);
+
+// validation
+void validate_arguments(int argc, char **argv, Stack *a);
 
 #endif /*PUSH_SWAP_H*/

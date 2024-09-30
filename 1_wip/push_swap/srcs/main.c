@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocation_utils.c                                 :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/05/03 15:37:38 by abraekev         ###   ########.fr       */
+/*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
+/*   Updated: 2024/09/30 15:37:38 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_free_strarr(char **strs)
+int main(int argc, char **argv)
 {
-	int	i;
+    Stack *a;
+    Stack *b;
 
-	i = -1;
-	while (strs && strs[++i])
-	{
-		free(strs[i]);
-		strs[i] = NULL;
-	}
-	free(strs);
+    a = NULL;
+    b = NULL;
+    
+    validate_arguments(argc, argv, a);
 }

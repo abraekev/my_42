@@ -13,15 +13,16 @@
 # VARIABLES
 # **************************************************************************** #
 
-SRC			=	push_swap.c	t_node_utils.c allocation_utils.c				\
-				argument_utils.c
+SRC_MAIN	=	main.c 
+SRC_UTILS	=	utils/exit_utils.c utils/stack_utils_1.c utils/stack_utils_2.c
+SRC_VALID	=	validation/validation.c
 
 DIRSRC		=	./srcs/
 DIRLIBFT	=	./srcs/libft/
 DIRINC		=	./includes/
 
 LIBFT		=	$(DIRLIBFT)libft.a
-SRCS		=	$(addprefix $(DIRSRC), $(SRC)) 
+SRCS		=	$(addprefix $(DIRSRC), $(SRC_MAIN) $(SRC_UTILS) $(SRC_VALID)) 
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	push_swap
@@ -62,6 +63,8 @@ fclean:		clean
 			@printf "$(CYAN)%-12s%-12sPROGRAMS\n$(NOCLR)" "cleaned" "$(NAME)"
 
 re:		fclean all
+
+test:	all clean
 
 .PHONY:		all bonus clean fclean re
 
