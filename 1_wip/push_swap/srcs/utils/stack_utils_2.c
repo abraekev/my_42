@@ -21,8 +21,12 @@ int peek(Stack *stack)
 
 void free_stack(Stack *stack)
 {
-    free(stack->buffer);
+    if (stack->buffer)
+        free(stack->buffer);
+    if (stack->mapper)
+        free(stack->mapper);
     stack->buffer = NULL;
+    stack->mapper = NULL;
     stack->capacity = 0;
     stack->top = -1;
     stack->size = 0;

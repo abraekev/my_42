@@ -20,6 +20,7 @@ void *init_stack(int capacity, Stack **stack)
     (*stack)->capacity = capacity;
     (*stack)->buffer = malloc(capacity * sizeof(int));
     (*stack)->top = -1;
+    (*stack)->mapper = NULL;
     (*stack)->bottom = 0;
     (*stack)->size = 0;
 }

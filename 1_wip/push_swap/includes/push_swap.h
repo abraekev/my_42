@@ -27,6 +27,7 @@
 typedef struct s_circular_array_stack
 {
 	int *buffer;
+	int *mapper;
 	int top;
 	int bottom;
 	int size;
@@ -41,6 +42,9 @@ void ft_exit(char *errorMessage, int errorCode);
 
 // malloc_utils
 void free_str_array(char **array);
+
+// mappers
+int create_mapper(Stack *stack);
 
 // stack_ops
 void ops_swap(Stack *stack);
@@ -68,6 +72,6 @@ int previous(Stack *stack, int index);
 // validation
 int validate_arguments(int argc, char **argv);
 int is_valid_int_string(const char *str);
-int check_duplicates(Stack *stack);
+int has_duplicates(Stack *stack);
 
 #endif /*PUSH_SWAP_H*/

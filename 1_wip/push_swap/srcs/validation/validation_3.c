@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int check_duplicates(Stack *stack)
+int has_duplicates(Stack *stack)
 {
     int *compare;
     int compare_size;

@@ -12,22 +12,27 @@
 
 #include "push_swap.h"
 
-void create_stack(int argc, char **argv, Stack **stack)
+void create_stacks(int capacity, char **argv, Stack **a, Stack **b)
 {
-    argc--;
-    init_stack(argc, stack);
-    while (argc > 0)
-        push(*stack, ft_atoi(argv[argc--]));
+    init_stack(capacity, b);
+    init_stack(capacity, a);
+    while (capacity > 0)
+        push(*a, ft_atoi(argv[capacity--]));
 }
 
 int main(int argc, char **argv)
 {
     Stack *a;
     Stack *b;
-    int stack_capacity;
 
-    b = NULL;
     validate_arguments(argc, argv);
-    create_stack(argc, argv, &a);
-    check_duplicates(a);
+    create_stacks(argc - 1, argv, &a, &b);
+    if (has_duplicates(a))
+    {
+        // free shit
+        // exit
+    };
+    create_mapper(a);
+
+    // end: free yo shit
 }
