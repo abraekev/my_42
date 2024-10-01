@@ -12,13 +12,15 @@
 
 #include "push_swap.h"
 
-int peek(Stack *stack){
+int peek(Stack *stack)
+{
     if (is_empty(stack))
-        ft_exit("Stack underflow", 1);
+        ft_exit("ERROR - Empty stack", 1);
     return stack->buffer[stack->top];
 }
 
-void free_stack(Stack *stack){
+void free_stack(Stack *stack)
+{
     free(stack->buffer);
     stack->buffer = NULL;
     stack->capacity = 0;
@@ -27,14 +29,26 @@ void free_stack(Stack *stack){
     free(stack);
 }
 
-void print_stack(Stack *stack){
+void print_stack(Stack *stack)
+{
     int index = stack->top;
 
     if (is_empty(stack))
         ft_printf(1, "Stack is empty\n");
-    for (int i = 0; i < stack->size; i++){
-        ft_printf(1, "%d ",stack->buffer[index]);
-        index = (index - 1) +stack->capacity % stack->capacity;
+    for (int i = 0; i < stack->size; i++)
+    {
+        ft_printf(1, "%d ", stack->buffer[index]);
+        index = (index - 1) + stack->capacity % stack->capacity;
     }
     ft_printf(1, "\n");
+}
+
+int next(Stack *stack, int index)
+{
+    return (index + 1) % stack->capacity;
+}
+
+int previous(Stack *stack, int index)
+{
+    return (index - 1 + stack->capacity) % stack->capacity;
 }

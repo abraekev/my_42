@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack_ops_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,30 @@
 
 #include "push_swap.h"
 
-void create_stack(int argc, char **argv, Stack **stack)
+void ops_rotate(Stack *stack)
 {
-    argc--;
-    init_stack(argc, stack);
-    while (argc > 0)
-        push(*stack, ft_atoi(argv[argc--]));
+    if (stack->size < 2)
+        return;
+    stack->top = next(stack, stack->top);
+    stack->bottom = next(stack, stack->bottom);
 }
 
-int main(int argc, char **argv)
+void ops_reverse_rotate(Stack *stack)
 {
-    Stack *a;
-    Stack *b;
-    int stack_capacity;
+    if (stack->size < 2)
+        return;
+    stack->top = previous(stack, stack->top);
+    stack->bottom = previous(stack, stack->bottom);
+}
 
-    b = NULL;
-    validate_arguments(argc, argv);
-    create_stack(argc, argv, &a);
+void ops_rotate_both(Stack *x, Stack *y)
+{
+    ops_rotate(x);
+    ops_rotate(y);
+}
+
+void ops_reverse_rotate_both(Stack *x, Stack *y)
+{
+    ops_reverse_rotate(x);
+    ops_reverse_rotate(y);
 }

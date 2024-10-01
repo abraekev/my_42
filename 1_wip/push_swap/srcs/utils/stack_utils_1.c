@@ -12,26 +12,30 @@
 
 #include "push_swap.h"
 
-Stack * init_stack(int capacity){
-    Stack *stack;
-    
-    stack = malloc(sizeof(Stack));
-    stack->capacity = capacity;
-    stack->buffer = malloc(capacity * sizeof(int));
-    stack->top = -1;
-    stack->size = 0;
-    return stack;
+void *init_stack(int capacity, Stack **stack)
+{
+    *stack = malloc(sizeof(Stack));
+    if (!stack)
+        return NULL;
+    (*stack)->capacity = capacity;
+    (*stack)->buffer = malloc(capacity * sizeof(int));
+    (*stack)->top = -1;
+    (*stack)->bottom = 0;
+    (*stack)->size = 0;
 }
 
-int is_full(Stack *stack){
+int is_full(Stack *stack)
+{
     return stack->size == stack->capacity;
 }
 
-int is_empty(Stack *stack){
+int is_empty(Stack *stack)
+{
     return stack->size == 0;
 }
 
-void push(Stack *stack, int value){
+void push(Stack *stack, int value)
+{
     if (is_full(stack))
         ft_exit("Stack overflow", 1);
 
@@ -40,12 +44,13 @@ void push(Stack *stack, int value){
     stack->size++;
 }
 
-int pop(Stack *stack){
+int pop(Stack *stack)
+{
     int result;
 
     if (is_empty(stack))
         ft_exit("Stack underflow", 1);
-    result = stack->buffer[stack->top]    ;
+    result = stack->buffer[stack->top];
     stack->top = (stack->top - 1 + stack->capacity) % stack->capacity;
     stack->size--;
     return result;

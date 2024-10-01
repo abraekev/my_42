@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack_ops_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,27 @@
 
 #include "push_swap.h"
 
-void create_stack(int argc, char **argv, Stack **stack)
+void ops_swap(Stack *stack)
 {
-    argc--;
-    init_stack(argc, stack);
-    while (argc > 0)
-        push(*stack, ft_atoi(argv[argc--]));
+    int tmp;
+
+    if (stack->size < 2)
+        return;
+    tmp = stack->buffer[stack->top];
+    stack->buffer[stack->top] = stack->buffer[(stack->top) - 1];
+    stack->buffer[(stack->top) - 1] = tmp;
 }
 
-int main(int argc, char **argv)
+void ops_swap_both(Stack *x, Stack *y)
 {
-    Stack *a;
-    Stack *b;
-    int stack_capacity;
+    ops_swap(x);
+    ops_swap(y);
+}
 
-    b = NULL;
-    validate_arguments(argc, argv);
-    create_stack(argc, argv, &a);
+void ops_push_from_to(Stack *x, Stack *y)
+{
+    if (x->size < 1)
+        return;
+    push(y, x->buffer[x->top]);
+    pop(x);
 }
