@@ -68,5 +68,6 @@ int previous(Stack *stack, int index);
 // validation
 int validate_arguments(int argc, char **argv);
 int is_valid_int_string(const char *str);
+int check_duplicates(Stack *stack);
 
 #endif /*PUSH_SWAP_H*/

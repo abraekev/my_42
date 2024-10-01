@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   validation_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,22 +12,32 @@
 
 #include "push_swap.h"
 
-void create_stack(int argc, char **argv, Stack **stack)
+int check_duplicates(Stack *stack)
 {
-    argc--;
-    init_stack(argc, stack);
-    while (argc > 0)
-        push(*stack, ft_atoi(argv[argc--]));
-}
+    int *compare;
+    int compare_size;
+    int i;
+    int j;
 
-int main(int argc, char **argv)
-{
-    Stack *a;
-    Stack *b;
-    int stack_capacity;
-
-    b = NULL;
-    validate_arguments(argc, argv);
-    create_stack(argc, argv, &a);
-    check_duplicates(a);
+    compare = malloc((stack->capacity) * sizeof(int));
+    if (!compare)
+        ft_exit("ERROR - allocation failed", 1);
+    i = stack->bottom;
+    compare_size = 0;
+    while (1)
+    {
+        j = 0;
+        while (j < compare_size)
+            if (stack->buffer[i] == compare[j++])
+            {
+                free(compare);
+                return 0;
+            }
+        compare[compare_size++] = stack->buffer[i];
+        i = previous(stack, i);
+        if (i == stack->bottom)
+            break;
+    }
+    free(compare);
+    return 1;
 }

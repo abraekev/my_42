@@ -45,10 +45,10 @@ void print_stack(Stack *stack)
 
 int next(Stack *stack, int index)
 {
-    return (index + 1) % stack->capacity;
+    return (index - 1 + stack->capacity) % stack->capacity;
 }
 
 int previous(Stack *stack, int index)
 {
-    return (index - 1 + stack->capacity) % stack->capacity;
+    return (index + 1) % stack->capacity;
 }
