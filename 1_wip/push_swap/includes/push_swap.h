@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#define PUSH_SWAP_H
 
 //	HEADERS
 /******************************************************************************/
@@ -26,11 +26,11 @@
 
 typedef struct s_circular_stack
 {
-	int	*buffer;
-	int	top;
-	int	size;
-	int	capacity;
-}	Stack;
+	int *buffer;
+	int top;
+	int size;
+	int capacity;
+} Stack;
 
 //	DEFINITIONS
 /******************************************************************************/
@@ -38,8 +38,11 @@ typedef struct s_circular_stack
 // exist_utils
 void ft_exit(char *errorMessage, int errorCode);
 
+// malloc_utils
+void free_str_array(char **array);
+
 // stack_utils_1
-Stack * init_stack(int capacity);
+Stack *init_stack(int capacity);
 int is_full(Stack *stack);
 int is_empty(Stack *stack);
 void push(Stack *stack, int value);
@@ -51,6 +54,7 @@ void free_stack(Stack *stack);
 void print_stack(Stack *stack);
 
 // validation
-void validate_arguments(int argc, char **argv, Stack *a);
+int validate_arguments(int argc, char **argv);
+int is_valid_int_string(const char *str);
 
 #endif /*PUSH_SWAP_H*/

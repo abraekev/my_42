@@ -16,9 +16,10 @@ int main(int argc, char **argv)
 {
     Stack *a;
     Stack *b;
-
+    int good_arguments;
     a = NULL;
     b = NULL;
-    
-    validate_arguments(argc, argv, a);
+
+    good_arguments = validate_arguments(argc, argv);
+    ft_printf(1, "args\t\t%d\ngood args\t%d\n", argc - 1, good_arguments);
 }
