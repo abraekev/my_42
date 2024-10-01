@@ -17,13 +17,16 @@ SRC_MAIN	=	main.c
 SRC_UTILS	=	utils/exit_utils.c utils/malloc_utils.c utils/stack_utils_1.c utils/stack_utils_2.c
 SRC_VALID	=	validation/validation_1.c validation/validation_2.c			\
 				validation/validation_3.c
+SRC_MAPPER	=	mappers/mappers_1.c
 
 DIRSRC		=	./srcs/
 DIRLIBFT	=	./srcs/libft/
 DIRINC		=	./includes/
 
 LIBFT		=	$(DIRLIBFT)libft.a
-SRCS		=	$(addprefix $(DIRSRC), $(SRC_MAIN) $(SRC_UTILS) $(SRC_VALID)) 
+SRCS		=	$(addprefix $(DIRSRC), $(SRC_MAIN) $(SRC_UTILS) $(SRC_VALID) \
+ 				$(SRC_MAPPER))
+
 OBJS		=	$(SRCS:.c=.o)
 
 NAME		=	push_swap

@@ -22,6 +22,7 @@ void create_stacks(int capacity, char **argv, Stack **a, Stack **b)
 
 int main(int argc, char **argv)
 {
+    ft_printf(1, "Start\n\n");
     Stack *a;
     Stack *b;
 
@@ -33,6 +34,7 @@ int main(int argc, char **argv)
         // exit
     };
     create_mapper(a);
-
+    print_stack(a);
     // end: free yo shit
+    ft_printf(1, "End\n");
 }

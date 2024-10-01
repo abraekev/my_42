@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapper_1.c                                         :+:      :+:    :+:   */
+/*   mappers_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -25,7 +25,7 @@ static void replace_buffer(Stack *stack)
         {
             if (stack->buffer[i] == stack->mapper[j])
             {
-                stack->buffer[i] = j; // Replace buffer value with its rank
+                stack->buffer[i] = (j + 1); // Replace buffer value with its rank
                 break;
             }
             j++;
