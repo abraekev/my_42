@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 12:19:02 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:16:35 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int peek(Stack *stack)
 {
     if (is_empty(stack))
         ft_exit("ERROR - Empty stack", 1);
-    return stack->buffer[stack->top];
+    return stack->stack[stack->top];
 }
 
 void free_stack(void *ptr)
@@ -24,11 +24,11 @@ void free_stack(void *ptr)
     Stack *stack = (Stack *)ptr;
     if (!stack)
         return;
-    if (stack->buffer)
-        free(stack->buffer);
+    if (stack->stack)
+        free(stack->stack);
     if (stack->mapper)
         free(stack->mapper);
-    stack->buffer = NULL;
+    stack->stack = NULL;
     stack->mapper = NULL;
     stack->capacity = 0;
     stack->top = -1;
@@ -48,7 +48,7 @@ void print_stack(Stack *stack)
 
     while (1)
     {
-        ft_printf(1, "%d ", stack->buffer[index]);
+        ft_printf(1, "%d ", stack->stack[index]);
         if (index == stack->bottom)
             break;
         index = ((index - 1) + stack->capacity) % stack->capacity;

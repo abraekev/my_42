@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 12:40:36 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:06:28 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void recursive_sort(Stack *a, Stack *b, int pivot1, int pivot2)
+static void free_data(Data *data)
 {
+    if (!data)
+        return;
+    if (&data->a)
+        free_stack(&data->a);
+    if (&data->b)
+        free_stack(&data->b);
 }
 
-int main(int argc, char **argv)
+void error(Data *data)
 {
-    // start
-    ft_printf(1, "Start\n\n");
-
-    Stack *a;
-    Stack *b;
-
-    create_stacks(argc, argv, &a, &b);
-    print_stack(a);
-
-    recursive_sort(a, b, 0, 0);
-
-    free_stack(a);
-    free_stack(b);
-
-    // end
-    ft_printf(1, "End\n");
+    free_data(data);
+    ft_printf(2, "Error\n");
+    exit(EXIT_FAILURE);
 }

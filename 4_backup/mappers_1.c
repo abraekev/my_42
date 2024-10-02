@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mappers_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/09/30 15:37:38 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:17:28 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static void replace_buffer(Stack *stack)
     int i = 0;
     int j;
 
-    // Iterate over buffer to replace values with their mapped ranks
+    // Iterate over stack to replace values with their mapped ranks
     while (i < stack->size)
     {
         j = 0;
         while (j < stack->size)
         {
-            if (stack->buffer[i] == stack->mapper[j])
+            if (stack->stack[i] == stack->mapper[j])
             {
-                stack->buffer[i] = (j + 1); // Replace buffer value with its rank
+                stack->stack[i] = (j + 1); // Replace stack value with its rank
                 break;
             }
             j++;
@@ -50,11 +50,11 @@ int create_mapper(Stack *stack)
         j = 0;
         while (j < stack->size)
         {
-            if (i != j && stack->buffer[i] > stack->buffer[j])
+            if (i != j && stack->stack[i] > stack->stack[j])
                 index++;
             j++;
         }
-        stack->mapper[index] = stack->buffer[i++];
+        stack->mapper[index] = stack->stack[i++];
     }
     replace_buffer(stack);
     return 1;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
+#    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/05/03 14:34:15 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/02 17:34:23 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,12 @@ SRC		=	ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c	\
 			ft_printf_flags_validate.c ft_printf_gets.c ft_printf_s_utils.c	\
 			ft_printf_uint_base.c ft_printf_vptr.c
 
-DIRSRC	=	./srcs/
+DIRSRC	=	./src/
 SRCS	=	$(addprefix $(DIRSRC), $(SRC))
 
 OBJS	=	$(SRCS:.c=.o)
 
-INCL	=	../../includes/
+INCL	=	./include/
 
 NAME	=	libft.a
 
