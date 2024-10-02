@@ -19,8 +19,11 @@ int peek(Stack *stack)
     return stack->buffer[stack->top];
 }
 
-void free_stack(Stack *stack)
+void free_stack(void *ptr)
 {
+    Stack *stack = (Stack *)ptr;
+    if (!stack)
+        return;
     if (stack->buffer)
         free(stack->buffer);
     if (stack->mapper)

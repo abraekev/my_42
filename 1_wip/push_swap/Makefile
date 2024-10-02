@@ -70,7 +70,7 @@ re:		fclean all
 
 test:	fclean
 			@echo "Running tests with empty CFLAGS"
-			@$(MAKE) CFLAGS="" all 
+			@$(MAKE) CFLAGS="-g" all 
 			@$(MAKE) clean
 
 .PHONY:		all bonus clean fclean re

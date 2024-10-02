@@ -39,6 +39,7 @@ typedef struct s_circular_array_stack
 
 // exist_utils
 void ft_exit(char *errorMessage, int errorCode);
+void error_free(char *error_message, void (*free)(void *), ...);
 
 // malloc_utils
 void free_str_array(char **array);
@@ -55,16 +56,14 @@ void ops_reverse_rotate(Stack *stack);
 void ops_rotate_both(Stack *x, Stack *y);
 void ops_reverse_rotate_both(Stack *x, Stack *y);
 
-// stack_utils_1
-void *init_stack(int capacity, Stack **stack);
+// stack_utils
+Stack *init_stack(int capacity);
 int is_full(Stack *stack);
 int is_empty(Stack *stack);
 void push(Stack *stack, int value);
 int pop(Stack *stack);
-
-// stack_utils_2
 int peek(Stack *stack);
-void free_stack(Stack *stack);
+void free_stack(void *ptr);
 void print_stack(Stack *stack);
 int next(Stack *stack, int index);
 int previous(Stack *stack, int index);

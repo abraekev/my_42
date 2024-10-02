@@ -21,7 +21,7 @@ int has_duplicates(Stack *stack)
 
     compare = malloc((stack->capacity) * sizeof(int));
     if (!compare)
-        ft_exit("ERROR - allocation failed", 1);
+        return -1;
     i = stack->bottom;
     compare_size = 0;
     while (1)
@@ -31,7 +31,7 @@ int has_duplicates(Stack *stack)
             if (stack->buffer[i] == compare[j++])
             {
                 free(compare);
-                return 0;
+                return 1;
             }
         compare[compare_size++] = stack->buffer[i];
         i = previous(stack, i);
@@ -39,5 +39,5 @@ int has_duplicates(Stack *stack)
             break;
     }
     free(compare);
-    return 1;
+    return 0;
 }

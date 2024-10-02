@@ -12,17 +12,20 @@
 
 #include "push_swap.h"
 
-void *init_stack(int capacity, Stack **stack)
+Stack *init_stack(int capacity)
 {
-    *stack = malloc(sizeof(Stack));
+    Stack *stack;
+
+    stack = malloc(sizeof(Stack));
     if (!stack)
         return NULL;
-    (*stack)->capacity = capacity;
-    (*stack)->buffer = malloc(capacity * sizeof(int));
-    (*stack)->top = -1;
-    (*stack)->mapper = NULL;
-    (*stack)->bottom = 0;
-    (*stack)->size = 0;
+    stack->capacity = capacity;
+    stack->buffer = malloc(capacity * sizeof(int));
+    stack->top = -1;
+    stack->mapper = NULL;
+    stack->bottom = 0;
+    stack->size = 0;
+    return stack;
 }
 
 int is_full(Stack *stack)
