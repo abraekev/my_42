@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   nav_stack.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 23:22:35 by ugerkens          #+#    #+#             */
-/*   Updated: 2023/04/27 14:58:50 by ugerkens         ###   ########.fr       */
+/*   Created: 2024/10/02 19:24:37 by abraekev          #+#    #+#             */
+/*   Updated: 2024/10/02 19:31:34 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_bzero(void *s, size_t n)
+int next(Data *data, Stack *stack, int index)
 {
-	ft_memset(s, 0, n);
+    return (index - 1 + data->capacity) % data->capacity;
+}
+
+int previous(Data *data, Stack *stack, int index)
+{
+    return (index + 1) % data->capacity;
 }

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 18:04:57 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:31:33 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void free_stack(Stack *stack);
 int is_empty(Stack *stack);
 int is_full(Data *data, Stack *stack);
 void init_stack(Data *data, Stack *stack, int size);
+int next(Data *data, Stack *stack, int index);
 int pop(Data *data, Stack *stack);
+int previous(Data *data, Stack *stack, int index);
 void print_stack(Data *data, Stack *stack);
 int push(Data *data, Stack *stack, int value);
 
@@ -64,5 +66,6 @@ void init_data(int capacity, int argc, char **argv, Data *data);
 // validation
 int validate_arguments(int argc, char **argv);
 int is_valid_int_string(const char *str);
+void duplicate_check(Data *data, Stack *stack);
 
 #endif /*PUSH_SWAP_H*/

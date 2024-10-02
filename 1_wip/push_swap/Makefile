@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/02 18:07:18 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/02 19:33:05 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,14 @@ SRC_UTILS	=	${SRC_MAIN}									\
 				utils/malloc.c
 SRC_VALID	=	$(SRC_UTILS)								\
 				validation/validate_args.c					\
-				validation/validate_int_str.c
+				validation/validate_int_str.c				\
+				validation/validate_duplicate.c
 SRC_STACK	=	$(SRC_VALID)								\
 				stack/fill_stack.c							\
 				stack/init_stack.c							\
-				stack/ops_std.c								\
-				stack/utils_stack.c
+				stack/ops_stack.c							\
+				stack/utils_stack.c							\
+				stack/nav_stack.c
 SRCS		=	$(addprefix	$(DIRSRC),	$(SRC_STACK))
 OBJS		=	$(SRCS:.c=.o)
 

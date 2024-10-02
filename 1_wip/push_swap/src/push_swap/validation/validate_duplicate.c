@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation_3.c                                     :+:      :+:    :+:   */
+/*   validate_duplicate.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 15:16:07 by abraekev         ###   ########.fr       */
+/*   Created: 2024/10/02 19:14:38 by abraekev          #+#    #+#             */
+/*   Updated: 2024/10/02 19:31:47 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int has_duplicates(Stack *stack)
+void duplicate_check(Data *data, Stack *stack)
 {
     int *compare;
     int compare_size;
     int i;
     int j;
 
-    compare = malloc((stack->capacity) * sizeof(int));
+    compare = malloc((data->capacity) * sizeof(int));
     if (!compare)
-        return -1;
+        error(data);
     i = stack->bottom;
     compare_size = 0;
     while (1)
@@ -31,13 +31,12 @@ int has_duplicates(Stack *stack)
             if (stack->stack[i] == compare[j++])
             {
                 free(compare);
-                return 1;
+                error(data);
             }
         compare[compare_size++] = stack->stack[i];
-        i = previous(stack, i);
+        i = previous(data, stack, i);
         if (i == stack->bottom)
             break;
     }
     free(compare);
-    return 0;
 }
