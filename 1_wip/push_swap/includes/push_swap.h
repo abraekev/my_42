@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/05/03 13:58:41 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:29:51 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void free_stack(void *ptr);
 void print_stack(Stack *stack);
 int next(Stack *stack, int index);
 int previous(Stack *stack, int index);
+void create_stacks(int argc, char **argv, Stack **a, Stack **b);
 
 // validation
 int validate_arguments(int argc, char **argv);
