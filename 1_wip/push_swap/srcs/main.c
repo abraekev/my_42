@@ -14,10 +14,6 @@
 
 void recursive_sort(Stack *a, Stack *b, int pivot1, int pivot2)
 {
-    if (chunk->size <= 2)
-    {
-        // do base case sorting
-    }
 }
 
 int main(int argc, char **argv)
