@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 12:00:48 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:25:41 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,21 @@ int main(int argc, char **argv)
     pb(&data);
     print_stack(&data.a);
 
-    // ft_printf(1, "pb:\n");
-    // pb(&data);
-    // print_stack(&data.a);
+    ft_printf(1, "pb:\n");
+    pb(&data);
+    print_stack(&data.a);
 
-    // ft_printf(1, "push a 42:\n");
-    // push(&data, &data.a, 42);
-    // print_stack(&data.a);
+    ft_printf(1, "push a 42:\n");
+    push(&data, &data.a, 42);
+    print_stack(&data.a);
+
+    ft_printf(1, "sa:\n");
+    sa(&data);
+    print_stack(&data.a);
+
+   ft_printf(1, "sa:\n");
+    sa(&data);
+    print_stack(&data.a);
 
     free_data(&data);
 

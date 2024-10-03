@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:57:20 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 11:30:52 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:27:55 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 static void ops_swap(Stack *stack)
 {
-    int tmp;
+    int original_top_value;
+    int top;
+    int second;
 
     if (stack->size < 2)
         return;
-    tmp = stack->stack[stack->top];
-    stack->stack[stack->top] = stack->stack[(stack->top) - 1];
-    stack->stack[(stack->top) - 1] = tmp;
+    original_top_value = stack->stack[stack->top];
+    top = stack->top;
+    second = next(stack,top);
+    stack->stack[top] = stack->stack[second];
+    stack->stack[second] = original_top_value;
 }
 
 void sa(Data *data)

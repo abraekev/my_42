@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/03 11:30:55 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/03 12:21:00 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_STACK	=	$(SRC_VALID)								\
 				stack/ops_push.c							\
 				stack/ops_reverse_rotate.c					\
 				stack/ops_rotate.c							\
-				stack/ops_stack.c							\
+				stack/ops_basic.c							\
 				stack/ops_swap.c							
 
 SRC_SORT	=	$(SRC_STACK)								\
