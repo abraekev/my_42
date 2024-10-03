@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ops_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 08:29:22 by abraekev         ###   ########.fr       */
+/*   Created: 2024/10/03 08:43:00 by abraekev          #+#    #+#             */
+/*   Updated: 2024/10/03 08:55:19 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void free_data(Data *data)
+static void ops_rotate(Stack *stack)
 {
-    if (!data)
+    if (stack->size < 2)
         return;
-    if (&data->a)
-        free_stack(&data->a);
-    if (&data->b)
-        free_stack(&data->b);
+    stack->top = next(stack, stack->top);
+    stack->bottom = next(stack, stack->bottom);
 }
 
-void error(Data *data)
+void ra(Data *data)
 {
-    free_data(data);
-    ft_printf(2, "Error\n");
-    exit(EXIT_FAILURE);
+    ops_rotate(&data->a);
+}
+
+void rb(Data *data)
+{
+    ops_rotate(&data->b);
+}
+
+void rr(Data *data)
+{
+    ops_rotate(&data->a);
+    ops_rotate(&data->b);
 }

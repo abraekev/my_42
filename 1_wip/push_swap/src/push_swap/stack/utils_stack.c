@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 18:08:09 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:58:38 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,30 @@ int is_empty(Stack *stack)
     return stack->size == 0;
 }
 
-void print_stack(Data *data, Stack *stack)
+void print_stack(Stack *stack)
 {
-    int index = stack->top;
+    int index;
+    int count;
 
+    ft_printf(1, "T - ");
     if (is_empty(stack))
     {
         ft_printf(1, "Stack is empty\n");
         return;
     }
 
-    while (1)
+    index = stack->top;
+    count = 0;
+    while (count < stack->size)
     {
         ft_printf(1, "%d ", stack->stack[index]);
-        if (index == stack->bottom)
-            break;
-        index = ((index - 1) + data->capacity) % data->capacity;
+        index = next(stack, index);
+        count++;
     }
-    ft_printf(1, "\n");
+    ft_printf(1, " - B\n");
+    ft_printf(1, "top %d\n", stack->top);
+    ft_printf(1, "bt %d\n", stack->bottom);
+    ft_printf(1, "sz %d\n\n", stack->size);
 }
 
 void free_stack(Stack *stack)

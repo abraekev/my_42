@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/02 19:33:05 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/03 11:30:55 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ DIRINC		=	./include/
 GREEN		=	\033[032m
 CYAN		=	\033[036m
 NOCLR		=	\033[0m
+MAKEFLAGS	+=	--no-print-directory
 
 # source and object files
 SRC_MAIN	=	push_swap.c 
@@ -35,10 +36,17 @@ SRC_VALID	=	$(SRC_UTILS)								\
 SRC_STACK	=	$(SRC_VALID)								\
 				stack/fill_stack.c							\
 				stack/init_stack.c							\
-				stack/ops_stack.c							\
 				stack/utils_stack.c							\
-				stack/nav_stack.c
-SRCS		=	$(addprefix	$(DIRSRC),	$(SRC_STACK))
+				stack/nav_stack.c							\
+				stack/ops_push.c							\
+				stack/ops_reverse_rotate.c					\
+				stack/ops_rotate.c							\
+				stack/ops_stack.c							\
+				stack/ops_swap.c							
+
+SRC_SORT	=	$(SRC_STACK)								\
+				sorter/sort.c
+SRCS		=	$(addprefix	$(DIRSRC),	$(SRC_SORT))
 OBJS		=	$(SRCS:.c=.o)
 
 # lib

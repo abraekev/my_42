@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ops_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 08:29:22 by abraekev         ###   ########.fr       */
+/*   Created: 2024/10/02 21:57:20 by abraekev          #+#    #+#             */
+/*   Updated: 2024/10/03 11:30:52 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void free_data(Data *data)
+static void ops_swap(Stack *stack)
 {
-    if (!data)
+    int tmp;
+
+    if (stack->size < 2)
         return;
-    if (&data->a)
-        free_stack(&data->a);
-    if (&data->b)
-        free_stack(&data->b);
+    tmp = stack->stack[stack->top];
+    stack->stack[stack->top] = stack->stack[(stack->top) - 1];
+    stack->stack[(stack->top) - 1] = tmp;
 }
 
-void error(Data *data)
+void sa(Data *data)
 {
-    free_data(data);
-    ft_printf(2, "Error\n");
-    exit(EXIT_FAILURE);
+    ops_swap(&data->a);
+}
+
+void sb(Data *data)
+{
+    ops_swap(&data->b);
+}
+
+void ss(Data *data)
+{
+    ops_swap(&data->a);
+    ops_swap(&data->b);
 }

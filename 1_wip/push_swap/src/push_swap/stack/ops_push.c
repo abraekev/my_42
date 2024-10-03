@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ops_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 08:29:22 by abraekev         ###   ########.fr       */
+/*   Created: 2024/10/02 22:10:53 by abraekev          #+#    #+#             */
+/*   Updated: 2024/10/03 10:46:49 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void free_data(Data *data)
+static void ops_push_from_to(Data *data, Stack *x, Stack *y)
 {
-    if (!data)
+    if (x->size < 1)
         return;
-    if (&data->a)
-        free_stack(&data->a);
-    if (&data->b)
-        free_stack(&data->b);
+    push(data, y, x->stack[x->top]);
+    pop(data, x);
 }
 
-void error(Data *data)
+void pa(Data *data)
 {
-    free_data(data);
-    ft_printf(2, "Error\n");
-    exit(EXIT_FAILURE);
-}
+    ops_push_from_to(data, &data->b, &data->a);
+};
+
+void pb(Data *data)
+{
+    ops_push_from_to(data, &data->a, &data->b);
+};

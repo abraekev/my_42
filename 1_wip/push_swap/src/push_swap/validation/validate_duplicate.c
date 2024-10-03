@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:14:38 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 19:31:47 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/03 08:56:06 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void duplicate_check(Data *data, Stack *stack)
                 error(data);
             }
         compare[compare_size++] = stack->stack[i];
-        i = previous(data, stack, i);
+        i = previous(stack, i);
         if (i == stack->bottom)
             break;
     }
