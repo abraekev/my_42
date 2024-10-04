@@ -6,11 +6,28 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 11:58:38 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:53:50 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int is_sorted(Data *data)
+{
+    int i;
+    int rank;
+
+    i = data->a.top;
+    rank = 1;
+    while (rank <= data->a.size)
+    {
+        if (data->a.stack[i] != rank)
+            return 0;
+        rank++;
+        i = next(&data->a, i);
+    }
+    return 1;
+}
 
 int is_full(Data *data, Stack *stack)
 {

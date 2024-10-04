@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 11:30:54 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:54:20 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void fill_stack(int argc, char **argv, Data *data);
 void free_stack(Stack *stack);
 int is_empty(Stack *stack);
 int is_full(Data *data, Stack *stack);
+int is_sorted(Data *data);
 void init_stack(Data *data, Stack *stack, int size);
 int next(Stack *stack, int index);
 int pop(Data *data, Stack *stack);

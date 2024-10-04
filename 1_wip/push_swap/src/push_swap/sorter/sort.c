@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:42:32 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 08:55:17 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:49:06 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sort_three(Data *data)
+static void sort_three(Data *data)
 {
     int first;
     int second;
@@ -21,20 +21,47 @@ void sort_three(Data *data)
     first = value_at_rank(&data->a, 1);
     second = value_at_rank(&data->a, 2);
     third = value_at_rank(&data->a, 3);
-
-    ft_printf(1, "first: %d\n", first);
-    ft_printf(1, "second: %d\n", second);
-    ft_printf(1, "third: %d\n", third);
+    if (first > second && third > second && third > first)
+        sa(data);
+    else if (first > second && third > second && first > third)
+        ra(data);
+    else if (second > first && second > third && first > third)
+        rra(data);
+    else if (second > first && second > third && third > first)
+    {
+        sa(data);
+        ra(data);
+    }
+    else if (first > second && second > third && first > third)
+    {
+        sa(data);
+        rra(data);
+    }
+}
+static void sort_five(Data *data)
+{
+    while (data->a.size > 3)
+    {
+        if (value_at_rank(&data->a, 1) == 1 || value_at_rank(&data->a, 1) == 2)
+            pb(data);
+        else
+            ra(data);
+    }
+    if (value_at_rank(&data->b, 1 < value_at_rank(&data->b, 2)))
+        sb;
+    sort_three(data);
+    pa(data);
+    pa(data);
 }
 
 void sort(Data *data)
 {
-    // if (data->a.size <= 1 || is_sorted(data))
-    //     return;
-    // else if (data->a.size == 3)
+    if (data->a.size <= 1 || is_sorted(data))
+        return;
+    else if (data->a.size == 3)
         sort_three(data);
-    // else if (data->a.size == 5)
-    //     sort_five_a(data);
+    else if (data->a.size == 5)
+        sort_five(data);
     // else
     //     chunk_sort(data);
     // post_sort_optimization();
