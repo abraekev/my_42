@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/04 12:57:15 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 13:19:10 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void test(Data data)
+static void test(Data data)
 {
     ft_printf(1, "original stack top->bottom:\n");
     print_stack(&data.a);
@@ -47,25 +47,14 @@ void test(Data data)
 int main(int argc, char **argv)
 {
     Data data;
-    /*  TODO
-     *      map values to their rank
-     *      remap values after sorting
-     */
 
-    // 1. initiate data with arguments
+    // 1. initiate data & sort
     init_data(validate_arguments(argc, argv), argc, argv, &data);
-
-    ft_printf(1, "before:\n");
-    print_stack(&data.a);
-
+    // 2. sort the data
     sort(&data);
 
-    ft_printf(1, "after:\n");
-    print_stack(&data.a);
 
     // 3. print operations
-
     // 4. cleanup operations
-
     // 5. end
 }

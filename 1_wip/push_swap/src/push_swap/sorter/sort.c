@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:42:32 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/04 12:49:06 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 13:33:31 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void sort_three(Data *data)
     int second;
     int third;
 
-    first = value_at_rank(&data->a, 1);
-    second = value_at_rank(&data->a, 2);
-    third = value_at_rank(&data->a, 3);
+    first = value(&data->a, 1);
+    second = value(&data->a, 2);
+    third = value(&data->a, 3);
     if (first > second && third > second && third > first)
         sa(data);
     else if (first > second && third > second && first > third)
@@ -38,16 +38,18 @@ static void sort_three(Data *data)
         rra(data);
     }
 }
+
 static void sort_five(Data *data)
 {
     while (data->a.size > 3)
     {
-        if (value_at_rank(&data->a, 1) == 1 || value_at_rank(&data->a, 1) == 2)
+        if (value(&data->a, 1) == 1 ||
+            value(&data->a, 1) == 2)
             pb(data);
         else
             ra(data);
     }
-    if (value_at_rank(&data->b, 1 < value_at_rank(&data->b, 2)))
+    if (value(&data->b, 1 < value(&data->b, 2)))
         sb;
     sort_three(data);
     pa(data);
@@ -62,8 +64,8 @@ void sort(Data *data)
         sort_three(data);
     else if (data->a.size == 5)
         sort_five(data);
-    // else
-    //     chunk_sort(data);
+    else
+        chunk_sort(data);
     // post_sort_optimization();
 
     return;

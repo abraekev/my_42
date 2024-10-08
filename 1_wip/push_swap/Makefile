@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/03 12:21:00 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/08 12:49:42 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,10 @@ NOCLR		=	\033[0m
 MAKEFLAGS	+=	--no-print-directory
 
 # source and object files
-SRC_MAIN	=	push_swap.c 
-SRC_UTILS	=	${SRC_MAIN}									\
+SRC_MAIN	=	push_swap.c
+SRC_MAPPER	=	${SRC_MAIN}									\
+				mapper/mapper_rank.c						
+SRC_UTILS	=	${SRC_MAPPER}								\
 				utils/error.c								\
 				utils/init_data.c							\
 				utils/malloc.c

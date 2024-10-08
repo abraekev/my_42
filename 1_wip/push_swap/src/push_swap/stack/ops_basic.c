@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:56:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 12:20:48 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:11:45 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int push(Data *data, Stack *stack, int value)
     push_value(data, stack, value);
     return 1;
 }
+
 static int pop_value(Data *data, Stack *stack)
 {
     int result;
@@ -44,6 +45,7 @@ static int pop_value(Data *data, Stack *stack)
     stack->size--;
     return result;
 }
+
 int pop(Data *data, Stack *stack)
 {
     int result;

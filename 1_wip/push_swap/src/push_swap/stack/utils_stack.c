@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/04 12:53:50 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:57:56 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ void print_stack(Stack *stack)
     ft_printf(1, "top %d\n", stack->top);
     ft_printf(1, "bt %d\n", stack->bottom);
     ft_printf(1, "sz %d\n\n", stack->size);
+    ft_printf(1, "mapper:\n");
+
+    int j = 0;
+    while (j < stack->size)
+    {
+        ft_printf(1, "index %d, %d\n", j, stack->mapper[j]);
+        j++;
+    }
 }
 
 void free_stack(Stack *stack)

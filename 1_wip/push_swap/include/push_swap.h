@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/04 12:54:20 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:57:14 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,27 @@
 
 //	STRUCTS & ENUMS
 /******************************************************************************/
+
+typedef enum e_location
+{
+	TOP_A,
+	BOTTOM_A,
+	TOP_B,
+	BOTTOM_B
+} Location;
+
+typedef struct s_chunk
+{
+	Location loc;
+	int size;
+} Chunk;
+
+typedef struct s_split_destination
+{
+	Chunk min;
+	Chunk mid;
+	Chunk max;
+} Destination;
 
 typedef struct s_circular_array_stack
 {
@@ -43,11 +64,19 @@ typedef struct s_push_swap_data
 //	DEFINITIONS
 /******************************************************************************/
 
+// mapper
+int create_mapper(Stack *stack);
+
 // push_swap
 int main(int argc, char **argv);
 
 // sorter
+void chunk_sort(Data *data);
+void chunk_to_the_top(Data *data, Chunk *chunk);
+int chunk_value(Data *data, Chunk *chunk, int n);
+void easy_sort(Data *data, Chunk *chunk);
 void sort(Data *data);
+void sort_one(Data *data, Chunk *chunk);
 
 // stack
 void fill_stack(int argc, char **argv, Data *data);
@@ -61,7 +90,7 @@ int pop(Data *data, Stack *stack);
 int previous(Stack *stack, int index);
 void print_stack(Stack *stack);
 int push(Data *data, Stack *stack, int value);
-int value_at_rank(Stack *stack, int rank);
+int value(Stack *stack, int rank);
 void pa(Data *data);
 void pb(Data *data);
 void ra(Data *data);
