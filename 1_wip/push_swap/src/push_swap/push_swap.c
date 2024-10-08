@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 13:19:10 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:45:58 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,9 @@ int main(int argc, char **argv)
     // 3. print operations
     // 4. cleanup operations
     // 5. end
+
+
+
+    // todo:
+    // implement subfunctions of  sort_three.c  
 }

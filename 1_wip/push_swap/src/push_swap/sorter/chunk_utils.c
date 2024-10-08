@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:18:18 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 14:20:01 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:42:08 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static Stack *loc_to_stack(Data *data, Location loc)
+Stack *loc_to_stack(Data *data, Location loc)
 {
     if (loc == TOP_A || loc == BOTTOM_A)
         return (&data->a);
@@ -49,4 +49,32 @@ int chunk_value(Data *data, Chunk *chunk, int n)
             i = previous(stack, i);
     }
     return (stack->stack[i]);
+
+    // is next and previous correct here?
+}
+
+int chunk_max_value(Data *data, Chunk *chunk)
+{
+    Stack *stack;
+    int size;
+    int max_value;
+    int i;
+
+    stack = loc_to_stack(data, chunk->loc);
+    size = chunk->size;
+    max_value = 0;
+    if (chunk->loc == TOP_A || chunk->loc == TOP_B)
+        i = stack->top;
+    else if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B)
+        i = stack->bottom;
+    while (size--)
+    {
+        if (stack->stack[i] > max_value)
+            max_value = stack->stack[i];
+        if (chunk->loc == TOP_A || chunk->loc == TOP_B)
+            i = next(stack, i);
+        else if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B)
+            i = previous(stack, i);
+    }
+    return (max_value);
 }

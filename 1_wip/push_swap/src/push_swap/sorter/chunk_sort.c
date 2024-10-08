@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:05:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 16:02:54 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:59:25 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void sort_three(Data *data, Chunk *chunk) {}
 
-static void sort_two(Data *data, Chunk *chunk)
+void sort_two(Data *data, Chunk *chunk)
 {
     if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B || chunk->loc == TOP_B)
     {
