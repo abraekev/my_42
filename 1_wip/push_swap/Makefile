@@ -3,37 +3,67 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+         #
+#    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/05/03 14:38:35 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/09 11:04:24 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLES
 # **************************************************************************** #
 
-SRC			=	push_swap.c	t_node_utils.c allocation_utils.c				\
-				argument_utils.c
-
-DIRSRC		=	./srcs/
-DIRLIBFT	=	./srcs/libft/
-DIRINC		=	./includes/
-
-LIBFT		=	$(DIRLIBFT)libft.a
-SRCS		=	$(addprefix $(DIRSRC), $(SRC)) 
-OBJS		=	$(SRCS:.c=.o)
-
 NAME		=	push_swap
-
 GCC			=	cc
 CFLAGS		+=	-Wall -Wextra -Werror
-MAKEFLAGS	+=	--no-print-directory
-LINK		=	-L$(DIRLIBFT) -lft
-
+DIRSRC		=	./src/push_swap/
+DIRINC		=	./include/
 GREEN		=	\033[032m
 CYAN		=	\033[036m
 NOCLR		=	\033[0m
+MAKEFLAGS	+=	--no-print-directory
+
+# source and object files
+SRC_MAIN	=	push_swap.c
+SRC_MAPPER	=	${SRC_MAIN}									\
+				mapper/mapper_rank.c						
+SRC_UTILS	=	${SRC_MAPPER}								\
+				utils/error.c								\
+				utils/init_data.c							\
+				utils/malloc.c
+SRC_VALID	=	$(SRC_UTILS)								\
+				validation/validate_args.c					\
+				validation/validate_int_str.c				\
+				validation/validate_duplicate.c
+SRC_STACK	=	$(SRC_VALID)								\
+				stack/fill_stack.c							\
+				stack/init_stack.c							\
+				stack/utils_stack.c							\
+				stack/nav_stack.c							\
+				stack/ops_push.c							\
+				stack/ops_reverse_rotate.c					\
+				stack/ops_rotate.c							\
+				stack/ops_basic.c							\
+				stack/ops_swap.c							
+
+SRC_SORT	=	$(SRC_STACK)								\
+				sorter/chunk_sort_three.c					\
+				sorter/chunk_sort.c							\
+				sorter/chunk_split_utils.c					\
+				sorter/chunk_split.c						\
+				sorter/chunk_utils.c						\
+				sorter/easy_sort.c							\
+				sorter/move.c								\
+				sorter/sort.c
+SRCS		=	$(addprefix	$(DIRSRC),	$(SRC_SORT))
+OBJS		=	$(SRCS:.c=.o)
+
+# lib
+LIBFT_DIR	=	./lib/libft/
+LIBFT		=	$(LIBFT_DIR)libft.a
+LIBFT_LINK	=	-L$(LIBFT_DIR) -lft
+CFLAGS		+=	-I$(LIBFT_DIR)/include
+
 
 # RULES
 # **************************************************************************** #
@@ -41,10 +71,10 @@ NOCLR		=	\033[0m
 all:			$(LIBFT) $(NAME)
 
 $(NAME):		$(OBJS)
-					@$(GCC) $(CFLAGS) $(OBJS) -o $(NAME) $(LINK)
+					@$(GCC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_LINK)
 					@printf "$(GREEN)%-12s%-12s\n$(NOCLR)" "compiled" "$(NAME)"
 $(LIBFT):
-				@$(MAKE) -C $(DIRLIBFT)
+				@$(MAKE) -C $(LIBFT_DIR)
 
 .c.o:
 		@$(GCC) $(CFLAGS) -I$(DIRINC) -c $< -o $(<:.c=.o)
@@ -53,15 +83,20 @@ bonus:	all
 
 clean:
 		@$(RM) $(OBJS)
-		@$(MAKE) -C $(DIRLIBFT) clean
+		@$(MAKE) -C $(LIBFT_DIR) clean
 		@printf "$(CYAN)%-12s%-12sOBJECTS\n$(NOCLR)" "cleaned" "$(NAME)"
 
 fclean:		clean
 			@$(RM) $(NAME)
-			@$(MAKE) -C $(DIRLIBFT) QUIET=1 fclean
+			@$(MAKE) -C $(LIBFT_DIR) QUIET=1 fclean
 			@printf "$(CYAN)%-12s%-12sPROGRAMS\n$(NOCLR)" "cleaned" "$(NAME)"
 
 re:		fclean all
+
+test:	fclean
+			@echo "Running tests with empty CFLAGS"
+			@$(MAKE) CFLAGS="-g -I$(LIBFT_DIR)/include" all 
+			@$(MAKE) clean
 
 .PHONY:		all bonus clean fclean re
 

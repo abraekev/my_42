@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocation_utils.c                                 :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/05/03 15:37:38 by abraekev         ###   ########.fr       */
+/*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
+/*   Updated: 2024/10/03 08:29:22 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_free_strarr(char **strs)
+void free_data(Data *data)
 {
-	int	i;
+    if (!data)
+        return;
+    if (&data->a)
+        free_stack(&data->a);
+    if (&data->b)
+        free_stack(&data->b);
+}
 
-	i = -1;
-	while (strs && strs[++i])
-	{
-		free(strs[i]);
-		strs[i] = NULL;
-	}
-	free(strs);
+void error(Data *data)
+{
+    free_data(data);
+    ft_printf(2, "Error\n");
+    exit(EXIT_FAILURE);
 }
