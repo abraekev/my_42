@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/08 12:49:42 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/09 11:04:24 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,13 @@ SRC_STACK	=	$(SRC_VALID)								\
 				stack/ops_swap.c							
 
 SRC_SORT	=	$(SRC_STACK)								\
+				sorter/chunk_sort_three.c					\
+				sorter/chunk_sort.c							\
+				sorter/chunk_split_utils.c					\
+				sorter/chunk_split.c						\
+				sorter/chunk_utils.c						\
+				sorter/easy_sort.c							\
+				sorter/move.c								\
 				sorter/sort.c
 SRCS		=	$(addprefix	$(DIRSRC),	$(SRC_SORT))
 OBJS		=	$(SRCS:.c=.o)

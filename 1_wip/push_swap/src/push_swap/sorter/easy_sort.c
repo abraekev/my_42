@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:31:43 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 09:53:52 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:07:12 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static handle_top_b(Data *data, Chunk *chunk)
+static void handle_top_b(Data *data, Chunk *chunk)
 {
     sb(data);
     pa(data);
@@ -23,7 +23,7 @@ static handle_top_b(Data *data, Chunk *chunk)
     }
 }
 
-static handle_bottom_a(Data *data, Chunk *chunk)
+static void handle_bottom_a(Data *data, Chunk *chunk)
 {
     rra(data);
     rra(data);
@@ -34,7 +34,7 @@ static handle_bottom_a(Data *data, Chunk *chunk)
         ra(data);
 }
 
-static handle_bottom_b(Data *data, Chunk *chunk)
+static void handle_bottom_b(Data *data, Chunk *chunk)
 {
     rrb(data);
     rrb(data);

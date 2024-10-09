@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 10:45:30 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:06:35 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int create_mapper(Stack *stack);
 int main(int argc, char **argv);
 
 // sorter
-int a_party_sort(Data *data, int from);
+int a_partly_sort(Data *data, int from);
 void chunk_sort(Data *data);
 void chunk_to_the_top(Data *data, Chunk *chunk);
 int chunk_value(Data *data, Chunk *chunk, int n);

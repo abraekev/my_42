@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:57:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 10:48:34 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:06:35 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void chunk_split(Data *data, Chunk *chunk, Destination *dest)
         {
             dest->max.size += move_from_to(data, chunk->loc, dest->max.loc);
             split_max_reduction(data, &dest->max);
-            if (a_party_sort(data, 1) && chunk->size)
+            if (a_partly_sort(data, 1) && chunk->size)
                 easy_sort(data, chunk);
         }
         else if (next_value > max_value - pivot_1)

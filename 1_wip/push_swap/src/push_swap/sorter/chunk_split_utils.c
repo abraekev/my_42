@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:14:17 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 10:48:38 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:06:36 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static sort_three_numbers(int *a, int *b, int *c)
+static void sort_three_numbers(int *a, int *b, int *c)
 {
     int temp;
 
@@ -42,7 +42,7 @@ static int is_consecutive(int a, int b, int c, int d)
     return ((b - a == 1) && (c - b == 1) && (d - c) == 1);
 }
 
-int a_party_sort(Data *data, int from)
+int a_partly_sort(Data *data, int from)
 {
     int i;
     Stack *a;
@@ -74,11 +74,11 @@ void split_max_reduction(Data *data, Chunk *chunk)
         chunk_sort_three(data, chunk);
         return;
     }
-    if (chunk->loc == TOP_A && value(a, 1) == value(a, 3) - 1 && a_party_sort(data, 3))
+    if (chunk->loc == TOP_A && value(a, 1) == value(a, 3) - 1 && a_partly_sort(data, 3))
     {
         sa(data);
         chunk->size--;
     }
-    if (chunk->loc == TOP_A && a_party_sort(data, 1))
+    if (chunk->loc == TOP_A && a_partly_sort(data, 1))
         chunk->size--;
 }
