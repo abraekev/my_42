@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:57:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 11:06:35 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:27:55 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void set_split_loc(Location loc, Chunk *min, Chunk *mid, Chunk *max)
 {
     if (loc == TOP_A)
     {
-        min->loc == BOTTOM_B;
-        mid->loc == TOP_B;
-        max->loc == BOTTOM_A;
+        min->loc = BOTTOM_B;
+        mid->loc = TOP_B;
+        max->loc = BOTTOM_A;
     }
     else if (loc == BOTTOM_A)
     {
@@ -56,7 +56,7 @@ static void set_third_pivots(
     if (loc == TOP_B || loc == BOTTOM_B)
         *pivot_1 = chunk_size / 2;
     if ((loc == TOP_A || loc == BOTTOM_A) && chunk_size < 15)
-        *pivot_1 == chunk_size;
+        *pivot_1 = chunk_size;
     if (loc == BOTTOM_B && chunk_size < 8)
         *pivot_2 = chunk_size / 2;
 }

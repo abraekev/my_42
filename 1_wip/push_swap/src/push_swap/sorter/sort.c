@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:42:32 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 13:33:31 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:39:25 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void sort_five(Data *data)
             ra(data);
     }
     if (value(&data->b, 1 < value(&data->b, 2)))
-        sb;
+        sb(data);
     sort_three(data);
     pa(data);
     pa(data);

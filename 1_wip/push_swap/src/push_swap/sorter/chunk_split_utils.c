@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:14:17 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 11:06:36 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:26:05 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void split_max_reduction(Data *data, Chunk *chunk)
     Stack *a;
 
     a = &data->a;
-    if (chunk->loc = TOP_A && chunk->size == 3 &&
+    if (chunk->loc == TOP_A && chunk->size == 3 &&
                      is_consecutive(value(a, 1), value(a, 2), value(a, 3), value(a, 4)) &&
                      a_partly_sort(data, 4))
     {

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:50:18 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 16:01:07 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:38:55 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void move_from_top_a(Data *data, Location to)
         pb(data);
     else if (to == BOTTOM_A)
         ra(data);
-    else if (to = BOTTOM_B)
+    else if (to == BOTTOM_B)
     {
         pb(data);
         rb(data);
@@ -57,14 +57,14 @@ static void move_from_bottom_a(Data *data, Location to)
 
 static void move_from_bottom_b(Data *data, Location to)
 {
-    if (to = TOP_B)
+    if (to == TOP_B)
         rrb(data);
     else if (to == TOP_A)
     {
         rrb(data);
         pa(data);
     }
-    else if (to = BOTTOM_A)
+    else if (to == BOTTOM_A)
     {
         rrb(data);
         pa(data);

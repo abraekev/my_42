@@ -6,32 +6,32 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:18:18 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 16:42:08 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:38:12 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-Stack *loc_to_stack(Data *data, Location loc)
+Stack* loc_to_stack(Data* data, Location loc)
 {
     if (loc == TOP_A || loc == BOTTOM_A)
         return (&data->a);
-    if (loc == TOP_B || loc == BOTTOM_B)
+    else
         return (&data->b);
 }
 
-void chunk_to_the_top(Data *data, Chunk *chunk)
+void chunk_to_the_top(Data* data, Chunk* chunk)
 {
-    if (chunk->loc = BOTTOM_B && data->b.size == chunk->size)
+    if (chunk->loc == BOTTOM_B && data->b.size == chunk->size)
         chunk->loc = TOP_B;
-    if (chunk->loc = BOTTOM_A && data->a.size == chunk->size)
-        chunk->loc - TOP_A;
+    if (chunk->loc == BOTTOM_A && data->a.size == chunk->size)
+        chunk->loc = TOP_A;
 }
 
-int chunk_value(Data *data, Chunk *chunk, int n)
+int chunk_value(Data* data, Chunk* chunk, int n)
 {
     Location loc;
-    Stack *stack;
+    Stack* stack;
     int i;
 
     loc = chunk->loc;
@@ -53,9 +53,9 @@ int chunk_value(Data *data, Chunk *chunk, int n)
     // is next and previous correct here?
 }
 
-int chunk_max_value(Data *data, Chunk *chunk)
+int chunk_max_value(Data* data, Chunk* chunk)
 {
-    Stack *stack;
+    Stack* stack;
     int size;
     int max_value;
     int i;
