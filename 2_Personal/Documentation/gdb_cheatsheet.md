@@ -137,3 +137,26 @@
   - **Select output**: Shift + Mouse Select
   - **Copy**: Ctrl + Shift + C
   - **Paste**: Ctrl + V
+ 
+## TUI (Text User Interface) Mode
+
+- **Start GDB in TUI mode**:  
+  `gdb --tui a.out`
+
+- **Switch to TUI mode** (if already running):  
+  `Ctrl + x + a`
+
+- **Layouts**:
+  - `Ctrl + x + 2`: Show source code and assembly (split-screen view).
+  - `Ctrl + x + o`: Switch between panes.
+  - `Ctrl + x + 1`: Exit TUI mode.
+
+- **TUI Commands**:
+  - `layout src`: Show source code only.
+  - `layout asm`: Show assembly code only.
+  - `layout regs`: Show registers.
+  - `focus next`: Switch focus between windows.
+
+- **Sync/Refresh TUI window**:  
+  `Ctrl + L`  
+  *(Redraws and syncs the terminal window)*
