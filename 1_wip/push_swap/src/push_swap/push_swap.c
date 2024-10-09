@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 16:45:58 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 11:44:24 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,15 @@ int main(int argc, char **argv)
 
     // 1. initiate data & sort
     init_data(validate_arguments(argc, argv), argc, argv, &data);
+
+    ft_printf(1, "\n==BEFORE==\n");
+    print_stack(&data.a);
+
     // 2. sort the data
     sort(&data);
 
+    ft_printf(1, "==AFTER==\n");
+    print_stack(&data.a);
 
     // 3. print operations
     // 4. cleanup operations
