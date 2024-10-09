@@ -50,17 +50,17 @@
 
 - **Watch a variable**:  
   `watch i`  
-  *(Watches the variable `i`)*
+  *(Breaks when the value of variable `i` changes)*
 
 ## Stepping
 
 - **Step into a function**:  
   `s`  
-  *(Steps into the function at the current line in the GDB source window)*
+  *(Steps into the function or line, entering function calls)*
 
 - **Next step (without going into the function)**:  
   `n`  
-  *(Steps over the function call)*
+  *(Steps over the function or line, does not enter function calls)*
 
 ## Printing
 
@@ -108,7 +108,7 @@
   `call show(cmd, data)`  
   *(You can also call external functions like `write(1, "test fd\n", 8)`)*
 
-- **Trace file writes**:  
+- **Trace file writes (external tool)**:  
   `strace -e write -f ./minishell`
 
 ## Debugging Flow Control
@@ -119,7 +119,7 @@
 
 - **Finish the current function**:  
   `finish`  
-  *(Returns from the current function)*
+  *(Finishes the current function and returns to the caller)*
 
 - **Delete a breakpoint**:  
   `delete 1`  
