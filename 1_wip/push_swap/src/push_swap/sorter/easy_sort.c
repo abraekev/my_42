@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:31:43 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 15:10:45 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:53:52 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void easy_sort(Data *data, Chunk *chunk)
     {
         if (value(&data->a, 1) == chunk_value(data, chunk, 1) + 1 &&
             chunk->size > 0)
-            sort_one(data, chunk);
+            chunk_sort_one(data, chunk);
         else if (value(&data->a, 1) == chunk_value(data, chunk, 2) + 1 &&
                  chunk->size > 1)
             easy_sort_second(data, chunk);

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 16:58:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:45:30 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,20 @@ int create_mapper(Stack *stack);
 int main(int argc, char **argv);
 
 // sorter
+int a_party_sort(Data *data, int from);
 void chunk_sort(Data *data);
 void chunk_to_the_top(Data *data, Chunk *chunk);
 int chunk_value(Data *data, Chunk *chunk, int n);
+int chunk_max_value(Data *data, Chunk *chunk);
+void chunk_sort_one(Data *data, Chunk *chunk);
+void chunk_sort_three(Data *data, Chunk *chunk);
+void chunk_sort_two(Data *data, Chunk *chunk);
+void chunk_split(Data *data, Chunk *chunk, Destination *dest);
 void easy_sort(Data *data, Chunk *chunk);
 Stack *loc_to_stack(Data *data, Location loc);
 int move_from_to(Data *data, Location from, Location to);
 void sort(Data *data);
-void sort_one(Data *data, Chunk *chunk);
-void sort_three(Data *data, Chunk *chunk);
-void sort_two(Data *data, Chunk *chunk);
+void split_max_reduction(Data *data, Chunk *chunk);
 
 // stack
 void fill_stack(int argc, char **argv, Data *data);

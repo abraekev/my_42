@@ -6,25 +6,11 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:05:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 16:59:25 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:49:25 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void sort_three(Data *data, Chunk *chunk) {}
-
-void sort_two(Data *data, Chunk *chunk)
-{
-    if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B || chunk->loc == TOP_B)
-    {
-        move_from_to(data, chunk->loc, TOP_A);
-        move_from_to(data, chunk->loc, TOP_A);
-    }
-    if (value(&data->a, 1) > value(&data->a, 2))
-        sa(data);
-    chunk->size -= 2;
-}
 
 static void rec_chunk_sort(Data *data, Chunk *chunk)
 {
@@ -35,13 +21,17 @@ static void rec_chunk_sort(Data *data, Chunk *chunk)
     if (chunk->size <= 3)
     {
         if (chunk->size == 3)
-            sort_three(data, chunk);
+            chunk_sort_three(data, chunk);
         else if (chunk->size == 2)
-            sort_two(data, chunk);
+            chunk_sort_two(data, chunk);
         else if (chunk->size == 1)
-            sort_one(data, chunk);
+            chunk_sort_one(data, chunk);
         return;
     }
+    chunk_split(data, chunk, &dest);
+    rec_chunk_sort(data, &dest.max);
+    rec_chunk_sort(data, &dest.mid);
+    rec_chunk_sort(data, &dest.min);
 }
 
 void chunk_sort(Data *data)
@@ -53,9 +43,21 @@ void chunk_sort(Data *data)
     rec_chunk_sort(data, &chunk);
 }
 
-void sort_one(Data *data, Chunk *chunk)
+void chunk_sort_one(Data *data, Chunk *chunk)
 {
     if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B || chunk->loc == TOP_B)
         move_from_to(data, chunk->loc, TOP_A);
     chunk->size -= 1;
+}
+
+void chunk_sort_two(Data *data, Chunk *chunk)
+{
+    if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B || chunk->loc == TOP_B)
+    {
+        move_from_to(data, chunk->loc, TOP_A);
+        move_from_to(data, chunk->loc, TOP_A);
+    }
+    if (value(&data->a, 1) > value(&data->a, 2))
+        sa(data);
+    chunk->size -= 2;
 }
