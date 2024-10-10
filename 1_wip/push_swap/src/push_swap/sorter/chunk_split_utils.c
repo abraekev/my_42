@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:14:17 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 11:26:05 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:57:00 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int a_partly_sort(Data *data, int from)
     a = &data->a;
     i = a->top;
     while (--from)
-        i = next(a, i);
+        i = next_down(a, i);
     while (a->stack[i] != data->a.size)
     {
         value = a->stack[i];
-        i = next(a, i);
+        i = next_down(a, i);
         if (a->stack[i] != value + 1)
             return 0;
     }

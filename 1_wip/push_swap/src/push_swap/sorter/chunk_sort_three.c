@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   chunk_sort_three.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:04:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 09:53:41 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:57:00 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void sort_three_top_a(Data *data, Chunk *chunk, Stack *stack, int max)
         sa(data);
         rra(data);
     }
-    else if (stack->stack[next(stack, stack->top)] == max)
+    else if (stack->stack[next_down(stack, stack->top)] == max)
     {
         ra(data);
         sa(data);
@@ -41,7 +41,7 @@ static void sort_three_bottom_a(Data *data, Chunk *chunk, Stack *stack, int max)
         sa(data);
         rra(data);
     }
-    else if (stack->stack[next(stack, stack->top)] == max)
+    else if (stack->stack[next_down(stack, stack->top)] == max)
         rra(data);
     else
     {
@@ -63,7 +63,7 @@ static void sort_three_top_b(Data *data, Chunk *chunk, Stack *stack, int max)
         pa(data);
         sa(data);
     }
-    else if (stack->stack[next(stack, stack->top)] == max)
+    else if (stack->stack[next_down(stack, stack->top)] == max)
     {
         sb(data);
         pa(data);
@@ -86,7 +86,7 @@ static void sort_three_bottom_b(Data *data, Chunk *chunk, Stack *stack, int max)
         pa(data);
         rrb(data);
     }
-    else if (stack->stack[next(stack, stack->top)] == max)
+    else if (stack->stack[next_down(stack, stack->top)] == max)
     {
         sb(data);
         pa(data);

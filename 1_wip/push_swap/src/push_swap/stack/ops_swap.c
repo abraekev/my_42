@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:57:20 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/03 12:27:55 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:57:00 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void ops_swap(Stack *stack)
         return;
     original_top_value = stack->stack[stack->top];
     top = stack->top;
-    second = next(stack,top);
+    second = next_down(stack,top);
     stack->stack[top] = stack->stack[second];
     stack->stack[second] = original_top_value;
 }

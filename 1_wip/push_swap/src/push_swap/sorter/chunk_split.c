@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:57:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 11:27:55 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:29:31 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void chunk_split(Data *data, Chunk *chunk, Destination *dest)
     while (chunk->size--)
     {
         next_value = chunk_value(data, chunk, 1);
-        if (next_value > next_value - pivot_2)
+        if (next_value > max_value - pivot_2)
         {
             dest->max.size += move_from_to(data, chunk->loc, dest->max.loc);
             split_max_reduction(data, &dest->max);

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:05:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 10:49:25 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:04:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void rec_chunk_sort(Data *data, Chunk *chunk)
 
     chunk_to_the_top(data, chunk);
     easy_sort(data, chunk);
-    if (chunk->size <= 3)
+    if (chunk->size <= 3)   
     {
         if (chunk->size == 3)
             chunk_sort_three(data, chunk);

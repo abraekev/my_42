@@ -6,63 +6,52 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:56:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 14:11:45 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:15:39 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void push_value(Data *data, Stack *stack, int value)
+int push(Data* data, Stack* stack, int value)
 {
-    stack->top = (stack->top + 1) % data->capacity;
-    stack->stack[stack->top] = value;
-    stack->size++;
-}
-
-int push(Data *data, Stack *stack, int value)
-{
+    int old_size;
+    int new_size;
     int i;
 
     if (is_full(data, stack))
         return 0;
-    if (stack->bottom != 0)
+    old_size = stack->size;
+    new_size = old_size + 1;
+    i = old_size;
+    while (--i > stack->top)
     {
-        i = data->capacity;
-        while (--i > stack->top + 1)
-            stack->stack[i] = stack->stack[i - 1];
-        stack->bottom = (stack->bottom + 1) % data->capacity;
+        stack->stack[i + 1] = stack->stack[i];
     }
-    push_value(data, stack, value);
-    return 1;
+    stack->size = new_size;
+    i = next_up(stack, stack->top);
+    stack->top = i;
+    stack->bottom = next_up(stack, i);
+    stack->stack[i] = value;
 }
 
-static int pop_value(Data *data, Stack *stack)
+int pop(Data* data, Stack* stack)
 {
     int result;
-
-    result = stack->stack[stack->top];
-    stack->top = (stack->top - 1 + stack->size) % stack->size;
-    stack->size--;
-    return result;
-}
-
-int pop(Data *data, Stack *stack)
-{
-    int result;
+    int old_top;
     int i;
 
     if (is_empty(stack))
         error(data);
-    result = pop_value(data, stack);
-    if (stack->bottom != 0)
+    old_top = stack->top;
+    result = stack->stack[old_top];
+    stack->size -= 1;
+    i = old_top;
+    while (i < stack->size)
     {
-        i = stack->bottom - 1;
-        while (i < stack->size - 1)
-        {
-            stack->stack[i] = stack->stack[i + 1];
-            i++;
-        }
-        stack->bottom = (stack->bottom - 1 + stack->size) % stack->size;
+        stack->stack[i] = stack->stack[i + 1];
+        i++;
     }
+    stack->top = next_down(stack, old_top);
+    stack->bottom = next_up(stack, stack->top);
     return result;
 }

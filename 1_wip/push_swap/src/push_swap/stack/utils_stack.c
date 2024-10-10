@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 12:57:56 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 08:30:49 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int is_sorted(Data *data)
         if (data->a.stack[i] != rank)
             return 0;
         rank++;
-        i = next(&data->a, i);
+        i = next_down(&data->a, i);
     }
     return 1;
 }
@@ -44,6 +44,10 @@ void print_stack(Stack *stack)
     int index;
     int count;
 
+
+    ft_printf(1, "top %d\n", stack->top);
+    ft_printf(1, "bt %d\n", stack->bottom);
+    ft_printf(1, "sz %d\n", stack->size);
     ft_printf(1, "T - ");
     if (is_empty(stack))
     {
@@ -56,21 +60,11 @@ void print_stack(Stack *stack)
     while (count < stack->size)
     {
         ft_printf(1, "%d ", stack->stack[index]);
-        index = next(stack, index);
+        index = next_down(stack, index);
         count++;
     }
     ft_printf(1, " - B\n");
-    ft_printf(1, "top %d\n", stack->top);
-    ft_printf(1, "bt %d\n", stack->bottom);
-    ft_printf(1, "sz %d\n\n", stack->size);
-    ft_printf(1, "mapper:\n");
 
-    int j = 0;
-    while (j < stack->size)
-    {
-        ft_printf(1, "index %d, %d\n", j, stack->mapper[j]);
-        j++;
-    }
 }
 
 void free_stack(Stack *stack)

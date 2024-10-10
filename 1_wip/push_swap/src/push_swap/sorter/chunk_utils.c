@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:18:18 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 11:38:12 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:57:14 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int chunk_value(Data* data, Chunk* chunk, int n)
     {
         i = stack->top;
         while (--n > 0)
-            i = next(stack, i);
+            i = next_down(stack, i);
     }
     else
     {
         i = stack->bottom;
         while (--n > 0)
-            i = previous(stack, i);
+            i = next_up(stack, i);
     }
     return (stack->stack[i]);
 
@@ -72,9 +72,9 @@ int chunk_max_value(Data* data, Chunk* chunk)
         if (stack->stack[i] > max_value)
             max_value = stack->stack[i];
         if (chunk->loc == TOP_A || chunk->loc == TOP_B)
-            i = next(stack, i);
+            i = next_down(stack, i);
         else if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B)
-            i = previous(stack, i);
+            i = next_up(stack, i);
     }
     return (max_value);
 }
