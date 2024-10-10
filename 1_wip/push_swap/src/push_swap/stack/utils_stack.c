@@ -6,40 +6,40 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 08:30:49 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:33:55 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int is_sorted(Data *data)
+int is_sorted(t_ps* data)
 {
-    int i;
-    int rank;
+    int	i;
+    int	rank;
 
     i = data->a.top;
     rank = 1;
     while (rank <= data->a.size)
     {
         if (data->a.stack[i] != rank)
-            return 0;
+            return (0);
         rank++;
         i = next_down(&data->a, i);
     }
-    return 1;
+    return (1);
 }
 
-int is_full(Data *data, Stack *stack)
+int is_full(t_ps* data, t_stack* stack)
 {
     return stack->size == data->capacity;
 }
 
-int is_empty(Stack *stack)
+int is_empty(t_stack* stack)
 {
     return stack->size == 0;
 }
 
-void print_stack(Stack *stack)
+void print_stack(t_stack* stack)
 {
     int index;
     int count;
@@ -48,7 +48,7 @@ void print_stack(Stack *stack)
     ft_printf(1, "top %d\n", stack->top);
     ft_printf(1, "bt %d\n", stack->bottom);
     ft_printf(1, "sz %d\n", stack->size);
-    ft_printf(1, "T - ");
+    ft_printf(1, "\nTOP\n");
     if (is_empty(stack))
     {
         ft_printf(1, "Stack is empty\n");
@@ -59,15 +59,15 @@ void print_stack(Stack *stack)
     count = 0;
     while (count < stack->size)
     {
-        ft_printf(1, "%d ", stack->stack[index]);
+        ft_printf(1, "[%d]\t%d\n", index, stack->stack[index]);
         index = next_down(stack, index);
         count++;
     }
-    ft_printf(1, " - B\n");
+    ft_printf(1, "BOTTOM\n\n");
 
 }
 
-void free_stack(Stack *stack)
+void free_stack(t_stack* stack)
 {
     if (!stack)
         return;

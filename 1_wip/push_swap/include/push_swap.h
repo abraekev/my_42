@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:14 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:05:05 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,96 +30,96 @@ typedef enum e_location
 	BOTTOM_A,
 	TOP_B,
 	BOTTOM_B
-} Location;
+} t_location;
 
 typedef struct s_chunk
 {
-	Location loc;
+	t_location loc;
 	int size;
-} Chunk;
+} t_chunk;
 
 typedef struct s_split_destination
 {
-	Chunk min;
-	Chunk mid;
-	Chunk max;
+	t_chunk min;
+	t_chunk mid;
+	t_chunk max;
 } Destination;
 
 typedef struct s_circular_array_stack
 {
-	int *stack;
-	int *mapper;
+	int* stack;
+	int* mapper;
 	int top;
 	int bottom;
 	int size;
-} Stack;
+} t_stack;
 
 typedef struct s_push_swap_data
 {
-	Stack a;
-	Stack b;
+	t_stack a;
+	t_stack b;
 	int capacity;
-} Data;
+} t_ps;
 
 //	DEFINITIONS
 /******************************************************************************/
 
 // mapper
-int create_mapper(Stack *stack);
+int create_mapper(t_stack* stack);
 
 // push_swap
-int main(int argc, char **argv);
+int main(int argc, char** argv);
 
 // sorter
-int a_partly_sort(Data *data, int from);
-void chunk_sort(Data *data);
-void chunk_to_the_top(Data *data, Chunk *chunk);
-int chunk_value(Data *data, Chunk *chunk, int n);
-int chunk_max_value(Data *data, Chunk *chunk);
-void chunk_sort_one(Data *data, Chunk *chunk);
-void chunk_sort_three(Data *data, Chunk *chunk);
-void chunk_sort_two(Data *data, Chunk *chunk);
-void chunk_split(Data *data, Chunk *chunk, Destination *dest);
-void easy_sort(Data *data, Chunk *chunk);
-Stack *loc_to_stack(Data *data, Location loc);
-int move_from_to(Data *data, Location from, Location to);
-void sort(Data *data);
-void split_max_reduction(Data *data, Chunk *chunk);
+int a_partly_sort(t_ps* data, int from);
+void chunk_sort(t_ps* data);
+void chunk_to_the_top(t_ps* data, t_chunk* chunk);
+int chunk_value(t_ps* data, t_chunk* chunk, int n);
+int chunk_max_value(t_ps* data, t_chunk* chunk);
+void chunk_sort_one(t_ps* data, t_chunk* chunk);
+void chunk_sort_three(t_ps* data, t_chunk* chunk);
+void chunk_sort_two(t_ps* data, t_chunk* chunk);
+void chunk_split(t_ps* data, t_chunk* chunk, Destination* dest);
+void easy_sort(t_ps* data, t_chunk* chunk);
+t_stack* loc_to_stack(t_ps* data, t_location loc);
+int move_from_to(t_ps* data, t_location from, t_location to);
+void sort(t_ps* data);
+void split_max_reduction(t_ps* data, t_chunk* max);
 
 // stack
-void fill_stack(int argc, char **argv, Data *data);
-void free_stack(Stack *stack);
-int is_empty(Stack *stack);
-int is_full(Data *data, Stack *stack);
-int is_sorted(Data *data);
-void init_stack(Data *data, Stack *stack, int size);
-int next_down(Stack *stack, int index);
-int pop(Data *data, Stack *stack);
-int next_up(Stack *stack, int index);
-void print_stack(Stack *stack);
-int push(Data *data, Stack *stack, int value);
-int value(Stack *stack, int rank);
-void pa(Data *data);
-void pb(Data *data);
-void ra(Data *data);
-void rb(Data *data);
-void rr(Data *data);
-void rra(Data *data);
-void rrb(Data *data);
-void rrr(Data *data);
-void sa(Data *data);
-void sb(Data *data);
-void ss(Data *data);
+void fill_stack(int argc, char** argv, t_ps* data);
+void free_stack(t_stack* stack);
+int is_empty(t_stack* stack);
+int is_full(t_ps* data, t_stack* stack);
+int is_sorted(t_ps* data);
+void init_stack(t_ps* data, t_stack* stack, int size);
+int next_down(t_stack* stack, int index);
+int pop(t_ps* data, t_stack* stack);
+int next_up(t_stack* stack, int index);
+void print_stack(t_stack* stack);
+int push(t_ps* data, t_stack* stack, int value);
+int value(t_stack* stack, int rank);
+void pa(t_ps* data);
+void pb(t_ps* data);
+void ra(t_ps* data);
+void rb(t_ps* data);
+void rr(t_ps* data);
+void rra(t_ps* data);
+void rrb(t_ps* data);
+void rrr(t_ps* data);
+void sa(t_ps* data);
+void sb(t_ps* data);
+void ss(t_ps* data);
 
 // utils
-void error(Data *data);
-void free_data(Data *data);
-void free_str_array(char **array);
-void init_data(int capacity, int argc, char **argv, Data *data);
+void error(t_ps* data);
+void free_data(t_ps* data);
+void free_str_array(char** array);
+void init_data(int capacity, int argc, char** argv, t_ps* data);
 
 // validation
-int validate_arguments(int argc, char **argv);
-int is_valid_int_string(const char *str);
-void duplicate_check(Data *data, Stack *stack);
+int validate_arguments(int argc, char** argv);
+int is_valid_int_string(const char* str);
+void duplicate_check(t_ps* data, t_stack* stack);
 
 #endif /*PUSH_SWAP_H*/

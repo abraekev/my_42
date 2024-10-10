@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 08:43:00 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:14 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:55:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void ops_reverse_rotate(Stack *stack)
+static void ops_reverse_rotate(t_stack *stack)
 {
     if (stack->size < 2)
         return;
@@ -20,17 +20,17 @@ static void ops_reverse_rotate(Stack *stack)
     stack->bottom = next_up(stack, stack->bottom);
 }
 
-void rra(Data *data)
+void rra(t_ps *data)
 {
     ops_reverse_rotate(&data->a);
 }
 
-void rrb(Data *data)
+void rrb(t_ps *data)
 {
     ops_reverse_rotate(&data->b);
 }
 
-void rrr(Data *data)
+void rrr(t_ps *data)
 {
     ops_reverse_rotate(&data->a);
     ops_reverse_rotate(&data->b);

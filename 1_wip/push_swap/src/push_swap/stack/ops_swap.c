@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:57:20 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:00 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:55:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void ops_swap(Stack *stack)
+static void ops_swap(t_stack *stack)
 {
     int original_top_value;
     int top;
@@ -27,17 +27,17 @@ static void ops_swap(Stack *stack)
     stack->stack[second] = original_top_value;
 }
 
-void sa(Data *data)
+void sa(t_ps *data)
 {
     ops_swap(&data->a);
 }
 
-void sb(Data *data)
+void sb(t_ps *data)
 {
     ops_swap(&data->b);
 }
 
-void ss(Data *data)
+void ss(t_ps *data)
 {
     ops_swap(&data->a);
     ops_swap(&data->b);

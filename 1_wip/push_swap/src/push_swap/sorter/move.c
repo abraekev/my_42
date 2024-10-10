@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:50:18 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 11:38:55 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:55:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void move_from_top_b(Data *data, Location to)
+static void move_from_top_b(t_ps *data, t_location to)
 {
     if (to == TOP_A)
         pa(data);
@@ -25,7 +25,7 @@ static void move_from_top_b(Data *data, Location to)
     }
 }
 
-static void move_from_top_a(Data *data, Location to)
+static void move_from_top_a(t_ps *data, t_location to)
 {
     if (to == TOP_B)
         pb(data);
@@ -38,7 +38,7 @@ static void move_from_top_a(Data *data, Location to)
     }
 }
 
-static void move_from_bottom_a(Data *data, Location to)
+static void move_from_bottom_a(t_ps *data, t_location to)
 {
     if (to == TOP_A)
         rra(data);
@@ -55,7 +55,7 @@ static void move_from_bottom_a(Data *data, Location to)
     }
 }
 
-static void move_from_bottom_b(Data *data, Location to)
+static void move_from_bottom_b(t_ps *data, t_location to)
 {
     if (to == TOP_B)
         rrb(data);
@@ -72,7 +72,7 @@ static void move_from_bottom_b(Data *data, Location to)
     }
 }
 
-int move_from_to(Data *data, Location from, Location to)
+int move_from_to(t_ps *data, t_location from, t_location to)
 {
     if (from == TOP_A)
         move_from_top_a(data, to);

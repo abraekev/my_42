@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:14:38 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:14 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:10:57 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void duplicate_check(Data *data, Stack *stack)
+void duplicate_check(t_ps *data, t_stack *stack)
 {
     int *compare;
     int compare_size;
@@ -34,7 +34,7 @@ void duplicate_check(Data *data, Stack *stack)
                 error(data);
             }
         compare[compare_size++] = stack->stack[i];
-        i = next_up(stack, i);
+        i = next_down(stack, i);
         if (i == stack->bottom)
             break;
     }

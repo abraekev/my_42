@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:04:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:00 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:57:33 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void sort_three_top_a(Data *data, Chunk *chunk, Stack *stack, int max)
+static void sort_three_top_a(t_ps* data, t_chunk* chunk, t_stack* stack, int max)
 {
     if (stack->stack[stack->top] == max)
     {
@@ -32,7 +32,7 @@ static void sort_three_top_a(Data *data, Chunk *chunk, Stack *stack, int max)
     chunk_sort_two(data, chunk);
 }
 
-static void sort_three_bottom_a(Data *data, Chunk *chunk, Stack *stack, int max)
+static void sort_three_bottom_a(t_ps* data, t_chunk* chunk, t_stack* stack, int max)
 {
     rra(data);
     rra(data);
@@ -55,7 +55,7 @@ static void sort_three_bottom_a(Data *data, Chunk *chunk, Stack *stack, int max)
     chunk_sort_two(data, chunk);
 }
 
-static void sort_three_top_b(Data *data, Chunk *chunk, Stack *stack, int max)
+static void sort_three_top_b(t_ps* data, t_chunk* chunk, t_stack* stack, int max)
 {
     pa(data);
     if (stack->stack[stack->top] == max)
@@ -77,35 +77,35 @@ static void sort_three_top_b(Data *data, Chunk *chunk, Stack *stack, int max)
     chunk_sort_two(data, chunk);
 }
 
-static void sort_three_bottom_b(Data *data, Chunk *chunk, Stack *stack, int max)
+static void sort_three_bottom_b(t_ps* data, t_chunk* chunk, t_stack* stack, int max)
 {
-    rrb(data);
-    rrb(data);
-    if (stack->stack[stack->top] == max)
-    {
-        pa(data);
-        rrb(data);
-    }
-    else if (stack->stack[next_down(stack, stack->top)] == max)
-    {
-        sb(data);
-        pa(data);
-        rrb(data);
-    }
-    else
-    {
-        rrb(data);
-        pa(data);
-    }
-    chunk->loc = TOP_B;
-    chunk->size -= 1;
-    chunk_sort_two(data, chunk);
+	rrb(data);
+	rrb(data);
+	if (stack->stack[stack->top] == max)
+	{
+		pa(data);
+		rrb(data);
+	}
+	else if (stack->stack[next_down(stack, stack->top)] == max)
+	{
+		sb(data);
+		pa(data);
+		rrb(data);
+	}
+	else
+	{
+		rrb(data);
+		pa(data);
+	}
+	chunk->loc = TOP_B;
+	chunk->size -= 1;
+	chunk_sort_two(data, chunk);
 }
 
-void chunk_sort_three(Data *data, Chunk *chunk)
+void chunk_sort_three(t_ps* data, t_chunk* chunk)
 {
-    Stack *stack;
-    int max;
+    t_stack* stack;
+    int		max;
 
     stack = loc_to_stack(data, chunk->loc);
     max = chunk_max_value(data, chunk);

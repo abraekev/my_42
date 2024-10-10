@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:18:18 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:14 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:59:02 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-Stack* loc_to_stack(Data* data, Location loc)
+t_stack* loc_to_stack(t_ps* data, t_location loc)
 {
     if (loc == TOP_A || loc == BOTTOM_A)
         return (&data->a);
@@ -20,7 +20,7 @@ Stack* loc_to_stack(Data* data, Location loc)
         return (&data->b);
 }
 
-void chunk_to_the_top(Data* data, Chunk* chunk)
+void chunk_to_the_top(t_ps* data, t_chunk* chunk)
 {
     if (chunk->loc == BOTTOM_B && data->b.size == chunk->size)
         chunk->loc = TOP_B;
@@ -28,37 +28,33 @@ void chunk_to_the_top(Data* data, Chunk* chunk)
         chunk->loc = TOP_A;
 }
 
-int chunk_value(Data* data, Chunk* chunk, int n)
+int chunk_value(t_ps* data, t_chunk* chunk, int n)
 {
-    Location loc;
-    Stack* stack;
-    int i;
+    t_location	loc;
+    t_stack* stack;
+    int			i;
 
     loc = chunk->loc;
     stack = loc_to_stack(data, loc);
     if (loc == TOP_A || loc == TOP_B)
-    {
         i = stack->top;
+    else if (loc == BOTTOM_A || loc == BOTTOM_B)
+        i = stack->bottom;
+    if (loc == TOP_A || loc == TOP_B)
         while (--n > 0)
             i = next_down(stack, i);
-    }
-    else
-    {
-        i = stack->bottom;
+    else if (loc == BOTTOM_A || loc == BOTTOM_B)
         while (--n > 0)
             i = next_up(stack, i);
-    }
     return (stack->stack[i]);
-
-    // is next and previous correct here?
 }
 
-int chunk_max_value(Data* data, Chunk* chunk)
+int chunk_max_value(t_ps* data, t_chunk* chunk)
 {
-    Stack* stack;
-    int size;
-    int max_value;
-    int i;
+    t_stack* stack;
+    int		size;
+    int		max_value;
+    int		i;
 
     stack = loc_to_stack(data, chunk->loc);
     size = chunk->size;

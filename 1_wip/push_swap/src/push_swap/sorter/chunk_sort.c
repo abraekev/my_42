@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:05:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 15:04:44 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:55:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void rec_chunk_sort(Data *data, Chunk *chunk)
+static void rec_chunk_sort(t_ps *data, t_chunk *chunk)
 {
     Destination dest;
 
@@ -34,30 +34,32 @@ static void rec_chunk_sort(Data *data, Chunk *chunk)
     rec_chunk_sort(data, &dest.min);
 }
 
-void chunk_sort(Data *data)
+void chunk_sort(t_ps *data)
 {
-    Chunk chunk;
+    t_chunk chunk;
 
     chunk.loc = TOP_A;
     chunk.size = data->a.size;
     rec_chunk_sort(data, &chunk);
 }
 
-void chunk_sort_one(Data *data, Chunk *chunk)
+void chunk_sort_one(t_ps *data, t_chunk *chunk)
 {
-    if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B || chunk->loc == TOP_B)
-        move_from_to(data, chunk->loc, TOP_A);
-    chunk->size -= 1;
+	if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B
+		|| chunk->loc == TOP_B)
+		move_from_to(data, chunk->loc, TOP_A);
+	chunk->size -= 1;
 }
 
-void chunk_sort_two(Data *data, Chunk *chunk)
+void chunk_sort_two(t_ps *data, t_chunk *chunk)
 {
-    if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B || chunk->loc == TOP_B)
-    {
-        move_from_to(data, chunk->loc, TOP_A);
-        move_from_to(data, chunk->loc, TOP_A);
-    }
-    if (value(&data->a, 1) > value(&data->a, 2))
-        sa(data);
-    chunk->size -= 2;
+	if (chunk->loc == BOTTOM_A || chunk->loc == BOTTOM_B
+		|| chunk->loc == TOP_B)
+	{
+		move_from_to(data, chunk->loc, TOP_A);
+		move_from_to(data, chunk->loc, TOP_A);
+	}
+	if (value(&data->a, 1) > value(&data->a, 2))
+		sa(data);
+	chunk->size -= 2;
 }

@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:56:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 09:29:46 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:02:18 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int push(Data* data, Stack* stack, int value)
+int push(t_ps* data, t_stack* stack, int value)
 {
     int old_size;
     int new_size;
@@ -23,34 +23,29 @@ int push(Data* data, Stack* stack, int value)
     old_size = stack->size;
     new_size = old_size + 1;
     i = old_size;
-    while (--i > stack->top)
+    while (--i >= stack->top)
         stack->stack[i + 1] = stack->stack[i];
+    stack->stack[stack->top] = value;
     stack->size = new_size;
-    i = next_up(stack, stack->top);
-    stack->top = i;
-    stack->bottom = next_up(stack, i);
-    stack->stack[i] = value;
+    stack->bottom = next_up(stack, stack->top);
     return 1;
 }
 
-int pop(Data* data, Stack* stack)
+int pop(t_ps* data, t_stack* stack)
 {
     int result;
-    int old_top;
     int i;
 
     if (is_empty(stack))
         error(data);
-    old_top = stack->top;
-    result = stack->stack[old_top];
-    stack->size -= 1;
-    i = old_top;
+    result = stack->stack[stack->top];
+    i = stack->top;
     while (i < stack->size)
     {
         stack->stack[i] = stack->stack[i + 1];
         i++;
     }
-    stack->top = next_down(stack, old_top);
+    stack->size--;
     stack->bottom = next_up(stack, stack->top);
     return result;
 }

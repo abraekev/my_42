@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:41:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/08 12:41:30 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:28:34 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void replace_buffer(Stack *stack)
+static void replace_buffer(t_stack *stack)
 {
     int i = 0;
     int j;
@@ -34,7 +34,7 @@ static void replace_buffer(Stack *stack)
     }
 }
 
-int create_mapper(Stack *stack)
+int create_mapper(t_stack *stack)
 {
     int index;
     int i;

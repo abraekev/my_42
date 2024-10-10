@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:14:17 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 16:57:00 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:05:41 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void sort_three_numbers(int *a, int *b, int *c)
+static void sort_three_numbers(int* a, int* b, int* c)
 {
     int temp;
 
@@ -42,11 +42,11 @@ static int is_consecutive(int a, int b, int c, int d)
     return ((b - a == 1) && (c - b == 1) && (d - c) == 1);
 }
 
-int a_partly_sort(Data *data, int from)
+int a_partly_sort(t_ps* data, int from)
 {
-    int i;
-    Stack *a;
-    int value;
+    int		i;
+    t_stack* a;
+    int		value;
 
     a = &data->a;
     i = a->top;
@@ -57,28 +57,28 @@ int a_partly_sort(Data *data, int from)
         value = a->stack[i];
         i = next_down(a, i);
         if (a->stack[i] != value + 1)
-            return 0;
+            return (0);
     }
-    return 1;
+    return (1);
 }
 
-void split_max_reduction(Data *data, Chunk *chunk)
+void	split_max_reduction(t_ps *data, t_chunk *max)
 {
-    Stack *a;
+	t_stack	*a;
 
-    a = &data->a;
-    if (chunk->loc == TOP_A && chunk->size == 3 &&
-                     is_consecutive(value(a, 1), value(a, 2), value(a, 3), value(a, 4)) &&
-                     a_partly_sort(data, 4))
-    {
-        chunk_sort_three(data, chunk);
-        return;
-    }
-    if (chunk->loc == TOP_A && value(a, 1) == value(a, 3) - 1 && a_partly_sort(data, 3))
-    {
-        sa(data);
-        chunk->size--;
-    }
-    if (chunk->loc == TOP_A && a_partly_sort(data, 1))
-        chunk->size--;
+	a = &data->a;
+	if (max->loc == TOP_A && max->size == 3 && is_consecutive(value(a, 1),
+			value(a, 2), value(a, 3), value(a, 4)) && a_partly_sort(data, 4))
+	{
+		chunk_sort_three(data, max);
+		return ;
+	}
+	if (max->loc == TOP_A && value(a, 1) == value(a, 3) - 1
+		&& a_partly_sort(data, 3))
+	{
+		sa(data);
+		max->size--;
+	}
+	if (max->loc == TOP_A && a_partly_sort(data, 1))
+		max->size--;
 }

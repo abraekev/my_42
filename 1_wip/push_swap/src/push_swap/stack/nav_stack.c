@@ -6,30 +6,45 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:24:37 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 08:40:20 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:56:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int next_down(Stack* stack, int index)
+int next_down(t_stack* stack, int index)
 {
-    int result;
+    if (stack->size== 0)
+        return (index);
+    if (index == stack->size - 1)
+        return (0);
+    else
+        return (index + 1);
 
-    if (stack->size == 0)
-        return index;
-    return (index - 1 + stack->size) % stack->size;
+    // arnout version
+    // int result;
 
+    // if (stack->size == 0)
+    //     return index;
+    // return (index - 1 + stack->size) % stack->size;
 }
 
-int next_up(Stack* stack, int index)
+int next_up(t_stack* stack, int index)
 {
     if (stack->size == 0)
-        return index;
-    return (index + 1) % stack->size;
+        return (index);
+    if (index == 0)
+        return (stack->size - 1);
+    else
+        return (index - 1);
+
+    // arnout version:
+    // if (stack->size == 0)
+    //     return index;
+    // return (index + 1) % stack->size;
 }
 
-int value(Stack* stack, int position)
+int value(t_stack* stack, int position)
 {
     int index;
 

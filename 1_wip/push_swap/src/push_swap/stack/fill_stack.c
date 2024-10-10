@@ -6,20 +6,20 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:47:23 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 09:33:04 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:55:44 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void fill_stack_fail(char **strs, int index, Data *data)
+static void fill_stack_fail(char **strs, int index, t_ps *data)
 {
     free(strs[index]);
     free(strs);
     error(data);
 }
 
-void fill_stack(int argc, char **argv, Data *data)
+void fill_stack(int argc, char **argv, t_ps *data)
 {
     char **args;
     int numbers_count;
