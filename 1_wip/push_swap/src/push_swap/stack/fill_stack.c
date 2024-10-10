@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:47:23 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 17:23:40 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:33:04 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void fill_stack(int argc, char **argv, Data *data)
     }
     else
         while (numbers_count > 0)
-            push(data, &data->a, ft_atoi(argv[numbers_count--]));
+            if (!push(data, &data->a, ft_atoi(argv[numbers_count--])))
+                error(data);
 }

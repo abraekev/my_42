@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:42:32 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/09 11:39:25 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:42:43 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void sort_three(Data *data)
+static void sort_three(Data* data)
 {
     int first;
     int second;
@@ -39,7 +39,7 @@ static void sort_three(Data *data)
     }
 }
 
-static void sort_five(Data *data)
+static void sort_five(Data* data)
 {
     while (data->a.size > 3)
     {
@@ -49,14 +49,14 @@ static void sort_five(Data *data)
         else
             ra(data);
     }
-    if (value(&data->b, 1 < value(&data->b, 2)))
+    if (value(&data->b, 1) < value(&data->b, 2))
         sb(data);
     sort_three(data);
     pa(data);
     pa(data);
 }
 
-void sort(Data *data)
+void sort(Data* data)
 {
     if (data->a.size <= 1 || is_sorted(data))
         return;
