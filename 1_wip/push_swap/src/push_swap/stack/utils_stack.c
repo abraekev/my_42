@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 12:33:55 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:42:53 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ int is_empty(t_stack* stack)
 void print_stack(t_stack* stack)
 {
     int index;
-    int count;
 
-
+    ft_printf(1, "========\n");
     ft_printf(1, "top %d\n", stack->top);
-    ft_printf(1, "bt %d\n", stack->bottom);
-    ft_printf(1, "sz %d\n", stack->size);
-    ft_printf(1, "\nTOP\n");
+    ft_printf(1, "bot %d\n", stack->bottom);
+    ft_printf(1, "siz %d\n", stack->size);
+    ft_printf(1, "TOP====\n");
     if (is_empty(stack))
     {
         ft_printf(1, "Stack is empty\n");
@@ -56,14 +55,14 @@ void print_stack(t_stack* stack)
     }
 
     index = stack->top;
-    count = 0;
-    while (count < stack->size)
+    while (1)
     {
         ft_printf(1, "[%d]\t%d\n", index, stack->stack[index]);
         index = next_down(stack, index);
-        count++;
+        if (index == stack->top)
+            break;
     }
-    ft_printf(1, "BOTTOM\n\n");
+    ft_printf(1, "BOT====\n\n");
 
 }
 

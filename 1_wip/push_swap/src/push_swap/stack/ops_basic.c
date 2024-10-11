@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:56:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 13:02:18 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/11 17:18:50 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int pop(t_ps* data, t_stack* stack)
         i++;
     }
     stack->size--;
+    if (stack->top == stack->size)
+        stack->top = 0;
     stack->bottom = next_up(stack, stack->top);
     return result;
 }

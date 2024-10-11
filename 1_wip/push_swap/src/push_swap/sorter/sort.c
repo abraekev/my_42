@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:42:32 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 11:59:33 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/11 17:19:28 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 static void sort_three(t_ps* data)
 {
-    int	first;
-    int	second;
-    int	third;
+	int	first;
+	int	second;
+	int	third;
 
-    first = value(&data->a, 1);
-    second = value(&data->a, 2);
-    third = value(&data->a, 3);
-    if (first > second && third > second && third > first)
-        sa(data);
-    else if (first > second && third > second && first > third)
-        ra(data);
-    else if (second > first && second > third && first > third)
-        rra(data);
-    else if (second > first && second > third && third > first)
-    {
-        sa(data);
-        ra(data);
-    }
-    else if (first > second && second > third && first > third)
-    {
-        sa(data);
-        rra(data);
-    }
+	first = value(&data->a, 1);
+	second = value(&data->a, 2);
+	third = value(&data->a, 3);
+	if (first > second && third > second && third > first)
+		sa(data);
+	else if (first > second && third > second && first > third)
+		ra(data);
+	else if (second > first && second > third && first > third)
+		rra(data);
+	else if (second > first && second > third && third > first)
+	{
+		sa(data);
+		ra(data);
+	}
+	else if (first > second && second > third && first > third)
+	{
+		sa(data);
+		rra(data);
+	}
 }
 
 static void sort_five(t_ps* data)
