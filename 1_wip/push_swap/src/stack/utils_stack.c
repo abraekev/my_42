@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/14 09:08:12 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:43:52 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void print_stack(t_stack* stack)
         if (index == stack->top)
             break;
     }
-    ft_printf(1, "BOT======\n\n");
-
+    ft_printf(1, "BOT======\n");
 }
 
 void free_stack(t_stack* stack)

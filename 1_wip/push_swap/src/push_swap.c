@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ops_swap.c                                         :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 21:57:20 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/11 16:12:35 by abraekev         ###   ########.fr       */
+/*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
+/*   Updated: 2024/10/14 11:04:36 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void ops_swap(t_stack* stack)
+int main(int argc, char** argv)
 {
-    int	tmp;
+  t_ps data;
 
-    if (stack->size < 2)
-        return;
-    tmp = stack->stack[next_down(stack, stack->top)];
-    stack->stack[next_down(stack, stack->top)] = stack->stack[stack->top];
-    stack->stack[stack->top] = tmp;
-}
+  // 1. initiate data & sort
+  init_data(validate_arguments(argc, argv), argc, argv, &data);
 
-void sa(t_ps* data)
-{
-    ops_swap(&data->a);
-}
+  // 2. sort the data
+  sort(&data);
 
-void sb(t_ps* data)
-{
-    ops_swap(&data->b);
-}
+  // 3. print operation log
+  print_log(&data);
 
-void ss(t_ps* data)
-{
-    ops_swap(&data->a);
-    ops_swap(&data->b);
+  // 4. cleanup
+  free_data(&data);
+
+  exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 12:05:05 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/14 11:27:43 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@
 
 //	STRUCTS & ENUMS
 /******************************************************************************/
+
+typedef enum e_op
+{
+	NULL_OP,
+	PA,
+	PB,
+	SA,
+	SB,
+	SS,
+	RA,
+	RB,
+	RR,
+	RRA,
+	RRB,
+	RRR,
+} t_op;
 
 typedef enum e_location
 {
@@ -58,14 +74,25 @@ typedef struct s_push_swap_data
 {
 	t_stack a;
 	t_stack b;
+	t_list* ops;
 	int capacity;
+	int log_ops;
 } t_ps;
 
 //	DEFINITIONS
 /******************************************************************************/
 
+// logger
+void log_ops(t_ps* data, t_op op);
+void print_log(t_ps* data);
+
 // mapper
 int create_mapper(t_stack* stack);
+
+// optimizer
+t_op get_op(t_list* node);
+t_op neutral_op(t_op op);
+void optimize_ops(t_ps* data);
 
 // push_swap
 int main(int argc, char** argv);

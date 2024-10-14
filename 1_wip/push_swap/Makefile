@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/09 11:04:24 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/14 10:59:02 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,15 @@
 NAME		=	push_swap
 GCC			=	cc
 CFLAGS		+=	-Wall -Wextra -Werror
-DIRSRC		=	./src/push_swap/
+DIRSRC		=	./src/
 DIRINC		=	./include/
-GREEN		=	\033[032m
-CYAN		=	\033[036m
-NOCLR		=	\033[0m
 MAKEFLAGS	+=	--no-print-directory
 
 # source and object files
 SRC_MAIN	=	push_swap.c
-SRC_MAPPER	=	${SRC_MAIN}									\
+SRC_LOG		= 	${SRC_MAIN}									\
+				logger/logger.c
+SRC_MAPPER	=	${SRC_LOG}									\
 				mapper/mapper_rank.c						
 SRC_UTILS	=	${SRC_MAPPER}								\
 				utils/error.c								\
@@ -45,7 +44,6 @@ SRC_STACK	=	$(SRC_VALID)								\
 				stack/ops_rotate.c							\
 				stack/ops_basic.c							\
 				stack/ops_swap.c							
-
 SRC_SORT	=	$(SRC_STACK)								\
 				sorter/chunk_sort_three.c					\
 				sorter/chunk_sort.c							\
@@ -64,6 +62,10 @@ LIBFT		=	$(LIBFT_DIR)libft.a
 LIBFT_LINK	=	-L$(LIBFT_DIR) -lft
 CFLAGS		+=	-I$(LIBFT_DIR)/include
 
+# colors
+GREEN		=	\033[032m
+CYAN		=	\033[036m
+NOCLR		=	\033[0m
 
 # RULES
 # **************************************************************************** #
