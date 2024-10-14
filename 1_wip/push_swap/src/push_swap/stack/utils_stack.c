@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:59:02 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/11 16:42:53 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/14 09:08:12 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ void print_stack(t_stack* stack)
 {
     int index;
 
-    ft_printf(1, "========\n");
     ft_printf(1, "top %d\n", stack->top);
     ft_printf(1, "bot %d\n", stack->bottom);
     ft_printf(1, "siz %d\n", stack->size);
-    ft_printf(1, "TOP====\n");
+    ft_printf(1, "TOP======\n");
     if (is_empty(stack))
     {
         ft_printf(1, "Stack is empty\n");
@@ -62,7 +61,7 @@ void print_stack(t_stack* stack)
         if (index == stack->top)
             break;
     }
-    ft_printf(1, "BOT====\n\n");
+    ft_printf(1, "BOT======\n\n");
 
 }
 
