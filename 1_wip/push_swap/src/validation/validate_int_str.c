@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 16:23:09 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:53:24 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	is_long_overflow(long nb, char c, int min)
 
 int	is_valid_int_string(const char *str)
 {
-	unsigned int i;
-	int min;
-	long nb;
+	unsigned int	i;
+	int				min;
+	long			nb;
 
 	nb = 0;
 	min = 1;

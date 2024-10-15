@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 16:28:58 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:51:05 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	validate_multiple_arguments(char **argv, int *numbers_count)
 
 int	validate_arguments(int argc, char **argv)
 {
-	int numbers_count;
+	int	numbers_count;
 
 	if (argc < 2 || !argv)
 		error(NULL);
