@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_s_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:21:54 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 // char *fspec = %[flags][min width][precision][conv specifier]
-char	*ftpf_get_empty_str(t_data *d)
+char	*ftpf_get_empty_str(t_printf *d)
 {
 	char	*str;
 
@@ -25,7 +25,7 @@ char	*ftpf_get_empty_str(t_data *d)
 	return (str);
 }
 
-char	*ftpf_get_null_str(t_data *d)
+char	*ftpf_get_null_str(t_printf *d)
 {
 	char	*str;
 
@@ -37,7 +37,7 @@ char	*ftpf_get_null_str(t_data *d)
 	return (str);
 }
 
-void	ftpf_putstr_special(t_data *d, int fd)
+void	ftpf_putstr_special(t_printf *d, int fd)
 {
 	if (d->cspec == 'c')
 		write(fd, d->insert, d->i_len);
@@ -66,7 +66,7 @@ void	ftpf_free_strs(size_t n, ...)
 	return ;
 }
 
-void	ftpf_free_data(t_data *d)
+void	ftpf_free_data(t_printf *d)
 {
 	if (d && d->fspec)
 	{

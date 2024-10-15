@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_apply_width_others.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:22:40 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	fill_str(char *s, size_t len, char c)
 	}
 }
 
-static void	process_nbrs(char **out, size_t a_len, t_data *d, t_flags f)
+static void	process_nbrs(char **out, size_t a_len, t_printf *d, t_pf_flags f)
 {
 	if (ft_strchr("di", d->cspec)
 		&& ft_strchr(" +-", (*out)[a_len]) && !f.just_l
@@ -58,7 +58,7 @@ static void	process_nbrs(char **out, size_t a_len, t_data *d, t_flags f)
 	}
 }
 
-static char	*apply_join(t_data *d, t_flags f, char *add)
+static char	*apply_join(t_printf *d, t_pf_flags f, char *add)
 {
 	char	*out;
 	size_t	a_len;
@@ -74,7 +74,7 @@ static char	*apply_join(t_data *d, t_flags f, char *add)
 	return (out);
 }
 
-char	*ftpf_apply_width_others(t_data *d, t_flags f)
+char	*ftpf_apply_width_others(t_printf *d, t_pf_flags f)
 {
 	char	*add;
 	size_t	a_len;

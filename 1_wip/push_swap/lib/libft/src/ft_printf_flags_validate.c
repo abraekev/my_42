@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_flags_validate.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:22:40 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_precision(char *s, size_t i)
 	return (i);
 }
 
-int	ftpf_validate_flags(char *s, t_flags *flags)
+int	ftpf_validate_flags(char *s, t_pf_flags *flags)
 {
 	size_t		i;
 

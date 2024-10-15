@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/04/19 16:31:22 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:21:54 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //	format specifier:
 //	char *fspec = %[flags][min width][precision][conversion specifier]
 
-static char	*get_fspecstr(t_data *d, size_t i)
+static char	*get_fspecstr(t_printf *d, size_t i)
 {
 	char	*convspecs;
 	char	*lastchr;
@@ -33,7 +33,7 @@ static char	*get_fspecstr(t_data *d, size_t i)
 	return (ft_substr(d->src, i, (lastchr - (d->src + i) + 1)));
 }
 
-static int	process_formatspec(t_data *d, int i, va_list args, int fd)
+static int	process_formatspec(t_printf *d, int i, va_list args, int fd)
 {
 	d->fspec = get_fspecstr(d, i);
 	if (!d->fspec)
@@ -47,7 +47,7 @@ static int	process_formatspec(t_data *d, int i, va_list args, int fd)
 	return (ftpf_free_data(d), d->f_len);
 }
 
-static void	init_d(const char *src, t_data *d, size_t *i)
+static void	init_d(const char *src, t_printf *d, size_t *i)
 {
 	*i = 0;
 	d->src = src;
@@ -61,7 +61,7 @@ static void	init_d(const char *src, t_data *d, size_t *i)
 
 int	ft_printf(int fd, const char *src, ...)
 {
-	t_data		d;
+	t_printf		d;
 	size_t		i;
 	int			jump;
 	va_list		args;

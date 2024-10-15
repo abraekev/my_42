@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/14 10:59:02 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/15 10:47:54 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,10 @@ SRC_LOG		= 	${SRC_MAIN}									\
 				logger/logger.c
 SRC_MAPPER	=	${SRC_LOG}									\
 				mapper/mapper_rank.c						
-SRC_UTILS	=	${SRC_MAPPER}								\
+SRC_OPTI	=	${SRC_MAPPER}								\
+				optimizer/optimizer.c						\
+				optimizer/optimizer_utils.c
+SRC_UTILS	=	${SRC_OPTI}									\
 				utils/error.c								\
 				utils/init_data.c							\
 				utils/malloc.c
@@ -51,6 +54,7 @@ SRC_SORT	=	$(SRC_STACK)								\
 				sorter/chunk_split.c						\
 				sorter/chunk_utils.c						\
 				sorter/easy_sort.c							\
+				sorter/edgecase.c							\
 				sorter/move.c								\
 				sorter/sort.c
 SRCS		=	$(addprefix	$(DIRSRC),	$(SRC_SORT))
@@ -96,7 +100,7 @@ fclean:		clean
 re:		fclean all
 
 test:	fclean
-			@echo "Running tests with empty CFLAGS"
+			@echo "Compiling with test CFLAGS"
 			@$(MAKE) CFLAGS="-g -I$(LIBFT_DIR)/include" all 
 			@$(MAKE) clean
 

@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:42:32 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/14 11:33:14 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 10:36:41 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void sort_three(t_ps* data)
+void sort_three(t_ps* data)
 {
     int	first;
     int	second;
@@ -63,8 +63,9 @@ void sort(t_ps* data)
         sort_three(data);
     else if (data->a.size == 5)
         sort_five(data);
+    else if (is_edgecase(data))
+        sort_edgecase(data);
     else
         chunk_sort(data);
-    // optimize_ops(data)
-    return;
+    optimize_ops(data);
 }

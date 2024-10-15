@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/02 17:30:36 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:35:07 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 //	STRUCTS & ENUMS
 /******************************************************************************/
 
-typedef struct s_flags
+typedef struct s_pf_flags
 {
 	char cspec;
 	int just_l;
@@ -46,9 +46,9 @@ typedef struct s_flags
 	int alt_print;
 	int min_width;
 	int precision;
-} t_flags;
+} t_pf_flags;
 
-typedef struct s_data
+typedef struct s_printf
 {
 	const char *src;
 	size_t s_len;
@@ -57,12 +57,13 @@ typedef struct s_data
 	size_t f_len;
 	char *insert;
 	size_t i_len;
-} t_data;
+} t_printf;
 
 typedef struct s_list
 {
 	void *content;
 	struct s_list *next;
+	struct s_list *prev;
 } t_list;
 
 //	DEFINITIONS
@@ -117,28 +118,28 @@ int ft_toupper(int c);
 char *get_next_line(int fd);
 
 //***	ft_printf
-char *ftpf_apply_precision_s(t_data *d, t_flags f);
-void ftpf_set_i_len(t_data *d);
-void ftpf_set_s_len_and_nullprotect(t_data *d);
-void ftpf_set_lengths(t_data *d);
-char *ftpf_apply_width_others(t_data *d, t_flags f);
-char *ftpf_apply_precision(t_data *d, t_flags f);
-char *ftpf_add_prefix(t_data *d, char *prefix);
-char *ftpf_apply_spaceplus(t_data *d, t_flags f);
-char *ftpf_apply_altprint(t_data *d, t_flags f);
-char *ftpf_get_vptr_base(uintptr_t nbr, t_data *d);
+char *ftpf_apply_precision_s(t_printf *d, t_pf_flags f);
+void ftpf_set_i_len(t_printf *d);
+void ftpf_set_s_len_and_nullprotect(t_printf *d);
+void ftpf_set_lengths(t_printf *d);
+char *ftpf_apply_width_others(t_printf *d, t_pf_flags f);
+char *ftpf_apply_precision(t_printf *d, t_pf_flags f);
+char *ftpf_add_prefix(t_printf *d, char *prefix);
+char *ftpf_apply_spaceplus(t_printf *d, t_pf_flags f);
+char *ftpf_apply_altprint(t_printf *d, t_pf_flags f);
+char *ftpf_get_vptr_base(uintptr_t nbr, t_printf *d);
 char *ftpf_get_uint_base(unsigned int nbr, char c);
-t_flags ftpf_initiate_flags(void);
-int ftpf_get_flags(char *fspec, t_flags *flags, va_list args);
-int ftpf_validate_flags(char *s, t_flags *flags);
+t_pf_flags ftpf_initiate_flags(void);
+int ftpf_get_flags(char *fspec, t_pf_flags *flags, va_list args);
+int ftpf_validate_flags(char *s, t_pf_flags *flags);
 char *ftpf_get_char(char c);
 char *ftpf_get_str(char *s);
-char *ftpf_get_insertstr(t_data *d, va_list args);
-char *ftpf_get_empty_str(t_data *d);
-char *ftpf_get_null_str(t_data *d);
-void ftpf_putstr_special(t_data *d, int fd);
+char *ftpf_get_insertstr(t_printf *d, va_list args);
+char *ftpf_get_empty_str(t_printf *d);
+char *ftpf_get_null_str(t_printf *d);
+void ftpf_putstr_special(t_printf *d, int fd);
 void ftpf_free_strs(size_t n, ...);
-void ftpf_free_data(t_data *d);
+void ftpf_free_data(t_printf *d);
 int ft_printf(int fd, const char *s, ...);
 
 #endif /*LIBFT_H*/

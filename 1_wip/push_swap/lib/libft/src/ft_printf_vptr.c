@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_vptr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:21:54 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*empty_ptr(void)
 	return (s);
 }
 
-char	*ftpf_get_vptr_base(uintptr_t nbr, t_data *d)
+char	*ftpf_get_vptr_base(uintptr_t nbr, t_printf *d)
 {
 	char	*base;
 

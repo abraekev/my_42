@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_apply_prec.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:22:40 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	apply_prec_nbr_newstr(char **s, char *abs, int len)
 	return (1);
 }
 
-static char	*apply_precision_nbr(char *s, t_flags f)
+static char	*apply_precision_nbr(char *s, t_pf_flags f)
 {
 	char	*abs;
 	int		len;
@@ -80,7 +80,7 @@ static char	*apply_precision_nbr(char *s, t_flags f)
 }
 
 //	only for: sdiuxX
-char	*ftpf_apply_precision(t_data *d, t_flags f)
+char	*ftpf_apply_precision(t_printf *d, t_pf_flags f)
 {
 	if (f.cspec == 's')
 		return (ftpf_apply_precision_s(d, f));

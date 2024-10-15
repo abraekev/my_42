@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/02/26 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:37:51 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}
-*/
 
 t_list	*ft_lstnew(void *content)
 {
@@ -29,5 +21,6 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	node -> content = content;
 	node -> next = NULL;
+	node -> prev = NULL;
 	return (node);
 }

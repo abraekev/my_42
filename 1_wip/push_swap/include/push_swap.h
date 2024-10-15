@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/14 11:27:43 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 10:36:03 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,16 @@ typedef struct s_push_swap_data
 // logger
 void log_ops(t_ps* data, t_op op);
 void print_log(t_ps* data);
+t_op op_from(t_list* node);
 
 // mapper
 int create_mapper(t_stack* stack);
 
 // optimizer
-t_op get_op(t_list* node);
-t_op neutral_op(t_op op);
+void	remove_op(t_list *to_delete);
+enum e_op	child_op(enum e_op first, enum e_op second);
+int	op_on_same_stack(enum e_op ref, enum e_op to_check);
+enum e_op	neutral_op(enum e_op op);
 void optimize_ops(t_ps* data);
 
 // push_swap
@@ -108,9 +111,12 @@ void chunk_sort_three(t_ps* data, t_chunk* chunk);
 void chunk_sort_two(t_ps* data, t_chunk* chunk);
 void chunk_split(t_ps* data, t_chunk* chunk, Destination* dest);
 void easy_sort(t_ps* data, t_chunk* chunk);
+int is_edgecase(t_ps* data);
 t_stack* loc_to_stack(t_ps* data, t_location loc);
 int move_from_to(t_ps* data, t_location from, t_location to);
 void sort(t_ps* data);
+void sort_edgecase(t_ps* data);
+void sort_three(t_ps* data);
 void split_max_reduction(t_ps* data, t_chunk* max);
 
 // stack

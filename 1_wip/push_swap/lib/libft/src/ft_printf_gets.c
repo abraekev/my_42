@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_gets.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:22:40 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ftpf_get_str(char *s)
 	return (out);
 }
 
-static char	*apply_flags(t_flags f, t_data *d)
+static char	*apply_flags(t_pf_flags f, t_printf *d)
 {
 	ftpf_set_i_len(d);
 	if (ft_strchr("sdiuxX", f.cspec))
@@ -60,9 +60,9 @@ static char	*apply_flags(t_flags f, t_data *d)
 	return (d->insert);
 }
 
-char	*ftpf_get_insertstr(t_data *d, va_list args)
+char	*ftpf_get_insertstr(t_printf *d, va_list args)
 {
-	t_flags	flags;
+	t_pf_flags	flags;
 
 	flags = ftpf_initiate_flags();
 	if (!ftpf_get_flags(d->fspec, &flags, args))

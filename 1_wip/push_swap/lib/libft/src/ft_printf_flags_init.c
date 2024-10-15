@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_flags_init.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abraekev <abraekev@student.s19.be>         +#+  +:+       +#+        */
+/*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/03/17 17:22:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 08:22:40 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // char *fspec = %[flags][min width][precision][conv specifier]
 
-t_flags	ftpf_initiate_flags(void)
+t_pf_flags	ftpf_initiate_flags(void)
 {
-	t_flags	flags;
+	t_pf_flags	flags;
 
 	flags.just_l = 0;
 	flags.pad_zero = 0;
@@ -29,7 +29,7 @@ t_flags	ftpf_initiate_flags(void)
 	return (flags);
 }
 
-static void	get_precision(t_flags *flags, char *fspec, va_list args)
+static void	get_precision(t_pf_flags *flags, char *fspec, va_list args)
 {
 	int	i;
 	int	nbr;
@@ -52,7 +52,7 @@ static void	get_precision(t_flags *flags, char *fspec, va_list args)
 		flags->precision = 0;
 }
 
-static void	get_min_width(t_flags *flags, char *fspec, va_list args)
+static void	get_min_width(t_pf_flags *flags, char *fspec, va_list args)
 {
 	int	i;
 	int	nbr;
@@ -79,7 +79,7 @@ static void	get_min_width(t_flags *flags, char *fspec, va_list args)
 		flags->min_width = nbr;
 }
 
-int	ftpf_get_flags(char *fspec, t_flags *flags, va_list args)
+int	ftpf_get_flags(char *fspec, t_pf_flags *flags, va_list args)
 {
 	if (!ftpf_validate_flags(fspec, flags))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 09:55:54 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/14 11:49:03 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 09:49:45 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void log_ops(t_ps* data, t_op op) {
 void print_log(t_ps* data)
 {
     ft_lstiter(data->ops, print_lst_item);
-    // ft_printf(1, "number count: %d\n", data->capacity);
-    // ft_printf(1, "operation count: %d\n", ft_lstsize(data->ops));
+}
+
+t_op op_from(t_list* node)
+{
+    return ((t_op)(uintptr_t)node->content);
 }
