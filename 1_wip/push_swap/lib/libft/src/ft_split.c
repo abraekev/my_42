@@ -31,8 +31,7 @@ static size_t	get_out_len(const char *str, char c)
 	return (len);
 }
 
-static int	assign_out_el(
-char **out, const char *str, size_t s_len, size_t i)
+static int	assign_out_el(char **out, const char *str, size_t s_len, size_t i)
 {
 	size_t	j;
 	size_t	s_start;
@@ -70,7 +69,7 @@ static int	do_split(char **out, const char *str, char c)
 		strlen = 0;
 		while (str[i] && str[i] != c)
 		{
-			strlen ++;
+			strlen++;
 			i++;
 		}
 		if (strlen)
@@ -84,9 +83,9 @@ static int	do_split(char **out, const char *str, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char		**out;
-	size_t		len;
-	size_t		i;
+	char	**out;
+	size_t	len;
+	size_t	i;
 
 	len = get_out_len(s, c) + 1;
 	out = malloc(sizeof(char *) * len);

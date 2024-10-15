@@ -18,13 +18,13 @@ int	ft_isalpha(int c)
 }
 
 /*
+#include <limits.h>
 #include <stdio.h>
 #include <strings.h>
-#include <limits.h>
 
 //	cc -Wall -Wextra -Werror
 
-int	main()
+int	main(void)
 {
 	printf(">%d<\n", ft_isalpha('a'));
 	printf(">%d<\n", ft_isalpha('3'));

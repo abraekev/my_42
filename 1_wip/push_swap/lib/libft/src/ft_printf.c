@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 16:58:41 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 08:21:54 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:31:10 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	init_d(const char *src, t_printf *d, size_t *i)
 
 int	ft_printf(int fd, const char *src, ...)
 {
-	t_printf		d;
+	t_printf	d;
 	size_t		i;
 	int			jump;
 	va_list		args;

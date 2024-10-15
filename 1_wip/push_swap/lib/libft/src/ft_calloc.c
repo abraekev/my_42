@@ -14,11 +14,13 @@
 
 /*	MANUAL:
 If nmemb or size is 0, then calloc() returns either NULL, or a unique pointer
-value that can later  be  successfully passed to free().
+value that can later  be  successfully passed to	free(void).
 
 If the multiplication of nmemb and size would result in integer overflow,
-then calloc() returns an error.  By  contrast,  an integer  overflow  would
-not be detected in the following call to malloc(), with the result that an 
+then	calloc(void) returns an error.  By  contrast,
+		 an integer  overflow  would
+not be detected in the following call to	malloc(void),
+		with the result that an
 incorrectly sized block of memory  would be allocated
 
 void* malloc(size_t size);

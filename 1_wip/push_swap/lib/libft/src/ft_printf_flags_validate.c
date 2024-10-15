@@ -34,7 +34,7 @@ static int	check_precision(char *s, size_t i)
 
 int	ftpf_validate_flags(char *s, t_pf_flags *flags)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 1;
 	while (ft_strchr("#0- +", s[i]))

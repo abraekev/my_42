@@ -19,8 +19,8 @@ The function expects a valid, null-terminated string as its argument.
 
 static int	is_white_space(const char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r')
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
 		return (1);
 	return (0);
 }
@@ -64,33 +64,45 @@ int	ft_atoi(const char *str)
 }
 
 /*
-#include <unistd.h>
-#include <strings.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
+#include <strings.h>
+#include <unistd.h>
 
 //	cc -Wall -Wextra -Werror ft_atoi.c -L. libft.a
 
 int	main(void)
 {
+	char	*str1;
+	char	*str2;
+	char	*str3;
+	char	*str4;
+	char	*str5;
+	char	*str6;
+	char	*str7;
+	char	*str8;
+	char	*str9;
+	char	*str10;
+	char	*str11;
+	char	*str12;
+	char	*str13;
 
-	char *str1 = " -000333rdd 0";
-	char *str2 = " 0000333rdd 0";
-	char *str3 = "+0000333rdd 0";
-	char *str4 = "-+00000333rdd 0";
-	char *str5 = "-2147483648";
-	char *str6 = "+2147483647";
-	char *str7 = "2147483648";
-	char *str8 = "2147483649";
-	char *str9 = "5721985738291";
-	char *str10 = "   -92233720368542347758070782623434";
-	char *str11 = "   -92233720368547758072341343118922";
-	char *str12 = "   922337203685477580723413249085823";
-	char *str13 = "   922337203685477580783234234245902";
+	str1 = " -000333rdd 0";
+	str2 = " 0000333rdd 0";
+	str3 = "+0000333rdd 0";
+	str4 = "-+00000333rdd 0";
+	str5 = "-2147483648";
+	str6 = "+2147483647";
+	str7 = "2147483648";
+	str8 = "2147483649";
+	str9 = "5721985738291";
+	str10 = "   -92233720368542347758070782623434";
+	str11 = "   -92233720368547758072341343118922";
+	str12 = "   922337203685477580723413249085823";
+	str13 = "   922337203685477580783234234245902";
 	char *array[]={str1, str2, str3, str4, str5, str6,
 	str7, str8, str9, str10, str11, str12, str13};
-
 	for (int i = 0; i < 13; i++)
 	{
 		printf("str:\t\"%s\"\nft_:\t%d\n", array[i], ft_atoi(array[i]));

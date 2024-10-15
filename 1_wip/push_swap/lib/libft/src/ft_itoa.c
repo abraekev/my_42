@@ -22,7 +22,7 @@ static size_t	itoa_len(int n)
 	while (n != 0)
 	{
 		n = n / 10;
-		len ++;
+		len++;
 	}
 	return (len);
 }

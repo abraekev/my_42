@@ -49,9 +49,8 @@ static void	fill_str(char *s, size_t len, char c)
 
 static void	process_nbrs(char **out, size_t a_len, t_printf *d, t_pf_flags f)
 {
-	if (ft_strchr("di", d->cspec)
-		&& ft_strchr(" +-", (*out)[a_len]) && !f.just_l
-		&& f.pad_zero && f.precision < 0)
+	if (ft_strchr("di", d->cspec) && ft_strchr(" +-", (*out)[a_len])
+		&& !f.just_l && f.pad_zero && f.precision < 0)
 	{
 		(*out)[0] = *(ft_strchr(" +-", (*out)[a_len]));
 		(*out)[a_len] = '0';
@@ -87,8 +86,8 @@ char	*ftpf_apply_width_others(t_printf *d, t_pf_flags f)
 	add = malloc(a_len + 1);
 	if (!add)
 		return (ftpf_free_data(d), NULL);
-	if (f.pad_zero && !f.just_l && f.precision < 0
-		&& ft_strchr("diuxX", f.cspec))
+	if (f.pad_zero && !f.just_l && f.precision < 0 && ft_strchr("diuxX",
+			f.cspec))
 		fill_str(add, a_len, '0');
 	else
 		fill_str(add, a_len, ' ');

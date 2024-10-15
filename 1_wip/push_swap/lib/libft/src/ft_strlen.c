@@ -23,13 +23,13 @@ size_t	ft_strlen(const char *s)
 }
 
 /*
+#include <limits.h>
 #include <stdio.h>
 #include <strings.h>
-#include <limits.h>
 
 //	cc -Wall -Wextra -Werror ft_strlen.c
 
-int	main()
+int	main(void)
 {
 	printf(">%lu<\n", ft_strlen("12345"));
 	return (0);

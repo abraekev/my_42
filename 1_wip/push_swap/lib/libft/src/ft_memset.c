@@ -29,17 +29,18 @@ void	*ft_memset(void *s, int c, size_t n)
 }
 
 /*
+#include <limits.h>
 #include <stdio.h>
 #include <strings.h>
-#include <limits.h>
 
 //	cc -Wall -Wextra -Werror ft_strlen.c
 
-int	main()
+int	main(void)
 {
 	char	str[] = "12345";
-	size_t	n = 6;
+	size_t	n;
 
+	n = 6;
 	printf(">%s<\n", (char *)ft_memset((void *)str, (int)'A' , n));
 	printf(">%s<\n", (char *)ft_memset(NULL, (int)'A' , n));
 	return (0);

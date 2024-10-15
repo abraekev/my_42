@@ -23,7 +23,7 @@ static size_t	get_vptr_len(uintptr_t nbr, size_t b_len)
 		return (1);
 	while (nbr != 0)
 	{
-		len ++;
+		len++;
 		nbr /= b_len;
 	}
 	return (len);

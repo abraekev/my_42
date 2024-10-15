@@ -15,7 +15,7 @@
 /*
 	size = size of the DESTINATION buffer.
 
-	the maximum number of characters that can be safely copied from src 
+	the maximum number of characters that can be safely copied from src
 	to dst, including the null terminator.
 */
 
@@ -40,18 +40,19 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 }
 
 /*
+#include <limits.h>
 #include <stdio.h>
 #include <strings.h>
-#include <limits.h>
 
 //	cc -Wall -Wextra -Werror ft_strlcpy.c -L. libft.a
 
-int	main()
+int	main(void)
 {
 	char	src[] = "testvalues";
-	size_t	dsize = 50;
+	size_t	dsize;
 	char	dst[dsize];
 
+	dsize = 50;
 	ft_strlcpy(dst, src, dsize);
 	printf(">%s<\n", dst);
 	return (0);
