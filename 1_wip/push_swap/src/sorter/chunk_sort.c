@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:05:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 12:23:09 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:25:58 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	rec_chunk_sort(t_ps *data, t_chunk *chunk)
 {
-	Destination	dest;
+	t_destination	dest;
 
 	chunk_to_the_top(data, chunk);
 	easy_sort(data, chunk);

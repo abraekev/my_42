@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:57:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 12:30:21 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:25:58 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	set_third_pivots(t_location loc, int chunk_size, int *pivot_1,
 		*pivot_2 = chunk_size / 2;
 }
 
-void	chunk_split(t_ps *data, t_chunk *chunk, Destination *dest)
+void	chunk_split(t_ps *data, t_chunk *chunk, t_destination *dest)
 {
 	int	pivot_1;
 	int	pivot_2;

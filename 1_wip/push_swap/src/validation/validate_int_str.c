@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 12:53:24 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:04:52 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	is_valid_int_string(const char *str)
 	{
 		if (is_long_overflow(nb, str[i], min))
 			return (0);
-		nb = (nb * 10) + (str[i] - '0');
-		i++;
+		nb = (nb * 10) + (str[i++] - '0');
 	}
 	while (is_white_space(str[i]))
 		i++;

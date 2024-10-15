@@ -6,11 +6,21 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:14:38 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 12:52:33 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:29:10 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	*init_compare(t_ps *data)
+{
+	int	*compare;
+
+	compare = malloc((data->capacity) * sizeof(int));
+	if (!compare)
+		error(data);
+	return (compare);
+}
 
 void	duplicate_check(t_ps *data, t_stack *stack)
 {
@@ -19,9 +29,7 @@ void	duplicate_check(t_ps *data, t_stack *stack)
 	int	i;
 	int	j;
 
-	compare = malloc((data->capacity) * sizeof(int));
-	if (!compare)
-		error(data);
+	compare = init_compare(data);
 	i = stack->bottom;
 	compare_size = 0;
 	while (1)
