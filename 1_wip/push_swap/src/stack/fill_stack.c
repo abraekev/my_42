@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:47:23 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 11:55:44 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:44:50 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	fill_stack_fail(char **strs, int index, t_ps *data)
 
 void	fill_stack(int argc, char **argv, t_ps *data)
 {
-	char **args;
-	int numbers_count;
+	char	**args;
+	int		numbers_count;
 
 	numbers_count = data->capacity;
 	if (argc == 2)

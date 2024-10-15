@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:56:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/11 17:18:50 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:47:32 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	push(t_ps *data, t_stack *stack, int value)
 
 int	pop(t_ps *data, t_stack *stack)
 {
-	int result;
-	int i;
+	int	result;
+	int	i;
 
 	if (is_empty(stack))
 		error(data);
