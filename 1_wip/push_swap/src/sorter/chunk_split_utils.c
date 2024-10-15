@@ -6,60 +6,60 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:14:17 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 12:05:41 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:31:24 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void sort_three_numbers(int* a, int* b, int* c)
+static void	sort_three_numbers(int *a, int *b, int *c)
 {
-    int temp;
+	int	temp;
 
-    if (*a > *b)
-    {
-        temp = *a;
-        *a = *b;
-        *b = temp;
-    }
-    if (*a > *c)
-    {
-        temp = *a;
-        *a = *c;
-        *c = temp;
-    }
-    if (*b > *c)
-    {
-        temp = *b;
-        *b = *c;
-        *c = temp;
-    }
+	if (*a > *b)
+	{
+		temp = *a;
+		*a = *b;
+		*b = temp;
+	}
+	if (*a > *c)
+	{
+		temp = *a;
+		*a = *c;
+		*c = temp;
+	}
+	if (*b > *c)
+	{
+		temp = *b;
+		*b = *c;
+		*c = temp;
+	}
 }
 
-static int is_consecutive(int a, int b, int c, int d)
+static int	is_consecutive(int a, int b, int c, int d)
 {
-    sort_three_numbers(&a, &b, &c);
-    return ((b - a == 1) && (c - b == 1) && (d - c) == 1);
+	sort_three_numbers(&a, &b, &c);
+	return ((b - a == 1) && (c - b == 1) && (d - c) == 1);
 }
 
-int a_partly_sort(t_ps* data, int from)
+int	a_partly_sort(t_ps *data, int from)
 {
-    int		i;
-    t_stack* a;
-    int		value;
+	int		i;
+	t_stack	*a;
+	int		value;
 
-    a = &data->a;
-    i = a->top;
-    while (--from)
-        i = next_down(a, i);
-    while (a->stack[i] != data->a.size)
-    {
-        value = a->stack[i];
-        i = next_down(a, i);
-        if (a->stack[i] != value + 1)
-            return (0);
-    }
-    return (1);
+	a = &data->a;
+	i = a->top;
+	while (--from)
+		i = next_down(a, i);
+	while (a->stack[i] != data->a.size)
+	{
+		value = a->stack[i];
+		i = next_down(a, i);
+		if (a->stack[i] != value + 1)
+			return (0);
+	}
+	return (1);
 }
 
 void	split_max_reduction(t_ps *data, t_chunk *max)

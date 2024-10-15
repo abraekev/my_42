@@ -12,31 +12,31 @@
 
 #include "push_swap.h"
 
-void duplicate_check(t_ps *data, t_stack *stack)
+void	duplicate_check(t_ps *data, t_stack *stack)
 {
-    int *compare;
-    int compare_size;
-    int i;
-    int j;
+	int *compare;
+	int compare_size;
+	int i;
+	int j;
 
-    compare = malloc((data->capacity) * sizeof(int));
-    if (!compare)
-        error(data);
-    i = stack->bottom;
-    compare_size = 0;
-    while (1)
-    {
-        j = 0;
-        while (j < compare_size)
-            if (stack->stack[i] == compare[j++])
-            {
-                free(compare);
-                error(data);
-            }
-        compare[compare_size++] = stack->stack[i];
-        i = next_down(stack, i);
-        if (i == stack->bottom)
-            break;
-    }
-    free(compare);
+	compare = malloc((data->capacity) * sizeof(int));
+	if (!compare)
+		error(data);
+	i = stack->bottom;
+	compare_size = 0;
+	while (1)
+	{
+		j = 0;
+		while (j < compare_size)
+			if (stack->stack[i] == compare[j++])
+			{
+				free(compare);
+				error(data);
+			}
+		compare[compare_size++] = stack->stack[i];
+		i = next_down(stack, i);
+		if (i == stack->bottom)
+			break ;
+	}
+	free(compare);
 }

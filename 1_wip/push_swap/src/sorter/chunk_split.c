@@ -6,20 +6,21 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 09:57:22 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/10 11:55:44 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:30:21 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void innit_size(t_chunk *min, t_chunk *mid, t_chunk *max)
+static void	innit_size(t_chunk *min, t_chunk *mid, t_chunk *max)
 {
-    min->size = 0;
-    mid->size = 0;
-    max->size = 0;
+	min->size = 0;
+	mid->size = 0;
+	max->size = 0;
 }
 
-static void set_split_loc(t_location loc, t_chunk *min, t_chunk *mid, t_chunk *max)
+static void	set_split_loc(t_location loc, t_chunk *min, t_chunk *mid,
+		t_chunk *max)
 {
 	if (loc == TOP_A)
 	{
@@ -47,8 +48,8 @@ static void set_split_loc(t_location loc, t_chunk *min, t_chunk *mid, t_chunk *m
 	}
 }
 
-static void set_third_pivots(
-    t_location loc, int chunk_size, int *pivot_1, int *pivot_2)
+static void	set_third_pivots(t_location loc, int chunk_size, int *pivot_1,
+		int *pivot_2)
 {
 	*pivot_2 = chunk_size / 3;
 	if (loc == TOP_A || loc == BOTTOM_A)
@@ -61,7 +62,7 @@ static void set_third_pivots(
 		*pivot_2 = chunk_size / 2;
 }
 
-void chunk_split(t_ps *data, t_chunk *chunk, Destination *dest)
+void	chunk_split(t_ps *data, t_chunk *chunk, Destination *dest)
 {
 	int	pivot_1;
 	int	pivot_2;

@@ -12,24 +12,24 @@
 
 #include "push_swap.h"
 
-int next_down(t_stack* stack, int index)
+int	next_down(t_stack *stack, int index)
 {
-    if (stack->size == 0)
-        return (index);
-    return (index + 1) % stack->size;
+	if (stack->size == 0)
+		return (index);
+	return ((index + 1) % stack->size);
 }
 
-int next_up(t_stack* stack, int index)
+int	next_up(t_stack *stack, int index)
 {
-    if (stack->size == 0)
-        return (index);
-    return (index - 1 + stack->size) % stack->size;
+	if (stack->size == 0)
+		return (index);
+	return ((index - 1 + stack->size) % stack->size);
 }
 
-int value(t_stack* stack, int position)
+int	value(t_stack *stack, int position)
 {
-    int index;
+	int index;
 
-    index = (stack->top + position - 1 + stack->size) % stack->size;
-    return (stack->stack[index]);
+	index = (stack->top + position - 1 + stack->size) % stack->size;
+	return (stack->stack[index]);
 }

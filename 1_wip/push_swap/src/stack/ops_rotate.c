@@ -12,32 +12,32 @@
 
 #include "push_swap.h"
 
-static void ops_rotate(t_stack* stack)
+static void	ops_rotate(t_stack *stack)
 {
-    if (stack->size < 2)
-        return;
-    stack->top = next_down(stack, stack->top);
-    stack->bottom = next_down(stack, stack->bottom);
+	if (stack->size < 2)
+		return ;
+	stack->top = next_down(stack, stack->top);
+	stack->bottom = next_down(stack, stack->bottom);
 }
 
-void ra(t_ps* data)
+void	ra(t_ps *data)
 {
-    ops_rotate(&data->a);
-    if (data->log_ops)
-        log_ops(data, RA);
+	ops_rotate(&data->a);
+	if (data->log_ops)
+		log_ops(data, RA);
 }
 
-void rb(t_ps* data)
+void	rb(t_ps *data)
 {
-    ops_rotate(&data->b);
-    if (data->log_ops)
-        log_ops(data, RB);
+	ops_rotate(&data->b);
+	if (data->log_ops)
+		log_ops(data, RB);
 }
 
-void rr(t_ps* data)
+void	rr(t_ps *data)
 {
-    ops_rotate(&data->a);
-    ops_rotate(&data->b);
-    if (data->log_ops)
-        log_ops(data, RR);
+	ops_rotate(&data->a);
+	ops_rotate(&data->b);
+	if (data->log_ops)
+		log_ops(data, RR);
 }

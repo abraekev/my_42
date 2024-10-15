@@ -12,68 +12,67 @@
 
 #include "push_swap.h"
 
-int is_sorted(t_ps* data)
+int	is_sorted(t_ps *data)
 {
-    int	i;
-    int	rank;
+	int	i;
+	int	rank;
 
-    i = data->a.top;
-    rank = 1;
-    while (rank <= data->a.size)
-    {
-        if (data->a.stack[i] != rank)
-            return (0);
-        rank++;
-        i = next_down(&data->a, i);
-    }
-    return (1);
+	i = data->a.top;
+	rank = 1;
+	while (rank <= data->a.size)
+	{
+		if (data->a.stack[i] != rank)
+			return (0);
+		rank++;
+		i = next_down(&data->a, i);
+	}
+	return (1);
 }
 
-int is_full(t_ps* data, t_stack* stack)
+int	is_full(t_ps *data, t_stack *stack)
 {
-    return stack->size == data->capacity;
+	return (stack->size == data->capacity);
 }
 
-int is_empty(t_stack* stack)
+int	is_empty(t_stack *stack)
 {
-    return stack->size == 0;
+	return (stack->size == 0);
 }
 
-void print_stack(t_stack* stack)
+void	print_stack(t_stack *stack)
 {
-    int index;
+	int	index;
 
-    ft_printf(1, "top %d\n", stack->top);
-    ft_printf(1, "bot %d\n", stack->bottom);
-    ft_printf(1, "siz %d\n", stack->size);
-    ft_printf(1, "TOP======\n");
-    if (is_empty(stack))
-    {
-        ft_printf(1, "Stack is empty\n");
-        return;
-    }
-
-    index = stack->top;
-    while (1)
-    {
-        ft_printf(1, "[%d]\t%d\n", index, stack->stack[index]);
-        index = next_down(stack, index);
-        if (index == stack->top)
-            break;
-    }
-    ft_printf(1, "BOT======\n");
+	ft_printf(1, "top %d\n", stack->top);
+	ft_printf(1, "bot %d\n", stack->bottom);
+	ft_printf(1, "siz %d\n", stack->size);
+	ft_printf(1, "TOP======\n");
+	if (is_empty(stack))
+	{
+		ft_printf(1, "Stack is empty\n");
+		return ;
+	}
+	index = stack->top;
+	while (1)
+	{
+		ft_printf(1, "[%d]\t%d\n", index, stack->stack[index]);
+		index = next_down(stack, index);
+		if (index == stack->top)
+			break ;
+	}
+	ft_printf(1, "BOT======\n");
 }
 
-void free_stack(t_stack* stack)
+void	free_stack(t_stack *stack)
 {
-    if (!stack)
-        return;
-    if (stack->stack)
-        free(stack->stack);
-    if (stack->mapper)
-        free(stack->mapper);
-    stack->stack = NULL;
-    stack->mapper = NULL;
-    stack->top = 0;
-    stack->size = 0;
+	if (!stack)
+		return ;
+	if (stack->stack)
+		free(stack->stack);
+	if (stack->mapper)
+		free(stack->mapper);
+	stack->stack = NULL;
+	stack->mapper = NULL;
+	stack->top = 0;
+	stack->size = 0;
 }

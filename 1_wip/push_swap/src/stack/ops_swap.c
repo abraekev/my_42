@@ -12,35 +12,35 @@
 
 #include "push_swap.h"
 
-static void ops_swap(t_stack* stack)
+static void	ops_swap(t_stack *stack)
 {
-    int	tmp;
+	int	tmp;
 
-    if (stack->size < 2)
-        return;
-    tmp = stack->stack[next_down(stack, stack->top)];
-    stack->stack[next_down(stack, stack->top)] = stack->stack[stack->top];
-    stack->stack[stack->top] = tmp;
+	if (stack->size < 2)
+		return ;
+	tmp = stack->stack[next_down(stack, stack->top)];
+	stack->stack[next_down(stack, stack->top)] = stack->stack[stack->top];
+	stack->stack[stack->top] = tmp;
 }
 
-void sa(t_ps* data)
+void	sa(t_ps *data)
 {
-    ops_swap(&data->a);
-    if (data->log_ops)
-        log_ops(data, SA);
+	ops_swap(&data->a);
+	if (data->log_ops)
+		log_ops(data, SA);
 }
 
-void sb(t_ps* data)
+void	sb(t_ps *data)
 {
-    ops_swap(&data->b);
-    if (data->log_ops)
-        log_ops(data, SB);
+	ops_swap(&data->b);
+	if (data->log_ops)
+		log_ops(data, SB);
 }
 
-void ss(t_ps* data)
+void	ss(t_ps *data)
 {
-    ops_swap(&data->a);
-    ops_swap(&data->b);
-    if (data->log_ops)
-        log_ops(data, SS);
+	ops_swap(&data->a);
+	ops_swap(&data->b);
+	if (data->log_ops)
+		log_ops(data, SS);
 }

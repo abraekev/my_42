@@ -12,14 +12,14 @@
 
 #include "push_swap.h"
 
-void init_data(int capacity, int argc, char** argv, t_ps* data)
+void	init_data(int capacity, int argc, char **argv, t_ps *data)
 {
-    data->capacity = capacity;
-    data->log_ops = 1;
-    data->ops = NULL;
-    init_stack(data, &data->a, capacity);
-    init_stack(data, &data->b, capacity);
-    fill_stack(argc, argv, data);
-    duplicate_check(data, &data->a);
-    create_mapper(&data->a);
+	data->capacity = capacity;
+	data->log_ops = 1;
+	data->ops = NULL;
+	init_stack(data, &data->a, capacity);
+	init_stack(data, &data->b, capacity);
+	fill_stack(argc, argv, data);
+	duplicate_check(data, &data->a);
+	create_mapper(&data->a);
 }

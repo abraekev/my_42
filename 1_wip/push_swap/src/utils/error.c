@@ -12,17 +12,17 @@
 
 #include "push_swap.h"
 
-void free_data(t_ps *data)
+void	free_data(t_ps *data)
 {
-    if (!data)
-        return;
-    free_stack(&data->a);
-    free_stack(&data->b);
+	if (!data)
+		return ;
+	free_stack(&data->a);
+	free_stack(&data->b);
 }
 
-void error(t_ps *data)
+void	error(t_ps *data)
 {
-    free_data(data);
-    ft_printf(2, "Error\n");
-    exit(EXIT_FAILURE);
+	free_data(data);
+	ft_printf(2, "Error\n");
+	exit(EXIT_FAILURE);
 }

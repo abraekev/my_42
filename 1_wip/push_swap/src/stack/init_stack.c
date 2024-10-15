@@ -12,14 +12,14 @@
 
 #include "push_swap.h"
 
-void init_stack(t_ps *data, t_stack *stack, int size)
+void	init_stack(t_ps *data, t_stack *stack, int size)
 {
-    stack->stack = malloc(sizeof(int) * size);
-    if (!stack->stack)
-        error(data);
-    stack->mapper = NULL;
-    stack->top = 0;
-    stack->bottom = 0;
-    stack->size = 0;
-    ft_memset(stack->stack, 0, sizeof(int) * size);
+	stack->stack = malloc(sizeof(int) * size);
+	if (!stack->stack)
+		error(data);
+	stack->mapper = NULL;
+	stack->top = 0;
+	stack->bottom = 0;
+	stack->size = 0;
+	ft_memset(stack->stack, 0, sizeof(int) * size);
 }
