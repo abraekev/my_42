@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Running Makefile"
-make test
+make re
 
 #if the exit code of the previous command is not 0, then…
 if [ $? -ne 0 ]; then

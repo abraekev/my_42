@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 13:52:07 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 12:51:05 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:36:13 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	validate_single_argument(char *arg, int *numbers_count)
 {
 	char	**numbers_string;
-	int		i;
 
 	numbers_string = ft_split(arg, ' ');
 	*numbers_count = 0;
