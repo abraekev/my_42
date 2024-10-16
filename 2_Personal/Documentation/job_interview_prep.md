@@ -87,4 +87,13 @@ return <>hello, {name}</>;
 > Props worden doorgegeven door parent components terwijl state door de component zelf beheerd wordt.
 
 ### Wat is context in React?
+> Context laat je toe om globale data zoals thema's of userdata overal beschikbaar te maken. (props zijn dus hier niet nodig)
+
+### Hoe kun je een React app optimizen voor betere prestaties?
+> Het doel is om onnodige rerenders te voorkomen. Goed plannen waar je props of hooks gebruikt (ref. useUserManager stageproject!). Gebruik useMemo (memoize a value) en useCallback (memoize a function).
+
+### Hoe gebruik je forms in React?
+> Dit kan via State managment of mbhv. libraries (eg. AntD Form Component).
+
+
 
