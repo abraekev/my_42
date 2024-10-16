@@ -56,6 +56,14 @@ using (var file = new StreamWriter("file.txt"))
 }  // StreamWriter wordt automatisch vrijgegeven zodra dit block wordt verlaten
 ```
 
+### Wat is middleware in asp.net?
+> mw zijn componenten in de http-request pipeline die verzoeken en reacties verwerken. voorbeelden hiervan zijn: Logging, Authentication, CORS, Exception Handling.
+
+### Wat is dependency injection?
+> dependencies (objects of services) worden aangeleverd (injected) aan de class dat ze nodig heeft ipv. dat een class ze zelf creeert. De instanties van de dependencies worden bijgehouden in een dependency container, ook wel de IoC-Container (Inversion of Control) genoemd.
+
+
+
 ## React and Typescript
 
 ### Wat is het verschil tussen een functionele en een class component in React?
