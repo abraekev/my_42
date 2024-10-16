@@ -68,10 +68,23 @@ using (var file = new StreamWriter("file.txt"))
 > useEffect laat je toe om side-effects (bv data fetching) uit te voeren. Belangrijk is hier dat de code in een useEffect wordt uitgevoerd na de re-render.
 
 ### Hoe werkt routing in React met React Router?
->
+> Met React Router kan je URLs definieren om tussen verschillende componenten te navigeren.
 
+### Wat is TypeScript en waarom gebruiken we het met React?
+> Typescript is een superset van javascript met typecontrole
 
+### Hoe definieer je een type voor een prop in TypeScript?
+> Dit kan via Interfaces of Type-aliases.
+```typescript
+interface HeaderProps { name: string };
 
+const Header = ({ name } : HeaderProps) => {
+return <>hello, {name}</>;
+}
+```
 
+### Wat is het verschil tussen props en state in React?
+> Props worden doorgegeven door parent components terwijl state door de component zelf beheerd wordt.
 
+### Wat is context in React?
 
