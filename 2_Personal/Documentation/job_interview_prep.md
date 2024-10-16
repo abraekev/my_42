@@ -1,5 +1,7 @@
 ←, ↑, →, ↓  Unicode arrows
-# Job Interview prep (C# and React typescript)
+# Job Interview prep
+
+## C# and ASP.NET
 
 ### Wat is het verschil tussen een struct en een class in c#?
 > - Een struct is een value type → stack.
@@ -26,3 +28,50 @@ Func<int, int> square = x => x*x;
 > De garbage collector beheert het geheugen door objecten die niet meer gebruikt worden, automatisch vrij te geven.
 
 ### Wat is een delegate in C#?
+> Een delegate is een type dat een referentie naar een method opslaat, similar to a pointer.
+```csharp
+:: example delegate
+public delegate void PrintMethod(string message);
+
+public static void HelloWorld(string message)
+{
+    Console.WriteLine("Hello World");
+    Console.WriteLine(message);
+}
+
+PrintMethod pm = HelloWorld;
+pm("This is a message!"); 
+```
+
+### Wat is een nullable type in C#?
+> nullable types kunnen een waarde of 'niks', aka 'null' bevatten. types kunnen nullable gemaakt worden met de ? operator.
+
+### Waarvoor dient het 'using' statement?
+> using zorgt ervoor dat een object automatisch vrijgegeven wordt wanneer het buiten scope is. Dit voorkomt geheugenlekken en zorgt voor beter resourcebeheer
+```csharp
+// example of using
+using (var file = new StreamWriter("file.txt"))
+{
+    file.WriteLine("Hello, world!");
+}  // StreamWriter wordt automatisch vrijgegeven zodra dit block wordt verlaten
+```
+
+## React and Typescript
+
+### Wat is het verschil tussen een functionele en een class component in React?
+> Components bepalen hoe de UI eruit al zien gebaseerd op state en props. Functionele comps worden tegenwoordig meer gebruikt, dankzij de introductie van hooks. Hierdoor zijn functionele componentts makkelijker en eenvoudiger geworden. Functionele components retourneren JSX.
+
+### Wat is useState in React?
+> useState laat je toe om statevariables in functionele componenten te gebruiken.
+
+### Wat is useEffect in React?
+> useEffect laat je toe om side-effects (bv data fetching) uit te voeren. Belangrijk is hier dat de code in een useEffect wordt uitgevoerd na de re-render.
+
+### Hoe werkt routing in React met React Router?
+>
+
+
+
+
+
+
