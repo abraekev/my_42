@@ -79,10 +79,16 @@ if (!ModelState.IsValid){
 > Je kan Middleware Components toevoegen zoals AddAuthentication, AddAuthorization, MSAL (MS authentication Lib.)
 
 ### Wat zijn Razor Pages?
->
+> Razo pages is een manier om aan web development te doen in asp.net. het is een page-focused framework bovenop asp.net.
 
+### Wat is het verschil tussen `ViewResult` en `JsonResult`?
+> Classes die gebruikt worden als return value bij een IActionResult method. ViewResult retourneert een html-view en JsonResult retourneert een JSON-object.
 
+### Hoe implementeer je logging?
+> via een middleware component en daarna via dependency injection.
 
+### Wat is Routing in asp.net core?
+> mbh. routing kan je bepalen via welke urls welke controller actionmethods aangesproken worden.
 
 
 
