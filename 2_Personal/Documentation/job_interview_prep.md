@@ -23,6 +23,9 @@ Func<int, int> square = x => x*x;
 ### Wat is het verschil tussen een abstracte klasse en een interface in C#?
 > Een abstracte class kan zowel members met als zonder implementatie hebben, terwijl een interface enkel zonder implementatie bevat. abstract classes dienen kunnen niet geinstantieerd worden en dienen voornamelijk als een gedeeld startpunt voor de afgeleide classes.
 
+### Wat zijn static Classes?
+> Static classes zijn classes die geen instantie vereissen. Deze bevatten dan allemaal static (niet veranderende) members. Bv. de class Math.
+
 ### Hoe werkt garbage collection in C#?
 > De garbage collector beheert het geheugen door objecten die niet meer gebruikt worden, automatisch vrij te geven.
 
