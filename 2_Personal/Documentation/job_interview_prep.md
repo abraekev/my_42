@@ -13,7 +13,7 @@
 > Deze dienen voor asynchrone code te schrijven. await laat toe om calls te maken naar functies die gedefinieerd zijn met het async sleutelwoord. Asynchrone functies laten je toe om taken uit te voeren zonder de hoofdthread the blokkeren.
 
 ### Wat is een lambda expressie in C#?
-> Een beknopte manier om anonieme functies te definieren.
+> Een beknopte manier om anonieme functies te definieren. Dit wordt bv. gebruikt in het configuren van options van services.
 
 ```csharp
 // example lambda expression
