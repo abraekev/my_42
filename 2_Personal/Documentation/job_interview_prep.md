@@ -62,6 +62,30 @@ using (var file = new StreamWriter("file.txt"))
 ### Wat is dependency injection?
 > dependencies (objects of services) worden aangeleverd (injected) aan de class dat ze nodig heeft ipv. dat een class ze zelf creeert. De instanties van de dependencies worden bijgehouden in een dependency container, ook wel de IoC-Container (Inversion of Control) genoemd.
 
+### Wat is Entity Framework?
+> EF is een ORM (Object relational Mapping) waarmee je data kunt beheren als objecten ipv. via SQL queries.
+
+### Wat is het verschil tss `IActionResult` en `ActionResult<T>` in asp.netcore?
+> IActionResult kan elke type retourneren (dmv. *Result classes) terwijl een een ActionResult<T> enkel een actie van het type T kan retourneren.
+
+### Wat is een `ModelState` in asp.net?
+> In de context van validatie, Modelstate controleert of de verkregen gegevens geldig zijn op basis van de definitie van het model.
+```csharp
+if (!ModelState.IsValid){
+    return BadRequest(ModelState);}
+```
+
+### Hoe voeg je authenticatie / authorisatie toe in asp.net?
+> Je kan Middleware Components toevoegen zoals AddAuthentication, AddAuthorization, MSAL (MS authentication Lib.)
+
+### Wat zijn Razor Pages?
+>
+
+
+
+
+
+
 
 
 ## React and Typescript
