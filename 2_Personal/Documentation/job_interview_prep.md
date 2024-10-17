@@ -1,4 +1,3 @@
-←, ↑, →, ↓  Unicode arrows
 # Job Interview prep
 
 ## C# and ASP.NET
@@ -91,7 +90,8 @@ if (!ModelState.IsValid){
 > mbh. routing kan je bepalen via welke urls welke controller actionmethods aangesproken worden.
 
 
-
+<br>
+<br>
 
 
 ## React and Typescript
@@ -132,6 +132,63 @@ return <>hello, {name}</>;
 
 ### Hoe gebruik je forms in React?
 > Dit kan via State managment of mbhv. libraries (eg. AntD Form Component).
+
+### Wat is het verschil tss let, const en var in TS?
+> let en const zijn block scoped, terwijl var function scoped is. const is immutable.
+
+### Wat is een interface in TS?
+> Een interface definieert de structuur van een object en geeft aan welke properties en methods het object zou moeten hebben.
+
+### Wat is een union type in TS?
+> Union types laten toe om meerdere types toe te kennen aan een variable. Bv. const x : string | number;
+
+### Wat is een tuple in TS?
+> Een tuple is een array met een vaste volgorde en type van elementen.
+```typescript
+let person : [string, number] = ["John", 30];                      // a tuple
+let people : [string, number][] =  [["John", 30], ["Amelia", 24]]; // an array of tuples
+```
+
+### Wat is het verschil tussen een `type alias` en een `interface`?
+> Beide definieren de structuur van een type of object, maar type alias kan meer complexe structuren definieren (zoals unions).
+
+### Hoe werkt Generics in TS?
+> Met Generics wordt bedoeld om het sleutelwoord `T` te gebruiken in het coderen van oa. methods en interfaces. Generics maakt code herbruikbaar door types parametrisch te maken.
+```typescript
+const mapApiResponse = <T>(data:T, error:string, info:string): ApiResponse<T> => {
+    return new ApiResponse<T>({
+        data:data,
+        info:info,
+        error:error
+    });
+};
+```
+
+### Wat zijn enums in Typescript?
+> enums zijn een makkelijke manier om een verzameling van constante waarden te definieren. bv zoals `enum Weekdays { Sunday = 0, Monday = 1, ...}`
+
+### Wat is `type assertion` in TS?
+> met type assertion kan je expliciet aanduiden welke type of interface een waarde heeft dmv. `:` sleutelwoord.
+
+### Hoe definieer je `readonly` eigenschappen in TS?
+> Het readonly sleutelwoord zorgt ervoor dat de waarde van een eigenschap niet kan worden gewijzigd. dit moet aangeduid worden in de definitie van de interface.
+```typescript
+interface User {
+    readonly userId:number;
+    name: string;
+}
+```
+
+### Wat is async/await in Typescript?
+> Dit zijn syntactische hulpmiddelen voor het schrijven van asynchrone code die gebruik maakt van `Promises`.
+```typescript
+const GetApiResponse = async (url :string) : Promise<ApiResponse> => {
+    const response = await axios.get(url);
+    return response;
+}
+```
+
+
 
 
 
