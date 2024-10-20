@@ -136,6 +136,9 @@ return <>hello, {name}</>;
 ### Hoe gebruik je forms in React?
 > Dit kan via State managment of mbhv. libraries (eg. AntD Form Component).
 
+### Wat zijn React Refs en Forward Refs?
+> ??
+
 ### Wat is het verschil tss let, const en var in TS?
 > let en const zijn block scoped, terwijl var function scoped is. const is immutable.
 
