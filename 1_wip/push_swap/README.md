@@ -22,5 +22,5 @@
 
 #### Practical pseudo code
 - find the cheapest node to push.
-    1. calc the target nodes for each node in a. **target node** = 'closest smaller number to the a node', else its the max value in b.
-    2. **push cost** = (# ops to bring node a on top) + (# ops to bring node a's target node on top)
+    - calc the target nodes for each node in a. **target node** = 'closest smaller number to the a node', else its the max value in b.
+    - **push cost** = (# ops to bring node a on top) + (# ops to bring node a's target node on top)
