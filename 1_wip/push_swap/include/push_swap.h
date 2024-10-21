@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 14:26:00 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:31:46 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_split_destination
 
 typedef struct s_circular_array_stack
 {
+	int			cheapest_rank;
+	int			cheapest_ops;
 	int			*stack;
 	int			*mapper;
 	int			top;
@@ -101,23 +103,9 @@ void			optimize_ops(t_ps *data);
 int				main(int argc, char **argv);
 
 // sorter
-int				a_partly_sort(t_ps *data, int from);
-void			chunk_sort(t_ps *data);
-void			chunk_to_the_top(t_ps *data, t_chunk *chunk);
-int				chunk_value(t_ps *data, t_chunk *chunk, int n);
-int				chunk_max_value(t_ps *data, t_chunk *chunk);
-void			chunk_sort_one(t_ps *data, t_chunk *chunk);
-void			chunk_sort_three(t_ps *data, t_chunk *chunk);
-void			chunk_sort_two(t_ps *data, t_chunk *chunk);
-void			chunk_split(t_ps *data, t_chunk *chunk, t_destination *dest);
-void			easy_sort(t_ps *data, t_chunk *chunk);
-int				is_edgecase(t_ps *data);
-t_stack			*loc_to_stack(t_ps *data, t_location loc);
-int				move_from_to(t_ps *data, t_location from, t_location to);
 void			sort(t_ps *data);
-void			sort_edgecase(t_ps *data);
+void			sort_stacks(t_ps *data);
 void			sort_three(t_ps *data);
-void			split_max_reduction(t_ps *data, t_chunk *max);
 
 // stack
 void			fill_stack(int argc, char **argv, t_ps *data);
