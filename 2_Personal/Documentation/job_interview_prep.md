@@ -137,8 +137,43 @@ return <>hello, {name}</>;
 > Dit kan via State managment of mbhv. libraries (eg. AntD Form Component).
 
 ### Wat zijn React Refs en Forward Refs?
-> ??
+> React Refs worden gebruikt om direct toegang te krijgen tot DOM-elementen of React-componenten binnen een functionele component.
+```tsx
+// Ref example
+const RefExample = () => {
+    const inputRef = useRef(null);
 
+    const focusInput = () => {
+        inputRef.current.focus();
+    }
+    return (
+        <div>
+            <input ref={inputRef} type="text" placeholder="Typ hier iets..." />
+            <button onClick={focusInput}>Focus op input</button>
+        </div>
+    );
+}
+
+// Childcomponent met forwardRef
+const InputWithForwardRef = React.forwardRef((props, ref) => {
+  return <input ref={ref} type="text" placeholder="Typ iets..." />;
+});
+
+function ForwardRefExample() {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();  // Focus op het input-element in de kindcomponent
+  };
+
+  return (
+    <div>
+      <InputWithForwardRef ref={inputRef} />
+      <button onClick={focusInput}>Focus op input</button>
+    </div>
+  );
+}
+```
 ### Wat is het verschil tss let, const en var in TS?
 > let en const zijn block scoped, terwijl var function scoped is. const is immutable.
 
