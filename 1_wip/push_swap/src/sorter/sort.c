@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:42:32 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/21 13:54:05 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:17:22 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	sort(t_ps *data)
 {
 	if (data->a.size <= 1 || is_sorted(data))
 		return ;
+	else if (data->a.size == 2)
+		sa(data);
 	else if (data->a.size == 3)
 		sort_three(data);
 	else
-	// sort data
+		sort_stacks(data);
 }
