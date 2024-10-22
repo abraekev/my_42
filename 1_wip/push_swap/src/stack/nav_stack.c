@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 19:24:37 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/15 12:46:19 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:25:52 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,25 @@ int	value(t_stack *stack, int position)
 
 	index = (stack->top + position - 1 + stack->size) % stack->size;
 	return (stack->stack[index]);
+}
+
+int rank_max(t_stack *stack)
+{
+    int	rank;
+	int	max_rank;
+	int	max_value;
+	
+	rank = 1;
+	max_rank = 0;
+	max_value = 0;
+	while (rank <= stack->size)
+	{
+		if (value(stack, rank) > max_value)
+		{
+			max_value = value(stack, rank);
+			max_rank = rank;
+		}
+		rank++;
+	}
+	return (max_rank);
 }

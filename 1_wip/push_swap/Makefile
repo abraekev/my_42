@@ -6,7 +6,7 @@
 #    By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 20:48:57 by abraekev          #+#    #+#              #
-#    Updated: 2024/10/15 10:47:54 by abraekev         ###   ########.fr        #
+#    Updated: 2024/10/22 14:31:00 by abraekev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,7 @@ SRC_LOG		= 	${SRC_MAIN}									\
 				logger/logger.c
 SRC_MAPPER	=	${SRC_LOG}									\
 				mapper/mapper_rank.c						
-SRC_OPTI	=	${SRC_MAPPER}								\
-				optimizer/optimizer.c						\
-				optimizer/optimizer_utils.c
-SRC_UTILS	=	${SRC_OPTI}									\
+SRC_UTILS	=	${SRC_MAPPER}								\
 				utils/error.c								\
 				utils/init_data.c							\
 				utils/malloc.c
@@ -48,14 +45,7 @@ SRC_STACK	=	$(SRC_VALID)								\
 				stack/ops_basic.c							\
 				stack/ops_swap.c							
 SRC_SORT	=	$(SRC_STACK)								\
-				sorter/chunk_sort_three.c					\
-				sorter/chunk_sort.c							\
-				sorter/chunk_split_utils.c					\
-				sorter/chunk_split.c						\
-				sorter/chunk_utils.c						\
-				sorter/easy_sort.c							\
-				sorter/edgecase.c							\
-				sorter/move.c								\
+				sorter/sort_stacks.c						\
 				sorter/sort.c
 SRCS		=	$(addprefix	$(DIRSRC),	$(SRC_SORT))
 OBJS		=	$(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/21 15:31:46 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:15:15 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /******************************************************************************/
 
 # include "libft.h"
+# include <stdbool.h>
 
 //	MACROS
 /******************************************************************************/
@@ -64,7 +65,7 @@ typedef struct s_split_destination
 typedef struct s_circular_array_stack
 {
 	int			cheapest_rank;
-	int			cheapest_ops;
+	int			cheapest_cost;
 	int			*stack;
 	int			*mapper;
 	int			top;
@@ -103,6 +104,7 @@ void			optimize_ops(t_ps *data);
 int				main(int argc, char **argv);
 
 // sorter
+int				get_push_cost(t_ps* data, int rank, int target);
 void			sort(t_ps *data);
 void			sort_stacks(t_ps *data);
 void			sort_three(t_ps *data);
@@ -119,6 +121,7 @@ int				pop(t_ps *data, t_stack *stack);
 int				next_up(t_stack *stack, int index);
 void			print_stack(t_stack *stack);
 int				push(t_ps *data, t_stack *stack, int value);
+int				rank_max(t_stack *stack);
 int				value(t_stack *stack, int rank);
 void			pa(t_ps *data);
 void			pb(t_ps *data);

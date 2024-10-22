@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:34:50 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/21 15:33:01 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:15:15 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_stack(t_ps *data, t_stack *stack, int size)
 	stack->top = 0;
 	stack->bottom = 0;
 	stack->size = 0;
-	stack->cheapest_ops = INT_MAX;
+	stack->cheapest_cost = INT_MAX;
 	stack->cheapest_rank = 0;
 	ft_memset(stack->stack, 0, sizeof(int) * size);
 }
