@@ -6,13 +6,13 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:17:46 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/22 15:41:40 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:28:21 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int get_target(t_ps* data, int node) // verified
+int get_target(t_ps* data, int node) // verified
 {
     // closest smaller number to node in b, else its the max value in b.
     int target;
@@ -66,12 +66,15 @@ static void    lowest_cost_push_desc_b(t_ps* data)
         rank++;
     }
 
-    // 4. execute the push:
+    // 4. execute the push: (39:40)
         // bring a to top
         // bring target to top
         // pb(data);
+    move_a_to_b(data);
+    
     // 5. reset stack->cheapest
-
+    data->a.cheapest_cost = INT_MAX;
+	data->a.cheapest_rank = 0;
 }
 
 static void    push_first_two(t_ps* data)

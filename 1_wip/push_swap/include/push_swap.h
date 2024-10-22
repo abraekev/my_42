@@ -6,7 +6,7 @@
 /*   By: abraekev <abraekev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:39:36 by abraekev          #+#    #+#             */
-/*   Updated: 2024/10/22 15:15:15 by abraekev         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:24:10 by abraekev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int				main(int argc, char **argv);
 
 // sorter
 int				get_push_cost(t_ps* data, int rank, int target);
+int				get_target(t_ps* data, int node);
+bool    		is_above_median(t_stack* stack, int rank);
 void			sort(t_ps *data);
 void			sort_stacks(t_ps *data);
 void			sort_three(t_ps *data);
